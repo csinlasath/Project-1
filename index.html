@@ -3,33 +3,28 @@
     <head>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
         <title>Project 1</title>
-        <!-- Bootstrap & JQuery-->
+        <!-- Bootstrap CSS-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
         
     </head>
     <body>
-     <h1> Adding something to the head</h1>
-
-        <!-- Firebase -->
+        <div id="root">Test Page...</div>
+        <!-- JQUERY JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+        <!-- Firebase JS-->
         <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
-        <script>
-            // Initialize Firebase
-            var config = {
-              apiKey: "AIzaSyBOB9TkbAPtIjCrgXC5_vHKVms283aQx4o",
-              authDomain: "project-1-music-trivia.firebaseapp.com",
-              databaseURL: "https://project-1-music-trivia.firebaseio.com",
-              projectId: "project-1-music-trivia",
-              storageBucket: "project-1-music-trivia.appspot.com",
-              messagingSenderId: "743814852234"
-            };
-            firebase.initializeApp(config);
-          </script>
-          <!-- Custom JS -->
-          <script src="assets/javascript/app.js"></script>
+        <!-- React JS -->
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!-- Babel JS -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!-- Custom JS -->
+        <script type="text/babel" src="assets/javascript/react-ui.js"></script>
+        <script src="assets/javascript/app.js"></script>
     </body>
 </html>
