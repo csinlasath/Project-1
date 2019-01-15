@@ -5,3 +5,19 @@
 #login-menu {
     float: right;
 }
+
+.carouselContainer {
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 40px;
+    text-align: center;
+
+}
+
+.carousel-inner {
+    border-style: outset;
+}
+
+.movie-info {
+    margin-top: 40px;
+}
