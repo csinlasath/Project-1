@@ -36,7 +36,7 @@ const SignUp = () => {
                         </form>
                     </div>
                     <div className='modal-footer'>
-                        <p>Have an account? <a data-toggle='modal' data-target='#login-modal' data-dismiss='modal'>Click Here</a></p>
+                        <p>Have an account? <a data-toggle='modal' className='click' data-target='#login-modal' data-dismiss='modal'>Click Here</a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
                         <button type='button' className='btn btn-primary'>Sign-Up</button>
                     </div>
@@ -67,7 +67,7 @@ const Login = () => {
                     </form>
                 </div>
                 <div className='modal-footer'>
-                    <p>Don't have an account? <a data-toggle='modal' data-target='#sign-up-modal' data-dismiss='modal'>Click Here</a></p>
+                    <p>Don't have an account? <a data-toggle='modal' data-target='#sign-up-modal' className='click' data-dismiss='modal'>Click Here</a></p>
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" className="btn btn-primary">Sign-Up</button>
                 </div>
