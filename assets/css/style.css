@@ -21,3 +21,11 @@
 .movie-info {
     margin-top: 40px;
 }
+
+.click:hover {
+    cursor: pointer;
+    color: darkred;
+}
+.click {
+    color: red!important;
+}
