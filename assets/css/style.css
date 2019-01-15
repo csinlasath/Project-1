@@ -5,3 +5,10 @@
 #login-menu {
     float: right;
 }
+.click:hover {
+    cursor: pointer;
+    color: darkred;
+}
+.click {
+    color: red!important;
+}
