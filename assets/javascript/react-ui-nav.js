@@ -28,10 +28,10 @@ const SignUp = () => {
                                 <input id='first-name-field' className='form-control' type='text' placeholder='John'></input>
                                 <label htmlFor='last-name-field'>Last Name</label>
                                 <input id='last-name-field' type='text' className='form-control' placeholder='Doe'></input>
-                                <label htmlFor='email-field'>Email Address</label>
-                                <input id='email-field' type='email' className='form-control' placeholder='johndoe@johndoe.com'></input>
-                                <label htmlFor='password-field'>Password</label>
-                                <input id='password-field' type='password' className='form-control' placeholder='Minimum of 6 Characters'></input>
+                                <label htmlFor='sign-up-email-field'>Email Address</label>
+                                <input id='sign-up-email-field' type='email' className='form-control' placeholder='johndoe@johndoe.com'></input>
+                                <label htmlFor='sign-up-password-field'>Password</label>
+                                <input id='sign-up-password-field' type='password' className='form-control' placeholder='Minimum of 6 Characters'></input>
                             </div>
                         </form>
                     </div>
@@ -59,10 +59,10 @@ const Login = () => {
                 <div className='modal-body'>
                     <form>
                         <div className='form-group'>
-                            <label htmlFor='email-field'>Email Address</label>
-                            <input id='email-field' type='email' className='form-control' placeholder='johndoe@johndoe.com'></input>
-                            <label htmlFor='password-field'>Password</label>
-                            <input id='password-field' type='password' className='form-control' placeholder='Minimum of 6 Characters'></input>
+                            <label htmlFor='login-email-field'>Email Address</label>
+                            <input id='login-email-field' type='email' className='form-control' placeholder='johndoe@johndoe.com'></input>
+                            <label htmlFor='login-password-field'>Password</label>
+                            <input id='login-password-field' type='password' className='form-control' placeholder='Minimum of 6 Characters'></input>
                         </div>
                     </form>
                 </div>
