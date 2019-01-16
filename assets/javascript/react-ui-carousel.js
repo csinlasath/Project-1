@@ -39,7 +39,7 @@ const Carousel = () => {
                             <img src='https://via.placeholder.com/150'></img>
                         </div>
                     </div>
-                    <div className='col-md-9'>
+                    <div id="plot-synopsis" className='col-md-9'>
                         <h3>Plot Synopsis</h3>
                         <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                                 laudantium,
