@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     
     $("#submit-button").on("click", function(event) {
@@ -10,15 +9,22 @@ $(document).ready(function() {
         
         //Update This for use with Title
         if (searchType === "Title") {
-            var queryURL = "https://www.omdbapi.com/?t=" + searchTopic + omdbAPIKey;
+
+            var queryURL = "https://api.themoviedb.org/3/search/movie?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&query=" + searchTopic + "&page=1&include_adult=false";
+            var moviePosterSize = "https://image.tmdb.org/t/p/w200";
 
             $.ajax({
                 url: queryURL,
                 method: "GET"
-            }).then(function(response) {
+            }).then(function(response){
                 console.log(response);
+                $("#plot-synopsis").html(
+                    "<div class='card' style='width: 200px;'><img class='card-img-top' src='" + moviePosterSize + response.results[0].poster_path + "' alt='Movie Poster'><div class='card-body><h5 class='card-title'>" + response.results[0].title + "</h5><p class='card-text'>" + response.results[0].overview + "</p><a href='#' class='btn btn-primary'>See Info</a></div></div>"
+                );
             });
+
         }
+
         //Update This for use with Genre
         if (searchType === "Genre") {
             var searchPerson = $("#search-bar").val().trim();
