@@ -19,7 +19,7 @@ $(document).ready(function() {
             }).then(function(response){
                 console.log(response);
                 $("#plot-synopsis").html(
-                    "<div class='card' style='width: 200px;'><img class='card-img-top' src='" + moviePosterSize + response.results[0].poster_path + "' alt='Movie Poster'><div class='card-body><h5 class='card-title'>" + response.results[0].title + "</h5><p class='card-text'>" + response.results[0].overview + "</p><a href='#' class='btn btn-primary'>See Info</a></div></div>"
+                    "<div class='card' style='width: 300px;'><img class='card-img-top' src='" + moviePosterSize + response.results[0].poster_path + "' alt='Movie Poster'><div class='card-body'><h1 class='card-title' style='font-size: 35px'><strong>" + response.results[0].title + "</strong></h1><hr><p class='card-text' style='font-size: 15px'>" + response.results[0].overview.slice(0,138) + " . . . " + "</p><a href='#' class='btn btn-primary'>See Info</a></div></div>"
                 );
             });
 
