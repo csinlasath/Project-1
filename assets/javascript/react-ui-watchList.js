@@ -1,4 +1,3 @@
-
 const WatchList = () => {
     return (
         <div id='my-watch-list' className='col-sm-3'>
@@ -13,7 +12,7 @@ const WatchList = () => {
             </div>
         </div>
     );
-}
+};
 
 ReactDOM.render (
     <WatchList />,
