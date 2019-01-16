@@ -59,17 +59,6 @@ const Carousel = () => {
                     </div>
                 </div>
             </div>
-            <div id='my-watch-list' className='col-sm-3'>
-                <div className='list-group'>
-                    <a href="#" className="list-group-item list-group-item-action active">
-                        My Watch List
-                    </a>
-                    <a href="#" className="list-group-item list-group-item-action">Seven</a>
-                    <a href="#" className="list-group-item list-group-item-action">Forest Gump</a>
-                    <a href="#" className="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                    <a href="#" className="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-                </div>
-            </div>
         </div>
     );
 }

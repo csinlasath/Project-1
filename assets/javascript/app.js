@@ -20,7 +20,7 @@ $(document).ready(function() {
         
         //Update This for use with Title
         if (searchType === "Title") {
-            var queryURL = "http://www.omdbapi.com/?t=" + searchTopic + omdbAPIKey;
+            var queryURL = "https://www.omdbapi.com/?t=" + searchTopic + omdbAPIKey;
 
             $.ajax({
                 url: queryURL,
@@ -83,7 +83,7 @@ $(document).ready(function() {
         }
         //Update This for Use with Plot
         if (searchType === "Plot") {
-            var queryURL = "http://www.omdbapi.com/?plot=" + theMovieDBAPIKey + movieLang + personParam + searchPerson;
+            var queryURL = "https://www.omdbapi.com/?plot=" + searchTopic + omdbAPIKey;
 
             $.ajax({
                 url: queryURL,
