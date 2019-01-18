@@ -4,13 +4,6 @@
     width: 100%;
 }
 
-#home-button {
-    float: left;
-}
-
-#login-menu {
-    float: right;
-}
 .click:hover {
     cursor: pointer;
     color: darkred;
@@ -27,14 +20,26 @@
     
 }
 
-.carousel-inner {
-    border-style: outset;
-}
-
 .movie-info {
     margin-top: 40px;
 }
 
+.card {
+    max-width: 300px;
+    min-height: 707px;
+    float: left;
+    margin-top: 40px;
+}
+
+.card-text {
+    min-height: 110px;
+}
+
 #my-watch-list {
     max-width: 100%;
+}
+
+#results-carousel-inner {
+    display: inline;
+    text-align: center;
 }
