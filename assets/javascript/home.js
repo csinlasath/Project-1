@@ -16,8 +16,11 @@ $(document).ready(function () {
     var queryURL2 = "https://api.themoviedb.org/3/movie/top_rated?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=1&region=US";
     var queryURL3 = "https://api.themoviedb.org/3/tv/popular?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=1";
     var queryURL4 = "https://api.themoviedb.org/3/tv/airing_today?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=1";
-    var queryURL5 = "https://api.themoviedb.org/3/movie/"
-    var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US"
+    var queryURL5 = "https://api.themoviedb.org/3/movie/";
+    var queryURL6 = "http://www.omdbapi.com/?i=";
+    var queryURL7 = "https://api.themoviedb.org/3/tv/"
+    var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
+    var omdbAPIKey = "&apikey=3dc16ac5";
     $.ajax({
         url: queryURL1,
         method: "GET"
@@ -60,12 +63,26 @@ $(document).ready(function () {
 
     });
     $(document).on("click", ".moviePoster", function() {
-        console.log("TEST");
         $.ajax({
             url: queryURL5 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
         }).then(function (response) {
             console.log(response);
+
+            $.ajax({
+                url: queryURL6 + response.imdb_id + omdbAPIKey,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+            });
         });
       });
+    $(document).on("click", ".tvPoster", function() {
+        $.ajax({
+            url: queryURL7 + $(this).attr("data-id") + tmdbKey,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+        });
+    });
 });
