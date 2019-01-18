@@ -4,7 +4,7 @@ body {
 .card {
     max-width: 300px;
     min-height: 707px;
-    float: left;
+    /* float: left; */
     margin-top: 40px;
 }
 .card-text {
@@ -103,11 +103,23 @@ img {
 #submit-button {
     margin-right: 15px;
 }
-.topLevel {
-    /* margin-top: 150px; */
-    max-width: 960px;
-    color: white;
-    margin: 150px auto 0 auto;
+#topPush {
+    height: 110px;
+}
+@media only screen and (min-width: 592px) and (max-width: 831px) {
+    #topPush {
+        height: 148px;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 591px) {
+    #topPush {
+        height: 182px;
+    }
+}
+@media only screen and (max-width: 575px) {
+    #topPush {
+        height: 258px;
+    }
 }
 ::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
