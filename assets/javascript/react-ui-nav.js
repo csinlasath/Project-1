@@ -8,9 +8,16 @@ const Navigation = () => {
             <SignUp />
             <Login />
             <MediaInfo />
+            <MyWatchList />
         </header>
     );
 }
+
+const WatchButton = () => {
+    return (
+        <button id='watch-button' className='btn btn-outline-danger my-2 my-sm-0' type='submit' data-toggle='modal' data-target='#watch-modal'>My Watch List</button>
+            );
+        }
 
 //User Signup Component
 const SignUp = () => {
@@ -46,6 +53,36 @@ const SignUp = () => {
         </div>
     );
 }
+
+const MyWatchList = () => {
+    return (
+        <div id='watch-modal' className='modal fade' tabIndex='-1' role='dialog'>
+                <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
+                    <div className='modal-content'>
+                        <div className='modal-header'>
+                            <h5 id='watch-modal-title' className='modal-title'>My Watch List</h5>
+                            <button type='button' className='close' data-dismiss='modal'></button>
+                        </div>
+                        <div className='modal-body'>
+                            <div id='my-watch-list' className='col-sm-3'>
+                                <div className='list-group'>
+                                    <a href="#" className="list-group-item list-group-item-action active">
+                                        My Watch List</a>
+                                    <a href="#" className="list-group-item list-group-item-action">Seven</a>
+                                    <a href="#" className="list-group-item list-group-item-action">Forrest Gump</a>
+                                    <a href="#" className="list-group-item list-group-item-action"> Whatever </a>
+                                    <a href="#" className="list-group-item list-group-item-action"> Whatever#2</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='modal-footer'>
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            );
+        }
 
 //User Login Component
 const Login = () => {
@@ -148,6 +185,7 @@ const Navbar = (props) => {
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
             <a id='home-button' className='navbar-brand' href='#'>{ props.siteName }</a>
             <Searchbar />
+            <WatchButton />
             <LoginDropdown 
                 accountName="John Doe" 
                 listItemOne="Login" 
