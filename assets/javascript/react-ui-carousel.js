@@ -1,7 +1,7 @@
 const Carousel = () => {
     return (
-        <div className='row'>
-            <div className='col-sm-9'>
+        <div id='movie-info' className='row'>
+            <div id='carousel-container' className='col-sm-9'>
                 <div className='container'>
                     <div className='carouselContainer'>
                         <h2>Now in Theaters</h2>
@@ -31,31 +31,6 @@ const Carousel = () => {
                                 <span className='sr-only'></span>
                             </a>
                         </div>
-                    </div>
-                </div>
-                <div id='movie-info' className='row'>
-                    <div className='col-md-3'>
-                        <div id='movie-poster'>
-                            <img src='https://via.placeholder.com/150'></img>
-                        </div>
-                    </div>
-                    <div id="plot-synopsis" className='col-md-9'>
-                        <h3>Plot Synopsis</h3>
-                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium,
-                                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
-                                vitae
-                                dicta
-                                sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                                sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-                                quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-                                non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                    </div>
-                </div>
-                <div id='actor-actress' className='row'>
-                    <div className='col-md-6'>
-                        <p>This is where fellow actors will go</p>
                     </div>
                 </div>
             </div>
