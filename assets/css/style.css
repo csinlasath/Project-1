@@ -84,7 +84,7 @@ h2 {
     color: white;
     margin: auto;
 }
-.poster {
+.posterContainer {
     display: inline-block;
     width: 300px;
     margin: 0 10px;
