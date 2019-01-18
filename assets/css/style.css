@@ -48,7 +48,10 @@
 .movie-info {
     margin-top: 40px;
 }
-
+/* #home {
+    margin-top: 0;
+    vertical-align: top;
+} */
 .card {
     max-width: 300px;
     min-height: 707px;
@@ -82,14 +85,14 @@ h2 {
 .levels {
     max-width: 960px;
     color: white;
-    margin: auto;
+    margin: 0 auto;
 }
 .posterContainer {
     display: inline-block;
     width: 300px;
     margin: 0 10px;
     max-width: 100%;
-    height: 100%;
+    height: auto;
 }
 .moviePoster:hover,
 .tvPoster{
@@ -123,6 +126,9 @@ img {
     float: right;
     background: red;
 }
-#theater {
-    margin-top: 150px;
+.topLevel {
+    /* margin-top: 150px; */
+    max-width: 960px;
+    color: white;
+    margin: 150px auto 0 auto;
 }
