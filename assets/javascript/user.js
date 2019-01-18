@@ -31,17 +31,42 @@ $(document).ready(function () {
         });
     });
 
-    // $("#user-info-login").on("click", function (event){
-    //     event.preventDefault();
+    $("#user-info-login").on("click", function (event) {
+        event.preventDefault();
 
-    //     database.ref("user").pull({
-    //         firstName: firstName,
-    //         lastName,
-    //         email,
-    //         password
-    //     });
-    //     console.log(firstName);
-    // });
+        var userRef = database.ref('user');
+        userRef.on('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                var childData = childSnapshot.val();
+                console.log(childData);
+
+                var emailTrue = false;
+
+                var passwordTrue = false;
+
+                if($("#login-email-field").val().trim() == childData.email){
+                    console.log(childData.email + "It Works!");
+                    emailTrue = true;
+                }
+                else{
+                    console.log("Wrong!")
+                }
+                if($("#login-password-field").val().trim() == childData.password){
+                    console.log(childData.password + "It Works Again!");
+                    passwordTrue = true;
+                }
+
+                else{
+                    console.log("Wrong Again!")
+                }
+
+                if (emailTrue == true && passwordTrue == true){
+                    $("#")
+                }
+            });
+        })
+
+    });
 
 
 
@@ -54,25 +79,3 @@ $(document).ready(function () {
 
 
 
-// function SignIn() {
-//     if (firebase.auth().currentUser){
-
-//         firebase.auth().signOut();
-//     }
-//     else {
-//         var email = $("#sign-up-email-field").val();
-//         var password = $("#sign-up-password-field").val();
-//         if (email.length < 4) {
-//             $(function () {
-//                 $('[enter-valid-email="popover"]').popover()
-//               })
-//               return;
-//         }
-//         if (password.length < 4) {
-//             $(function () {
-//                 $('[enter-longer-password="popover"]').popover()
-//               })
-//               return;
-//         }
-//     }
-// }
