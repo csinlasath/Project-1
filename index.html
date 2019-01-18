@@ -11,20 +11,30 @@
 
 <body>
     <div id="root"></div>
-    <div class="row">
-        <div class="col-md-9">
-            <div id="bottom-wrapper"></div>
-        </div>
-        <div class="col-md-3">
-            <div id="watch-list"></div>
-        </div>
+    <div>
+        <h1>Now in Theaters</h1>
+        <div id="theater" class="scrolling-wrapper"></div>
     </div>
+    <div>
+        <h1>Movies at home</h1>
+        <div id="home" class="scrolling-wrapper"></div>
+    </div>
+    <div>
+        <h1>Popular TV</h1>
+        <div id="popTv" class="scrolling-wrapper"></div>
+    </div>
+    <div>
+        <h1>On TV Tonight</h1>
+        <div id="tonightTv" class="scrolling-wrapper"></div>
+    </div>
+
     <div id='test-div-wrapper' class='container'>
         <div id='test-wrapper' class='row'>
             <div id='test-div' class='col-md-9'></div>
         </div>
     </div>
     <div id="modal-div" style="display: none;"></div>
+
 
     <!-- JQUERY JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -44,8 +54,9 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!-- Custom JS -->
     <script type="text/babel" src="assets/javascript/react-ui-nav.js"></script>
-    <script type="text/babel" src="assets/javascript/react-ui-carousel.js"></script>
+    <!-- <script type="text/babel" src="assets/javascript/react-ui-carousel.js"></script> -->
     <script type="text/babel" src="assets/javascript/react-ui-watchList.js"></script>
+    <script type="text/javascript" src="assets/javascript/home.js"></script>
     <script src="assets/javascript/app.js"></script>
     <script src="assets/javascript/user.js"></script>
     <!-- Custom CSS -->
