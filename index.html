@@ -13,16 +13,22 @@
 
 <body>
     <div id="root"></div>
-    <div class="row">
-        <div class="col-md-9">
-            <div id="bottom-wrapper"></div>
-        </div>
-        <div class="col-md-3">
-            <div id="watch-list"></div>
-        </div>
+    <div>
+        <h1>Now in Theaters</h1>
+        <div id="theater" class="scrolling-wrapper"></div>
     </div>
-
-
+    <div>
+        <h1>Movies at home</h1>
+        <div id="home" class="scrolling-wrapper"></div>
+    </div>
+    <div>
+        <h1>Popular TV</h1>
+        <div id="popTv" class="scrolling-wrapper"></div>
+    </div>
+    <div>
+        <h1>On TV Tonight</h1>
+        <div id="tonightTv" class="scrolling-wrapper"></div>
+    </div>
 
 
 
@@ -45,8 +51,9 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!-- Custom JS -->
     <script type="text/babel" src="assets/javascript/react-ui-nav.js"></script>
-    <script type="text/babel" src="assets/javascript/react-ui-carousel.js"></script>
+    <!-- <script type="text/babel" src="assets/javascript/react-ui-carousel.js"></script> -->
     <script type="text/babel" src="assets/javascript/react-ui-watchList.js"></script>
+    <script type="text/javascript" src="assets/javascript/home.js"></script>
     <script src="assets/javascript/app.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
