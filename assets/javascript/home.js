@@ -3,7 +3,7 @@ $(document).ready(function () {
         $('#theater').append($('<div/>', { id: 'theater' + i, 'class': 'posterContainer' }))
     };
     for (var i = 0; i <= 19; i++) {
-        $('#home').append($('<div/>', { id: 'home' + i, 'class': 'posterContainer' }))
+        $('#topRated').append($('<div/>', { id: 'topRated' + i, 'class': 'posterContainer' }))
     };
     for (var i = 0; i <= 19; i++) {
         $('#popTv').append($('<div/>', { id: 'popTv' + i, 'class': 'posterContainer' }))
@@ -26,9 +26,9 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i = 0; 1 <= 19; i++){
-        $('#theater' +i).append($('<img class="moviePoster" data-id="'+response.results[i].id+'" src="'+moviePosterSize+response.results[i].poster_path+'">'));
-        $('#theater'+i).append($('<div><h5>'+response.results[i].title+'</h5></div>'));
+        for (var i = 0; 1 <= 19; i++) {
+            $('#theater' + i).append($('<img class="moviePoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            $('#theater' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
         }
     });
     $.ajax({
@@ -36,9 +36,9 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i = 0; 1 <=19; i++){
-        $('#home'+i).append($('<img class="moviePoster" data-id="'+response.results[i].id+'" src="'+moviePosterSize+response.results[i].poster_path+'">'));
-        $('#home'+i).append($('<div><h5>'+response.results[i].title+'</h5></div>'));
+        for (var i = 0; 1 <= 19; i++) {
+            $('#topRated' + i).append($('<img class="moviePoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            $('#topRated' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
         }
     });
     $.ajax({
@@ -46,9 +46,9 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i = 0; 1 <=19; i++){
-        $('#popTv'+i).append($('<img class="tvPoster" data-id="'+response.results[i].id+'" src="'+moviePosterSize+response.results[i].poster_path+'">'));
-        $('#popTv'+i).append($('<div><h5>'+response.results[i].name+'</h5></div>'));
+        for (var i = 0; 1 <= 19; i++) {
+            $('#popTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            $('#popTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
         }
     });
     $.ajax({
@@ -56,13 +56,13 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i = 0; 1 <=19; i++){
-        $('#tonightTv'+i).append($('<img class="tvPoster" data-id="'+response.results[i].id+'" src="'+moviePosterSize+response.results[i].poster_path+'">'));
-        $('#tonightTv'+i).append($('<div><h5>'+response.results[i].name+'</h5></div>'));
+        for (var i = 0; 1 <= 19; i++) {
+            $('#tonightTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            $('#tonightTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
         }
 
     });
-    $(document).on("click", ".moviePoster", function() {
+    $(document).on("click", ".moviePoster", function () {
         $.ajax({
             url: queryURL5 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
@@ -76,13 +76,43 @@ $(document).ready(function () {
                 console.log(response);
             });
         });
-      });
-    $(document).on("click", ".tvPoster", function() {
+    });
+    $(document).on("click", ".tvPoster", function () {
         $.ajax({
             url: queryURL7 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
         }).then(function (response) {
             console.log(response);
         });
+    });
+    $(".levels").mCustomScrollbar({
+        set_width: false,
+        set_height: false,
+        horizontalScroll: false,
+        scrollInertia: 850,
+        SCROLLINERTIA: "easeOutCirc",
+        mouseWheel: "auto",
+        autoDraggerLength: true,
+        scrollButtons: {
+            enable: false,
+            scrollType: "continuous",
+            SCROLLSPEED: 80,
+            SCROLLAMOUNT: 180
+        },
+        advanced: {
+            updateOnBrowserResize: true,
+            updateOnContentResize: false,
+            autoExpandHorizontalScroll: true,
+            autoScrollOnFocus: true
+        },
+        callbacks: {
+            onScrollStart: function () { },
+            onScroll: function () { },
+            onTotalScroll: function () { },
+            onTotalScrollBack: function () { },
+            onTotalScrollOffset: 0,
+            whileScrolling: false,
+            whileScrollingInterval: 30
+        }
     });
 });
