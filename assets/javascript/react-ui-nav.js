@@ -186,13 +186,15 @@ const Navbar = (props) => {
             <a id='home-button' className='navbar-brand' href='#'>{props.siteName}</a>
             <Searchbar />
             <WatchButton />
-            <LoginDropdown
-                accountName="John Doe"
-                listItemOne="Login"
-                listItemTwo="Sign-up"
-                listItemThree="Account Details"
-                listItemFour="Log off"
-            />
+            <div class="navbar-nav ml-auto">
+                <LoginDropdown
+                    accountName="John Doe"
+                    listItemOne="Login"
+                    listItemTwo="Sign-up"
+                    listItemThree="Account Details"
+                    listItemFour="Log off"
+                />
+                </div>
         </nav>
     );
 }

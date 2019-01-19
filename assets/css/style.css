@@ -7,6 +7,10 @@
 body {
     background-color: black;
 }
+h1,
+h5 {
+font-family: 'Aleo', serif;
+}
 .card {
     max-width: 300px;
     min-height: 707px;
@@ -62,8 +66,10 @@ h2 {
     margin: 0 auto;
     position: relative;
 }
-#login-menu {
-    float: right;
+
+#loginDropdownMenuLink {
+    color: white;
+    margin-left: 60px;
 }
 #moreButton:hover {
     cursor: pointer;
