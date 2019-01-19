@@ -3,6 +3,9 @@
     width: 69px;
     background: transparent;
     border: transparent;
+}
+.arrow:hover {
+    cursor: pointer;
 } 
 body {
     background-color: black;
@@ -168,5 +171,5 @@ h2 {
 }
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-    background: #FF0000;
+    background: #1e90ff;
 }
