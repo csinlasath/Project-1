@@ -1,3 +1,8 @@
+var firstSearch = "";
+var secondSearch = "";
+var threeSearch = "";
+var fourSearch = "";
+
 //This creates the header
 const Navigation = () => {
     return (
@@ -159,21 +164,54 @@ const SearchTypeSwitch = (props) => {
         <select id='search-type-selector' className='form-control form-inline'>
             <option>{props.searchTypeOne}</option>
             <option>{props.searchTypeTwo}</option>
-            <option>{props.searchTypeThree}</option>
-            <option>{props.searchTypeFour}</option>
         </select>
     );
 }
+
+const SearchTypeSubswitch = (props) => {
+    return(
+        <select id='search-subtype-selector' className='form-control form-inline'>
+        <option>{props.searchTypeOne}</option>
+        <option>{props.searchTypeTwo}</option>
+        <option>{props.searchTypeThree}</option>
+        <option>{props.searchTypeFour}</option>
+        <option>{props.searchTypeFive}</option>
+        <option>{props.searchTypeSix}</option>
+        <option>{props.searchTypeSeven}</option>
+        <option>{props.searchTypeEight}</option>
+    </select>
+    ); 
+
+}
+
 //This object creates the search bar
 const Searchbar = () => {
     return (
         <form className='form-inline'>
             <SearchTypeSwitch
-                searchTypeOne="Title"
-                searchTypeTwo="Genre"
-                searchTypeThree="Actor/Actress"
-                searchTypeFour="Plot"
+                searchTypeOne="Movie"
+                searchTypeTwo="Title"
             />
+            <div className='col-auto'>
+                <div className='input-group mb-6'>
+                    <div className='input-group-prepend'>
+                        <form className='form-inline'>
+                            <SearchTypeSubswitch 
+                                searchTypeOne="Movie Title"
+                                searchTypeTwo="Movie Genre"
+                                searchTypeThree="Movie Actor/Actress"
+                                searchTypeFour="Movie Plot"
+                                searchTypeFive="TV Title"
+                                searchTypeSix="TV Genre"
+                                searchTypeSeven="TV Actor/Actress"
+                                searchTypeEight="TV Plot"
+                                searchTypeNine="Movie"
+                                searchTypeTen="TV"
+                            />
+                        </form>
+                    </div>
+                </div>
+            </div>
             <input id='search-bar' className='form-control mr-md-6' type='search' placeholder='Type in Text' aria-label='Search'></input>
             <button id='submit-button' className='btn' type='submit'>Search</button>
         </form>
@@ -184,6 +222,9 @@ const Navbar = (props) => {
     return (
         <nav className='navbar navbar-expand-lg navbar-light bg-primary'>
             <a id='home-button' className='navbar-brand' href='#'>{props.siteName}</a>
+            <div className='navbar-nav ml-auto'>
+                <Searchbar />
+                <WatchButton />
             <Searchbar />
             <WatchButton />
             <div class="navbar-nav ml-auto">
@@ -194,6 +235,7 @@ const Navbar = (props) => {
                     listItemThree="Account Details"
                     listItemFour="Log off"
                 />
+                 </div>
                 </div>
         </nav>
     );
