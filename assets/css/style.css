@@ -42,6 +42,7 @@ h2 {
 #home-button {
     font-size: 16px;
     font-weight: 5px;
+    color: white;
 }
 .left {
     float: left;
@@ -63,8 +64,6 @@ h2 {
 }
 #login-menu {
     float: right;
-    background:whitesmoke;
-    border: solid; 
 }
 #moreButton:hover {
     cursor: pointer;
@@ -95,6 +94,8 @@ h2 {
     padding: 20px;
     border: solid;
     top: 0;
+    background: url(../Images/fancy-cushion.png);
+    z-index: 2;
 }
 .posterContainer {
     display: inline-block;
@@ -132,7 +133,6 @@ h2 {
     max-width: 960px;
     margin: auto;
     color: white;
-    background-color: black;
     -webkit-overflow-scrolling: touch;
 }
 #search-bar {
