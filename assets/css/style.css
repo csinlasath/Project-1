@@ -1,3 +1,9 @@
+.arrow {
+    height: 69px;
+    width: 69px;
+    background: transparent;
+    border: transparent;
+} 
 body {
     background-color: black;
 }
@@ -22,6 +28,9 @@ body {
 .click:hover {
     cursor: pointer;
 }
+.dropdown-item:hover {
+    cursor: pointer;
+}
 h2 {
     color: white;
     z-index: 5;
@@ -34,22 +43,39 @@ h2 {
     font-size: 16px;
     font-weight: 5px;
 }
-img {
-    width: 300px;
-    min-width: 300px;
+.left {
+    float: left;
+    position: absolute;
+    left: -5px;
+    z-index: 5;
+    top: 232.25px;
+}
+@media only screen and (max-height:800px) {
+    .left {
+        display: none;
+    }
 }
 .levels {
     max-width: 960px;
     color: white;
     margin: 0 auto;
+    position: relative;
 }
 #login-menu {
     float: right;
     background:whitesmoke;
     border: solid; 
 }
+#moreButton:hover {
+    cursor: pointer;
+}
 .movie-info {
     margin-top: 40px;
+}
+.moviePoster, .tvPoster {
+    max-height: 450px;
+    width: 300px;
+    min-width: 300px;
 }
 .moviePoster:hover,
 .tvPoster{
@@ -85,6 +111,20 @@ img {
     display: inline;
     text-align: center;
 }
+.right {
+    /* float: right; */
+    position: absolute;
+    right: 7px;
+    z-index: 5;
+    margin-left: 0;
+    margin-right: 0;
+    bottom: 245.25px;
+}
+@media only screen and (max-height:800px) {
+    .right {
+        display: none;
+    }
+}
 .scrolling-wrapper {
     overflow-x: scroll;
     overflow-y: hidden;
@@ -93,6 +133,7 @@ img {
     margin: auto;
     color: white;
     background-color: black;
+    -webkit-overflow-scrolling: touch;
 }
 #search-bar {
     margin-right: 15px;

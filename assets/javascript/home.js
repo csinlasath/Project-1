@@ -1,15 +1,15 @@
 $(document).ready(function () {
-    for (var i = 19; i >= 0; i--) {
-        $('#theater').prepend($('<div/>', { id: 'theater' + i, 'class': 'posterContainer' }))
+    for (var i = 0; i <= 19; i++) {
+        $('#more1').before($('<div/>', { id: 'theater' + i, 'class': 'posterContainer' }))
     };
-    for (var i = 19; i >= 0; i--) {
-        $('#topRated').prepend($('<div/>', { id: 'topRated' + i, 'class': 'posterContainer' }))
+    for (var i = 0; i <= 19; i++) {
+        $('#more2').before($('<div/>', { id: 'topRated' + i, 'class': 'posterContainer' }))
     };
-    for (var i = 19; i >= 0; i--) {
-        $('#popTv').prepend($('<div/>', { id: 'popTv' + i, 'class': 'posterContainer' }))
+    for (var i = 0; i <= 19; i++) {
+        $('#more3').before($('<div/>', { id: 'popTv' + i, 'class': 'posterContainer' }))
     };
-    for (var i = 19; i >= 0; i--) {
-        $('#tonightTv').prepend($('<div/>', { id: 'tonightTv' + i, 'class': 'posterContainer' }))
+    for (var i = 0; i <= 19; i++) {
+        $('#more4').before($('<div/>', { id: 'tonightTv' + i, 'class': 'posterContainer' }))
     };
     var queryURL1 = "https://api.themoviedb.org/3/movie/now_playing?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=";
     var moviePosterSize = "https://image.tmdb.org/t/p/w200";
@@ -109,7 +109,10 @@ $(document).ready(function () {
                 $('#theater'+page1+'-' + i).append($('<div><h5>' + response.results[i].title.slice(0 , 28) + '</h5></div>'));
             }
             page1++;
-        })
+            if (response.results.length < 20) {
+                $("#more1").empty();
+            };
+        });
     });
     $(document).on("click", "#more2", function () {
         $.ajax({
@@ -125,6 +128,9 @@ $(document).ready(function () {
                 $('#topRated'+page2+'-' + i).append($('<div><h5>' + response.results[i].title.slice(0 , 28) + '</h5></div>'));
             }
             page2++;
+            if (response.results.length < 20) {
+                $("#more2").empty();
+            };
         })
     });
     $(document).on("click", "#more3", function () {
@@ -141,6 +147,9 @@ $(document).ready(function () {
                 $('#popTv'+page3+'-' + i).append($('<div><h5>' + response.results[i].name.slice(0 , 28) + '</h5></div>'));
             }
             page3++;
+            if (response.results.length < 20) {
+                $("#more3").empty();
+            };
         })
     });
     $(document).on("click", "#more4", function () {
@@ -157,36 +166,119 @@ $(document).ready(function () {
                 $('#tonightTv'+page4+'-' + i).append($('<div><h5>' + response.results[i].name.slice(0 , 28) + '</h5></div>'));
             }
             page4++;
+            if (response.results.length < 20) {
+                $("#more4").empty();
+            };
         })
     });
-    $(".levels").mCustomScrollbar({
-        set_width: false,
-        set_height: false,
-        horizontalScroll: false,
-        scrollInertia: 850,
-        SCROLLINERTIA: "easeOutCirc",
-        mouseWheel: "auto",
-        autoDraggerLength: true,
-        scrollButtons: {
-            enable: false,
-            scrollType: "continuous",
-            SCROLLSPEED: 80,
-            SCROLLAMOUNT: 180
-        },
-        advanced: {
-            updateOnBrowserResize: true,
-            updateOnContentResize: false,
-            autoExpandHorizontalScroll: true,
-            autoScrollOnFocus: true
-        },
-        callbacks: {
-            onScrollStart: function () { },
-            onScroll: function () { },
-            onTotalScroll: function () { },
-            onTotalScrollBack: function () { },
-            onTotalScrollOffset: 0,
-            whileScrolling: false,
-            whileScrollingInterval: 30
-        }
+    $('#right-button').mousedown(function() {
+        event.preventDefault();
+        $('#theater').animate({
+          scrollLeft: "+=25600px"
+        }, 12000);
+      });
+    $('#right-button').mouseup(function() {
+        event.preventDefault();
+        $('#theater').stop();
     });
+    $('#left-button').mousedown(function() {
+        event.preventDefault();
+        $('#theater').animate({
+          scrollLeft: "-=25600px"
+        }, 12000);
+      });
+    $('#left-button').mouseup(function() {
+        event.preventDefault();
+        $('#theater').stop();
+    });
+    $('#right-button2').mousedown(function() {
+        event.preventDefault();
+        $('#topRated').animate({
+          scrollLeft: "+=25600px"
+        }, 12000);
+      });
+    $('#right-button2').mouseup(function() {
+        event.preventDefault();
+        $('#topRated').stop();
+    });
+    $('#left-button2').mousedown(function() {
+        event.preventDefault();
+        $('#topRated').animate({
+          scrollLeft: "-=25600px"
+        }, 12000);
+      });
+    $('#left-button2').mouseup(function() {
+        event.preventDefault();
+        $('#topRated').stop();
+    });
+    $('#right-button3').mousedown(function() {
+        event.preventDefault();
+        $('#popTv').animate({
+          scrollLeft: "+=25600px"
+        }, 12000);
+      });
+    $('#right-button3').mouseup(function() {
+        event.preventDefault();
+        $('#popTv').stop();
+    });
+    $('#left-button3').mousedown(function() {
+        event.preventDefault();
+        $('#popTv').animate({
+          scrollLeft: "-=25600px"
+        }, 12000);
+      });
+    $('#left-button3').mouseup(function() {
+        event.preventDefault();
+        $('#popTv').stop();
+    });
+    $('#right-button4').mousedown(function() {
+        event.preventDefault();
+        $('#tonightTv').animate({
+          scrollLeft: "+=25600px"
+        }, 12000);
+      });
+    $('#right-button4').mouseup(function() {
+        event.preventDefault();
+        $('#tonightTv').stop();
+    });
+    $('#left-button4').mousedown(function() {
+        event.preventDefault();
+        $('#tonightTv').animate({
+          scrollLeft: "-=25600px"
+        }, 12000);
+      });
+    $('#left-button4').mouseup(function() {
+        event.preventDefault();
+        $('#tonightTv').stop();
+    });
+        // $(".levels").mCustomScrollbar({
+    //     set_width: false,
+    //     set_height: false,
+    //     horizontalScroll: false,
+    //     scrollInertia: 850,
+    //     SCROLLINERTIA: "easeOutCirc",
+    //     mouseWheel: "auto",
+    //     autoDraggerLength: true,
+    //     scrollButtons: {
+    //         enable: false,
+    //         scrollType: "continuous",
+    //         SCROLLSPEED: 80,
+    //         SCROLLAMOUNT: 180
+    //     },
+    //     advanced: {
+    //         updateOnBrowserResize: true,
+    //         updateOnContentResize: false,
+    //         autoExpandHorizontalScroll: true,
+    //         autoScrollOnFocus: true
+    //     },
+    //     callbacks: {
+    //         onScrollStart: function () { },
+    //         onScroll: function () { },
+    //         onTotalScroll: function () { },
+    //         onTotalScrollBack: function () { },
+    //         onTotalScrollOffset: 0,
+    //         whileScrolling: false,
+    //         whileScrollingInterval: 30
+    //     }
+    // });
 });
