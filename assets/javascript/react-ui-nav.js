@@ -225,6 +225,9 @@ const Navbar = (props) => {
             <div className='navbar-nav ml-auto'>
                 <Searchbar />
                 <WatchButton />
+            <Searchbar />
+            <WatchButton />
+            <div class="navbar-nav ml-auto">
                 <LoginDropdown
                     accountName="John Doe"
                     listItemOne="Login"
@@ -232,7 +235,8 @@ const Navbar = (props) => {
                     listItemThree="Account Details"
                     listItemFour="Log off"
                 />
-            </div>
+                 </div>
+                </div>
         </nav>
     );
 }
