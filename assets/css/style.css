@@ -7,6 +7,10 @@
 body {
     background-color: black;
 }
+h1,
+h5 {
+font-family: 'Aleo', serif;
+}
 .card {
     max-width: 300px;
     min-height: 707px;
@@ -47,7 +51,7 @@ h2 {
 .left {
     float: left;
     position: absolute;
-    left: -5px;
+    left: -74px;
     z-index: 5;
     top: 232.25px;
 }
@@ -62,8 +66,10 @@ h2 {
     margin: 0 auto;
     position: relative;
 }
-#login-menu {
-    float: right;
+
+#loginDropdownMenuLink {
+    color: white;
+    margin-left: 60px;
 }
 #moreButton:hover {
     cursor: pointer;
@@ -95,7 +101,7 @@ h2 {
     border: solid;
     top: 0;
     background: url(../Images/fancy-cushion.png);
-    z-index: 2;
+    z-index: 6;
 }
 .posterContainer {
     display: inline-block;
@@ -115,7 +121,7 @@ h2 {
 .right {
     /* float: right; */
     position: absolute;
-    right: 7px;
+    right: -62px;
     z-index: 5;
     margin-left: 0;
     margin-right: 0;
