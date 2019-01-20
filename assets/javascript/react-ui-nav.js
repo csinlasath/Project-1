@@ -159,44 +159,44 @@ const LoginDropdown = (props) => {
     );
 }
 //Creates object to switch between different types of searches
-const SearchTypeSwitch = (props) => {
-    return (
-        <select id='search-type-selector' className='form-control form-inline'>
-            <option>{props.searchTypeOne}</option>
-            <option>{props.searchTypeTwo}</option>
-        </select>
-    );
-}
+// const SearchTypeSwitch = (props) => {
+//     return (
+//         <select id='search-type-selector' className='form-control form-inline'>
+//             <option>{props.searchTypeOne}</option>
+//             <option>{props.searchTypeTwo}</option>
+//         </select>
+//     );
+// }
 
-const SearchTypeSubswitch = (props) => {
-    return(
-        <select id='search-subtype-selector' className='form-control form-inline'>
-        <option>{props.searchTypeOne}</option>
-        <option>{props.searchTypeTwo}</option>
-        <option>{props.searchTypeThree}</option>
-        <option>{props.searchTypeFour}</option>
-        <option>{props.searchTypeFive}</option>
-        <option>{props.searchTypeSix}</option>
-        <option>{props.searchTypeSeven}</option>
-        <option>{props.searchTypeEight}</option>
-    </select>
-    ); 
+// const SearchTypeSubswitch = (props) => {
+//     return (
+//         <select id='search-subtype-selector' className='form-control form-inline'>
+//             <option>{props.searchTypeOne}</option>
+//             <option>{props.searchTypeTwo}</option>
+//             <option>{props.searchTypeThree}</option>
+//             <option>{props.searchTypeFour}</option>
+//             <option>{props.searchTypeFive}</option>
+//             <option>{props.searchTypeSix}</option>
+//             <option>{props.searchTypeSeven}</option>
+//             <option>{props.searchTypeEight}</option>
+//         </select>
+//     );
 
-}
+// }
 
 //This object creates the search bar
 const Searchbar = () => {
     return (
         <form className='form-inline'>
             <SearchTypeSwitch
-                searchTypeOne="Movie"
-                searchTypeTwo="Title"
+                // searchTypeOne="Movie"
+                // searchTypeTwo="Title"
             />
-            <div className='col-auto'>
+            {/* <div className='col-auto'>
                 <div className='input-group mb-6'>
                     <div className='input-group-prepend'>
                         <form className='form-inline'>
-                            <SearchTypeSubswitch 
+                            <SearchTypeSubswitch
                                 searchTypeOne="Movie Title"
                                 searchTypeTwo="Movie Genre"
                                 searchTypeThree="Movie Actor/Actress"
@@ -211,7 +211,7 @@ const Searchbar = () => {
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <input id='search-bar' className='form-control mr-md-6' type='search' placeholder='Type in Text' aria-label='Search'></input>
             <button id='submit-button' className='btn' type='submit'>Search</button>
         </form>
@@ -236,6 +236,58 @@ const Navbar = (props) => {
         </nav>
     );
 }
+class SearchTypeSwitch extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        selectedView: 'Movie'
+      }
+    }
+    
+    render() {
+      const { selectedView } = this.state
+      const VIEWS = [
+        {
+          name: 'Movie', 
+          minor: ['Title']
+        }, {
+          name: 'Movie Genre', 
+          minor: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Sci-Fi', 'TV Movie', 'Thriller', 'War', 'Western']  
+        }, {
+            name: 'TV Show',
+            minor: ['Title']
+        }, {
+            name: 'TV Genre',
+            minor: ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western']
+        }, {
+            name: 'Actor/Actresss',
+            minor: ['Name']
+        }
+
+      ]
+  
+      const getMajorMethod = () => {
+        const view = VIEWS.filter(({name}) => name === selectedView)[0]
+        return (
+          <div>
+            <select>
+              {view.minor.map(m => <option>{m}</option>)}
+            </select>
+            
+          </div>
+        )
+      }
+      return (
+        <div>
+          <select onChange={(e) => this.setState({selectedView: e.target.value})}>
+            {VIEWS.map(({name}) => <option value={name}>{name}</option>)}
+          </select>
+  
+          {getMajorMethod()}
+        </div>
+      )
+    }
+  }
 
 //This renders the objects to the page
 ReactDOM.render(
