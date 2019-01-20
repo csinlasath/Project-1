@@ -20,7 +20,7 @@ const Navigation = () => {
 
 const WatchButton = () => {
     return (
-        <button id='watch-button' className='btn' type='submit' data-toggle='modal' data-target='#watch-modal'>My Watch List</button>
+        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal' data-target='#watch-modal'>My Watch List</button>
     );
 }
 
@@ -212,8 +212,8 @@ const Searchbar = () => {
                     </div>
                 </div>
             </div> */}
-            <input id='search-bar' className='form-control mr-md-6' type='search' placeholder='Type in Text' aria-label='Search'></input>
-            <button id='submit-button' className='btn' type='submit'>Search</button>
+            <input style={{height: '51px', width: '205.5px'}} id='search-bar' className='form-control mr-md-6' type='search' placeholder='Type in Text' aria-label='Search'></input>
+            <button style={{height: '51px'}} id='submit-button' className='btn' type='submit'>Search</button>
         </form>
     );
 }
@@ -269,8 +269,8 @@ class SearchTypeSwitch extends React.Component {
       const getMajorMethod = () => {
         const view = VIEWS.filter(({name}) => name === selectedView)[0]
         return (
-          <div>
-            <select>
+          <div className='dropdownSub'>
+            <select style={{width: '164.5px'}}>
               {view.minor.map(m => <option>{m}</option>)}
             </select>
             
@@ -278,8 +278,8 @@ class SearchTypeSwitch extends React.Component {
         )
       }
       return (
-        <div>
-          <select onChange={(e) => this.setState({selectedView: e.target.value})}>
+        <div className='dropdownMain'>
+          <select style={{width: '164.5px'}} onChange={(e) => this.setState({selectedView: e.target.value})}>
             {VIEWS.map(({name}) => <option value={name}>{name}</option>)}
           </select>
   
