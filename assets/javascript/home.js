@@ -17,7 +17,7 @@ $(document).ready(function () {
     var queryURL3 = "https://api.themoviedb.org/3/tv/popular?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=";
     var queryURL4 = "https://api.themoviedb.org/3/tv/airing_today?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=";
     var queryURL5 = "https://api.themoviedb.org/3/movie/";
-    var queryURL6 = "http://www.omdbapi.com/?i=";
+    var queryURL6 = "https://www.omdbapi.com/?i=";
     var queryURL7 = "https://api.themoviedb.org/3/tv/"
     var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
     var omdbAPIKey = "&apikey=3dc16ac5";

@@ -21,7 +21,7 @@ const Navigation = () => {
 
 const WatchButton = () => {
     return (
-        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal' data-target='#watch-modal'>My Watch List</button>
+        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal'>My Watch List</button>
     );
 }
 
@@ -68,6 +68,7 @@ const MyWatchList = () => {
                     <div className='modal-body'>
                         <div id='my-watch-list' className='col-sm-3'>
                             <div id='list-group-watch-div' className='list-group'>
+                                <div id='empty-watch-list'>You don't have anything on your list!  Try searching for some.</div>
                                 <ul id='watch-list-group' className='list-group'></ul>
                             </div>
                         </div>
