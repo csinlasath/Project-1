@@ -1,7 +1,4 @@
 $(document).ready(function () {
-
-
-
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyBOB9TkbAPtIjCrgXC5_vHKVms283aQx4o",
@@ -10,70 +7,82 @@ $(document).ready(function () {
         projectId: "project-1-music-trivia",
         storageBucket: "project-1-music-trivia.appspot.com",
         messagingSenderId: "743814852234"
-    };
-    firebase.initializeApp(config);
+      };
+      firebase.initializeApp(config);
 
     database = firebase.database();
 
-    $("#info-user-signup").on("click", function (event) {
+    const databaseAuth = firebase.auth();
+
+    databaseAuth.onAuthStateChanged(projectAppUser => {
+        if (projectAppUser) {
+            $("#account-details").show();
+            $("#log-off-button").show();
+            $("#watch-button").show();
+            $("#loginDropdownMenuLink").text(projectAppUser.email);
+            $("#login-button").hide();
+            $("#sign-up-button").hide();
+        } else {
+            console.log("Not logged in.");
+        }
+    });
+
+    $(document).on("click", "#user-info-login", function(event) {
         event.preventDefault();
-        var firstName = $("#first-name-field").val().trim();
-        var lastName = $("#last-name-field").val().trim();
-        var email = $("#sign-up-email-field").val().trim();
-        var password = $("#sign-up-password-field").val().trim();
 
+        const emailText = $("#login-email-field").val().toString().toLowerCase().trim();
+        const passwordText = $("#login-password-field").val().toString().toLowerCase().trim();
+        
+        const databasePromise = databaseAuth.signInWithEmailAndPassword(emailText, passwordText);
+        databasePromise.catch(event => console.log(event.message));
 
-        database.ref("user").push({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
+        databaseAuth.onAuthStateChanged(projectAppUser => {
+            if (projectAppUser) {
+                $("#account-details").show();
+                $("#log-off-button").show();
+                $("#watch-button").show();
+                $("#loginDropdownMenuLink").text(projectAppUser.email);
+                $("#login-button").hide();
+                $("#sign-up-button").hide();
+                $("#login-modal").modal("hide");
+            } else {
+                console.log("Not logged in.");
+            }
         });
     });
 
-    $("#user-info-login").on("click", function (event) {
+    $(document).on("click", "#info-user-signup", function(event) {
         event.preventDefault();
 
-        var userRef = database.ref('user');
-        userRef.on('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                var childData = childSnapshot.val();
-                console.log(childData);
+        const emailText = $("#sign-up-email-field").val().toString().toLowerCase().trim();
+        const passwordText = $("#sign-up-password-field").val().toString().toLowerCase().trim();
 
-                var emailTrue = false;
-
-                var passwordTrue = false;
-
-                if($("#login-email-field").val().trim() == childData.email){
-                    console.log(childData.email + "It Works!");
-                    emailTrue = true;
-                }
-                else{
-                    console.log("Wrong!")
-                }
-                if($("#login-password-field").val().trim() == childData.password){
-                    console.log(childData.password + "It Works Again!");
-                    passwordTrue = true;
-                }
-
-                else{
-                    console.log("Wrong Again!")
-                }
-
-                if (emailTrue == true && passwordTrue == true){
-                    $("#")
-                }
-            });
-        })
-
+        const databasePromise = databaseAuth.createUserWithEmailAndPassword(emailText, passwordText);
+        databasePromise.catch(event => console.log(event.message));
+        databaseAuth.onAuthStateChanged(projectAppUser => {
+            if (projectAppUser) {
+                $("#account-details").show();
+                $("#log-off-button").show();
+                $("#watch-button").show();
+                $("#loginDropdownMenuLink").text(projectAppUser.email);
+                $("#login-button").hide();
+                $("#sign-up-button").hide();
+                $("#sign-up-modal").modal("hide");
+            } else {
+                console.log("Not logged in.");
+            }
+        });
     });
 
-
-
-
-
-
-
+    $(document).on("click", "#log-off-button", function() {
+        firebase.auth().signOut();
+        $("#account-details").hide();
+        $("#log-off-button").hide();
+        $("#watch-button").hide();
+        $("#loginDropdownMenuLink").text("Menu");
+        $("#login-button").show();
+        $("#sign-up-button").show();
+    });
 });
 
 
