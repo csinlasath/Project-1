@@ -67,13 +67,8 @@ const MyWatchList = () => {
                     </div>
                     <div className='modal-body'>
                         <div id='my-watch-list' className='col-sm-3'>
-                            <div className='list-group'>
-                                <a href="#" className="list-group-item list-group-item-action">Seven
-                                    <button id="remove-item" type='button' className='btn btn-primary'>Remove</button>
-                                </a>
-                                <a href="#" className="list-group-item list-group-item-action">Forrest Gump</a>
-                                <a href="#" className="list-group-item list-group-item-action"> Whatever </a>
-                                <a href="#" className="list-group-item list-group-item-action"> Whatever#2</a>
+                            <div id='list-group-watch-div' className='list-group'>
+                                <ul id='watch-list-group' className='list-group'></ul>
                             </div>
                         </div>
                     </div>
@@ -128,16 +123,18 @@ const MediaInfo = () => {
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
                     <div id='media-modal-body' className='modal-body'>
+                        <div id="media-modal-year"></div>
                         <div id="media-modal-rating"></div>
                         <div id="media-modal-actors"></div>
                         <div id="media-modal-director"></div>
                         <div id="media-modal-genre"></div>
+                        <div id="media-modal-imdb" style={{display: 'none'}}></div>
                     </div>
 
                     <div className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                        <button type='button' className='btn btn-primary'>Add to Watch List</button>
+                        <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
                     </div>
                 </div>
             </div>
