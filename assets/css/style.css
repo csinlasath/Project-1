@@ -35,7 +35,7 @@ font-family: 'Aleo', serif;
 .click:hover {
     cursor: pointer;
 }
-.dropdown-item:hover {
+.dropdownMain:hover {
     cursor: pointer;
 }
 h2 {
@@ -149,6 +149,9 @@ h2 {
 }
 #search-type-selector {
     margin-right: 15px;
+}
+select:hover {
+    cursor: pointer!important;
 }
 #submit-button {
     margin-right: 15px;
