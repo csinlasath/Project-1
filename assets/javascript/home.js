@@ -84,10 +84,12 @@ $(document).ready(function () {
                 console.log(response);
                 $("#media-info-modal").modal();
                 $("#media-info-modal-title").html(response.Title);
+                $("#media-modal-year").html("Year Released: " + response.Year)
                 $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
                 $("#media-modal-actors").html("Actors: " + response.Actors);
                 $("#media-modal-director").html("Directed by: " + response.Director);
                 $("#media-modal-genre").html("Genre " + response.Genre);
+                $("#media-modal-imdb").html(response.imdbID);
 
             });
         });
