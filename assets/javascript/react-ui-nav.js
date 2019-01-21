@@ -215,20 +215,25 @@ class SearchTypeSwitch extends React.Component {
       const { selectedView } = this.state
       const VIEWS = [
         {
-          name: 'Movie', 
-          minor: ['Title']
+            name: 'Movie', 
+            minor: ['Title'],
+            genreCode: ['1'],
         }, {
-          name: 'Movie Genre', 
-          minor: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Sci-Fi', 'TV Movie', 'Thriller', 'War', 'Western']  
+            name: 'Movie Genre', 
+            minor: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Sci-Fi', 'TV Movie', 'Thriller', 'War', 'Western'],
+            genreCode: ['28', '12', '16', '35', '80', '99', '18', '10751', '14', '36', '27', '10402', '9648', '10749', '878', '10770', '53', '10752', '37']
         }, {
             name: 'TV Show',
-            minor: ['Title']
+            minor: ['Title'],
+            genreCode: ['1']
         }, {
             name: 'TV Genre',
-            minor: ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western']
+            minor: ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western'],
+            genreCode: ['10759', '16', '35', '80', '99', '18', '10751', '10762', '9648', '10763', '10764', '10765', '10766', '10767', '10768', '37']
         }, {
             name: 'Actor/Actresss',
-            minor: ['Name']
+            minor: ['Name'],
+            genreCode: ['1']
         }
 
       ]
@@ -237,8 +242,8 @@ class SearchTypeSwitch extends React.Component {
         const view = VIEWS.filter(({name}) => name === selectedView)[0]
         return (
           <div className='dropdownSub'>
-            <select style={{width: '164.5px'}}>
-              {view.minor.map(m => <option>{m}</option>)}
+            <select id='subSearch' style={{width: '164.5px'}}>
+              {view.minor.map(m => <option data-genre={view.genreCode[view.minor.indexOf(m)]}>{m}</option>)}
             </select>
             
           </div>
@@ -246,7 +251,7 @@ class SearchTypeSwitch extends React.Component {
       }
       return (
         <div className='dropdownMain'>
-          <select style={{width: '164.5px'}} onChange={(e) => this.setState({selectedView: e.target.value})}>
+          <select id='mainSearch' style={{width: '164.5px'}} onChange={(e) => this.setState({selectedView: e.target.value})}>
             {VIEWS.map(({name}) => <option value={name}>{name}</option>)}
           </select>
   
