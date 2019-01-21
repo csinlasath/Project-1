@@ -33,7 +33,7 @@ $(document).ready(function () {
     }).then(function (response) {
         console.log(response);
         for (var i = 19; i >= 0; i--) {
-            $('#theater' + i).append($('<img class="moviePoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             $('#theater' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
         }
         page1 = 2;
@@ -77,13 +77,18 @@ $(document).ready(function () {
             url: queryURL5 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
-
             $.ajax({
                 url: queryURL6 + response.imdb_id + omdbAPIKey,
                 method: "GET"
             }).then(function (response) {
                 console.log(response);
+                $("#media-info-modal").modal();
+                $("#media-info-modal-title").html(response.Title);
+                $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
+                $("#media-modal-actors").html("Actors: " + response.Actors);
+                $("#media-modal-director").html("Directed by: " + response.Director);
+                $("#media-modal-genre").html("Genre " + response.Genre);
+
             });
         });
     });
@@ -93,6 +98,12 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response);
+            $("#media-info-modal").modal();
+                $("#media-info-modal-title").html(response.name);
+                $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
+                $("#media-modal-actors").html("Actors: " + response.Actors);
+                $("#media-modal-director").html("Directed by: " + response.Director);
+                $("#media-modal-genre").html("Genre " + response.Genre);
         });
     });
     $(document).on("click", "#more1", function () {

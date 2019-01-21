@@ -127,7 +127,13 @@ const MediaInfo = () => {
                         <h5 id='media-info-modal-title' className='modal-title'></h5>
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
-                    <div id='media-modal-body' className='modal-body'></div>
+                    <div id='media-modal-body' className='modal-body'>
+                        <div id="media-modal-rating"></div>
+                        <div id="media-modal-actors"></div>
+                        <div id="media-modal-director"></div>
+                        <div id="media-modal-genre"></div>
+                    </div>
+
                     <div className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
