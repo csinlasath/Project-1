@@ -242,7 +242,7 @@ class SearchTypeSwitch extends React.Component {
         const view = VIEWS.filter(({name}) => name === selectedView)[0]
         return (
           <div className='dropdownSub'>
-            <select style={{width: '164.5px'}}>
+            <select id='subSearch' style={{width: '164.5px'}}>
               {view.minor.map(m => <option data-genre={view.genreCode[view.minor.indexOf(m)]}>{m}</option>)}
             </select>
             
@@ -251,7 +251,7 @@ class SearchTypeSwitch extends React.Component {
       }
       return (
         <div className='dropdownMain'>
-          <select style={{width: '164.5px'}} onChange={(e) => this.setState({selectedView: e.target.value})}>
+          <select id='mainSearch' style={{width: '164.5px'}} onChange={(e) => this.setState({selectedView: e.target.value})}>
             {VIEWS.map(({name}) => <option value={name}>{name}</option>)}
           </select>
   
