@@ -14,6 +14,7 @@ const Navigation = () => {
             <Login />
             <MediaInfo />
             <MyWatchList />
+            <AccountInfo />
         </header>
     );
 }
@@ -37,10 +38,6 @@ const SignUp = () => {
                     <div className='modal-body'>
                         <form>
                             <div className='form-group'>
-                                <label htmlFor='first-name-field'>First Name</label>
-                                <input id='first-name-field' className='form-control' type='text' placeholder='John'></input>
-                                <label htmlFor='last-name-field'>Last Name</label>
-                                <input id='last-name-field' type='text' className='form-control' placeholder='Doe'></input>
                                 <label htmlFor='sign-up-email-field'>Email Address</label>
                                 <input id='sign-up-email-field' type='email' className='form-control' placeholder='johndoe@johndoe.com'></input>
                                 <label htmlFor='sign-up-password-field'>Password</label>
@@ -130,9 +127,28 @@ const MediaInfo = () => {
                         <h5 id='media-info-modal-title' className='modal-title'></h5>
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
-                    <div id='media-modal-body' className='modal-body'>
-
+                    <div id='media-modal-body' className='modal-body'></div>
+                    <div className='modal-footer'>
+                        <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
+                        <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
+                        <button type='button' className='btn btn-primary'>Add to Watch List</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const AccountInfo = () => {
+    return (
+        <div id='account-info-modal' className='modal fade' tabIndex='-1' role='dialog'>
+            <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
+                <div className='modal-content'>
+                    <div className='modal-header'>
+                        <h5 id='account-info-modal-title' className='modal-title'></h5>
+                        <button type='button' className='close' data-dismiss='modal'></button>
+                    </div>
+                    <div id='account-modal-body' className='modal-body'></div>
                     <div className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
@@ -148,70 +164,22 @@ const MediaInfo = () => {
 const LoginDropdown = (props) => {
     return (
         <li id='login-menu' className='nav-item dropdown'>
-            <a className='nav-link dropdown-toggle' href='#' id='loginDropdownMenuLink' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' aria-label='Toggle navigation'>{props.accountName}</a>
+            <a className='nav-link dropdown-toggle' href='#' id='loginDropdownMenuLink' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' aria-label='Toggle navigation'>Menu</a>
             <div className='dropdown-menu' aria-labelledby='loginDropdownMenuLink'>
                 <a id='login-button' className='dropdown-item' data-toggle='modal' data-target="#login-modal"> {props.listItemOne}</a>
                 <a id='sign-up-button' className='dropdown-item' data-toggle='modal' data-target='#sign-up-modal'>{props.listItemTwo}</a>
-                <a id='account-details' className='dropdown-item' href='#'>{props.listItemThree}</a>
+                <a id='account-details' className='dropdown-item' data-toggle='modal' data-target='#account-info-modal'>{props.listItemThree}</a>
                 <a id='log-off-button' className='dropdown-item' href='#'>{props.listItemFour}</a>
             </div>
         </li>
     );
 }
-//Creates object to switch between different types of searches
-// const SearchTypeSwitch = (props) => {
-//     return (
-//         <select id='search-type-selector' className='form-control form-inline'>
-//             <option>{props.searchTypeOne}</option>
-//             <option>{props.searchTypeTwo}</option>
-//         </select>
-//     );
-// }
-
-// const SearchTypeSubswitch = (props) => {
-//     return (
-//         <select id='search-subtype-selector' className='form-control form-inline'>
-//             <option>{props.searchTypeOne}</option>
-//             <option>{props.searchTypeTwo}</option>
-//             <option>{props.searchTypeThree}</option>
-//             <option>{props.searchTypeFour}</option>
-//             <option>{props.searchTypeFive}</option>
-//             <option>{props.searchTypeSix}</option>
-//             <option>{props.searchTypeSeven}</option>
-//             <option>{props.searchTypeEight}</option>
-//         </select>
-//     );
-
-// }
 
 //This object creates the search bar
 const Searchbar = () => {
     return (
         <form className='form-inline'>
-            <SearchTypeSwitch
-                // searchTypeOne="Movie"
-                // searchTypeTwo="Title"
-            />
-            {/* <div className='col-auto'>
-                <div className='input-group mb-6'>
-                    <div className='input-group-prepend'>
-                        <form className='form-inline'>
-                            <SearchTypeSubswitch
-                                searchTypeOne="Movie Title"
-                                searchTypeTwo="Movie Genre"
-                                searchTypeThree="Movie Actor/Actress"
-                                searchTypeFour="Movie Plot"
-                                searchTypeFive="TV Title"
-                                searchTypeSix="TV Genre"
-                                searchTypeSeven="TV Actor/Actress"
-                                searchTypeEight="TV Plot"
-                                searchTypeNine="Movie"
-                                searchTypeTen="TV"
-                            />
-                        </form>
-                    </div>
-                </div>
-            </div> */}
+            <SearchTypeSwitch />
             <input style={{height: '51px', width: '205.5px'}} id='search-bar' className='form-control mr-md-6' type='search' placeholder='Type in Text' aria-label='Search'></input>
             <button style={{height: '51px'}} id='submit-button' className='btn' type='submit'>Search</button>
         </form>
@@ -226,7 +194,6 @@ const Navbar = (props) => {
             <WatchButton />
             <div className="navbar-nav ml-auto">
                 <LoginDropdown
-                    accountName="John Doe"
                     listItemOne="Login"
                     listItemTwo="Sign-up"
                     listItemThree="Account Details"
@@ -294,6 +261,10 @@ ReactDOM.render(
     <Navigation />,
     document.getElementById('root')
 );
+
+$("#account-details").hide();
+$("#log-off-button").hide();
+$("#watch-button").hide();
 
 
 
