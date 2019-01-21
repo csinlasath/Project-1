@@ -103,7 +103,7 @@ h2 {
     padding: 20px;
     border: solid;
     top: 0;
-    background: url(../Images/fancy-cushion.png);
+    background: url("../images/fancy-cushion.png");
     z-index: 6;
 }
 .posterContainer {

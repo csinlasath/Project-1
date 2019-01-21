@@ -24,6 +24,7 @@ $(document).ready(function () {
         newListItem.addClass("list-group-item");
         newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
         newListItem.attr("id", snap.key);
+        newListItem.attr("data-imdb", snap.val().imdbID);
         var deleteWatchListButton = $("<button>");
         deleteWatchListButton.add.id = snap.key + "-button";
         deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
@@ -150,7 +151,11 @@ $(document).ready(function () {
             $("#empty-watch-list").hide();
         }
         $("#watch-modal").modal("show");
-    })
+    });
+    $(document).on("click", "#account-details", function() {
+        $("#account-modal-body").text("This is placeholder text");
+        $("#account-info-modal").modal("show");
+    });
 });
 
 
