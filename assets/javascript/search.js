@@ -4,16 +4,15 @@ $(document).ready(function () {
     var page0 = 2;
     var withGenre = "&with_genres=";
     var langOriginal = "&with_original_language=en";
-    var searchTopicsub = $("#subSearch").val();
+    var searchTopicsub = "";
     var moviePosterSize = "https://image.tmdb.org/t/p/w200";
-    var searchTopicMain = $("#mainSearch").val();
+    var searchTopicMain = "";
     var timeGenre = "&timezone=America%2FNew_York&with_genres=";
     $(document).on("click", "#submit-button", function (event) {
         event.preventDefault();
         $("#searchResults").empty();
         $("#searchResults").append('<div id="results" class="scrolling-wrapper"></div>');
         $("#results").html('<div id="searchLeft" class="left"></div>');
-        $("#results").append('<div id="more0" class="posterContainer"></div>');
         $("#results").append('<div id="searchRight" class="right"></div>');
         $("#searchResults").prepend('<h1>Search results</h1>');
         searchTopicMain = $("#mainSearch").val();
@@ -170,6 +169,7 @@ $(document).ready(function () {
                     $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
                 };
                 if (response.results.length >= 20) {
+                    $("#searchRight").before('<div id="more0" class="posterContainer"></div>');
                     $('#more0').html($('<img id="moreButton" src="assets/images/more.jpg">'));
                     $('#more0').append($('<div><h5>More</h5></div>'));
                     for (var i = 0; i < response.results.length; i++) {
@@ -201,6 +201,7 @@ $(document).ready(function () {
                     $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
                 };
                 if (response.results.length >= 20) {
+                    $("#searchRight").before('<div id="more0" class="posterContainer"></div>');
                     $('#more0').append($('<img id="moreButton" src="assets/images/more.jpg">'));
                     $('#more0').append($('<div><h5>More</h5></div>'));
                     for (var i = 0; i < response.results.length; i++) {
