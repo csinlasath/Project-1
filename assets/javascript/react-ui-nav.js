@@ -267,7 +267,7 @@ class SearchTypeSwitch extends React.Component {
                 minor: ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western'],
                 genreCode: ['10759', '16', '35', '80', '99', '18', '10751', '10762', '9648', '10763', '10764', '10765', '10766', '10767', '10768', '37']
             }, {
-                name: 'Actor/Actresss',
+                name: 'Actor/Actress',
                 minor: ['Name'],
                 genreCode: ['1']
             }
@@ -279,7 +279,7 @@ class SearchTypeSwitch extends React.Component {
             return (
                 <div className='dropdownSub'>
                     <select id='subSearch' style={{ width: '164.5px' }}>
-                        {view.minor.map(m => <option data-genre={view.genreCode[view.minor.indexOf(m)]}>{m}</option>)}
+                        {view.minor.map(m => <option value={view.genreCode[view.minor.indexOf(m)]}>{m}</option>)}
                     </select>
                 </div>
             )
