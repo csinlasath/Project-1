@@ -13,6 +13,7 @@ const Navigation = () => {
             <SignUp />
             <Login />
             <MediaInfo />
+            <MediaInfoTV />
             <MyWatchList />
             <AccountInfo />
         </header>
@@ -130,6 +131,34 @@ const MediaInfo = () => {
                         <div id="media-modal-director"></div>
                         <div id="media-modal-genre"></div>
                         <div id="media-modal-imdb" style={{display: 'none'}}></div>
+                    </div>
+
+                    <div className='modal-footer'>
+                        <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
+                        <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
+                        <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const MediaInfoTV = () => {
+    return (
+        <div id='media-info-modal-tv' className='modal fade' tabIndex='-1' role='dialog'>
+            <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
+                <div className='modal-content'>
+                    <div className='modal-header'>
+                        <h5 id='media-info-modal-title-tv' className='modal-title'></h5>
+                        <button type='button' className='close' data-dismiss='modal'></button>
+                    </div>
+                    <div id='media-modal-body-tv' className='modal-body'>
+                        <div id="media-modal-creators-tv"></div>
+                        <div id="media-modal-latest-epi-tv"></div>
+                        <div id="media-modal-network-tv"></div>
+                        <div id="media-modal-genre-tv"></div>
+                        <div id="media-modal-imdb-tv" style={{display: 'none'}}></div>
                     </div>
 
                     <div className='modal-footer'>
