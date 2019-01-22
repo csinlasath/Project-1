@@ -12,39 +12,47 @@ $(document).ready(function () {
 
     var userKey = "/users/";
     var database = firebase.database().ref().child(userKey);
-    // database.on('value', snap => {
-    //     console.log(snap.val());
-    //     $("#my-watch-list").html(JSON.stringify(snap.val(), null, 3));
-    // });
 
     database.on("child_added", snap => {
         console.log(snap.val());
 
-        const newListItem = $("<li></li>");
-        newListItem.addClass("list-group-item");
-        newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
-        newListItem.attr("id", snap.key);
-        newListItem.attr("data-imdb", snap.val().imdbID);
-        var deleteWatchListButton = $("<button>");
-        deleteWatchListButton.add.id = snap.key + "-button";
-        deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
-        deleteWatchListButton.text("Remove");
-        deleteWatchListButton.css("float", "right");
-        newListItem.append(deleteWatchListButton);
-        $("#watch-list-group").append(newListItem);
-        // $("#my-watch-list").html(JSON.stringify(snap.val(), null, 3));
+        if (snap.val().mediaType === "Movie") {
+            const newListItem = $("<li></li>");
+            newListItem.addClass("list-group-item");
+            newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
+            newListItem.attr("id", snap.key);
+            newListItem.attr("data-imdb", snap.val().imdbID);
+            var deleteWatchListButton = $("<button>");
+            deleteWatchListButton.add.id = snap.key + "-button";
+            deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
+            deleteWatchListButton.text("Remove");
+            deleteWatchListButton.css("float", "right");
+            newListItem.append(deleteWatchListButton);
+            $("#watch-list-group").append(newListItem);
+        }
+        if (snap.val().mediaType === "Show") {
+            const newListItem = $("<li></li>");
+            newListItem.addClass("list-group-item");
+            newListItem.text(snap.val().showTitle + " - (" + snap.val().showNetwork + ")");
+            newListItem.attr("id", snap.key);
+            var deleteWatchListButton = $("<button>");
+            deleteWatchListButton.add.id = snap.key + "-button";
+            deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
+            deleteWatchListButton.text("Remove");
+            deleteWatchListButton.css("float", "right");
+            newListItem.append(deleteWatchListButton);
+            $("#watch-list-group").append(newListItem);
+        }
     });
 
     database.on("child_changed", snap => {
         console.log(snap.val());
         const listItemChanged = $(snap.key);
-        // ("#watch-list-group").remove(listItemChanged);
     });
 
     database.on("child_removed", snap => {
         console.log(snap.val());
         const listItemRemove = $(snap.key);
-        // ("#watch-list-group").remove(listItemRemove);
     });
 
     const databaseAuth = firebase.auth();
@@ -137,17 +145,31 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#add-to-watch-list-button", function () {
-        database.push({
-            movieTitle: $("#media-info-modal-title").text(),
-            movieYear: $("#media-modal-year").text(),
-            imdbID: $("#media-modal-imdb").text(),
-            firebaseUserID: firebase.auth().currentUser.uid,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-        });
+
+        if (($(this).parent().attr("id")) === "media-modal-footer") {
+            database.push({
+                movieTitle: $("#media-info-modal-title").text(),
+                movieYear: $("#media-modal-year").text(),
+                imdbID: $("#media-modal-imdb").text(),
+                mediaType: "Movie",
+                firebaseUserID: firebase.auth().currentUser.uid,
+                dateAdded: firebase.database.ServerValue.TIMESTAMP
+            });
+            $("#media-info-modal").modal("hide");
+        }
+        if (($(this).parent().attr("id")) === "media-modal-tv-footer") {
+            database.push({
+                showTitle: $("#media-info-modal-title-tv").text(),
+                showNetwork: $("#media-modal-network-tv").text(),
+                mediaType: "Show",
+                firebaseUserID: firebase.auth().currentUser.uid,
+                dateAdded: firebase.database.ServerValue.TIMESTAMP
+            });
+            $("#media-info-modal-tv").modal("hide");
+        }
         if ($("#watch-list-group").children().length > 0) {
             $("#empty-watch-list").hide();
         }
-        $("#media-info-modal").modal("hide");
         $("#watch-modal").modal("show");
     });
 
