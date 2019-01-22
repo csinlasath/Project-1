@@ -274,6 +274,7 @@ ReactDOM.render(
 $("#account-details").hide();
 $("#log-off-button").hide();
 $("#watch-button").hide();
+$("#add-to-watch-list-button").hide();
 
 
 
