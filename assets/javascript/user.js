@@ -24,6 +24,7 @@ $(document).ready(function () {
         newListItem.addClass("list-group-item");
         newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
         newListItem.attr("id", snap.key);
+        newListItem.attr("data-imdb", snap.val().imdbID);
         var deleteWatchListButton = $("<button>");
         deleteWatchListButton.add.id = snap.key + "-button";
         deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
@@ -130,7 +131,9 @@ $(document).ready(function () {
             firebaseUserID: firebase.auth().currentUser.uid,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-
+        if ($("#watch-list-group").children().length > 0) {
+            $("#empty-watch-list").hide();
+        }
         $("#media-info-modal").modal("hide");
         $("#watch-modal").modal("show");
     });
@@ -138,6 +141,20 @@ $(document).ready(function () {
     $(document).on("click", ".remove-watch-list-button", function(snap) {
         $(this).closest("li").remove();
         database.child($(this).closest("li").attr("id")).remove();
+        if ($("#watch-list-group").children().length < 1) {
+            $("#empty-watch-list").show();
+        }
+    });
+
+    $(document).on("click", "#watch-button", function() {
+        if ($("#watch-list-group").children().length > 0) {
+            $("#empty-watch-list").hide();
+        }
+        $("#watch-modal").modal("show");
+    });
+    $(document).on("click", "#account-details", function() {
+        $("#account-modal-body").text("This is placeholder text");
+        $("#account-info-modal").modal("show");
     });
 });
 

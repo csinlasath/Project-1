@@ -21,7 +21,7 @@ const Navigation = () => {
 
 const WatchButton = () => {
     return (
-        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal' data-target='#watch-modal'>My Watch List</button>
+        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal'>My Watch List</button>
     );
 }
 
@@ -68,6 +68,7 @@ const MyWatchList = () => {
                     <div className='modal-body'>
                         <div id='my-watch-list' className='col-sm-3'>
                             <div id='list-group-watch-div' className='list-group'>
+                                <div id='empty-watch-list'>You don't have anything on your list!  Try searching for some.</div>
                                 <ul id='watch-list-group' className='list-group'></ul>
                             </div>
                         </div>
@@ -148,14 +149,14 @@ const AccountInfo = () => {
             <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
                 <div className='modal-content'>
                     <div className='modal-header'>
-                        <h5 id='account-info-modal-title' className='modal-title'></h5>
+                        <h5 id='account-info-modal-title' className='modal-title'>My Account</h5>
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
                     <div id='account-modal-body' className='modal-body'></div>
                     <div className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                        <button type='button' className='btn btn-primary'>Add to Watch List</button>
+                        <button id='save-account-settings' type='button' className='btn btn-primary'>Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -171,7 +172,7 @@ const LoginDropdown = (props) => {
             <div className='dropdown-menu' aria-labelledby='loginDropdownMenuLink'>
                 <a id='login-button' className='dropdown-item' data-toggle='modal' data-target="#login-modal"> {props.listItemOne}</a>
                 <a id='sign-up-button' className='dropdown-item' data-toggle='modal' data-target='#sign-up-modal'>{props.listItemTwo}</a>
-                <a id='account-details' className='dropdown-item' data-toggle='modal' data-target='#account-info-modal'>{props.listItemThree}</a>
+                <a id='account-details' className='dropdown-item' data-toggle='modal'>{props.listItemThree}</a>
                 <a id='log-off-button' className='dropdown-item' href='#'>{props.listItemFour}</a>
             </div>
         </li>
