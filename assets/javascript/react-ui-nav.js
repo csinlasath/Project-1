@@ -247,6 +247,7 @@ class SearchTypeSwitch extends React.Component {
     }
 
     render() {
+      
         const { selectedView } = this.state
         const VIEWS = [
             {
@@ -280,7 +281,6 @@ class SearchTypeSwitch extends React.Component {
                     <select id='subSearch' style={{ width: '164.5px' }}>
                         {view.minor.map(m => <option data-genre={view.genreCode[view.minor.indexOf(m)]}>{m}</option>)}
                     </select>
-
                 </div>
             )
         }

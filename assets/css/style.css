@@ -40,6 +40,9 @@ font-family: 'Aleo', serif;
 .dropdownMain:hover {
     cursor: pointer;
 }
+.dropdown-item:hover {
+    cursor: pointer;
+}
 h2 {
     color: white;
     z-index: 5;
@@ -86,13 +89,14 @@ h2 {
 .movie-info {
     margin-top: 40px;
 }
-.moviePoster, .tvPoster {
+.moviePoster, .tvPoster, .actorPoster {
     max-height: 450px;
+    height: 450px;
     width: 300px;
     min-width: 300px;
 }
 .moviePoster:hover,
-.tvPoster{
+.tvPoster:hover{
     cursor: pointer;
 }
 #my-watch-list {
@@ -156,7 +160,7 @@ h2 {
 #search-type-selector {
     margin-right: 15px;
 }
-select:hover {
+select:hover, option:hover {
     cursor: pointer!important;
 }
 #submit-button {
