@@ -84,6 +84,8 @@ $(document).ready(function () {
                 console.log(response);
                 $("#media-info-modal").modal();
                 $("#media-info-modal-title").html(response.Title);
+                $("#media-modal-overview").html("<p><q>" + response.Plot + "</q></p><br>");
+                $("#media-modal-overview").css("font-weight", "bolder");
                 $("#media-modal-year").html("Year Released: " + response.Year)
                 $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
                 $("#media-modal-actors").html("Actors: " + response.Actors);
@@ -102,6 +104,8 @@ $(document).ready(function () {
             console.log(response);
             $("#media-info-modal-tv").modal();
             $("#media-info-modal-title-tv").html(response.name);
+            $("#media-modal-overview-tv").html("<p><q>" + response.overview + "</q></p><br>");
+            $("#media-modal-overview-tv").css("font-weight", "bolder");
             $("#media-modal-creators-tv").html("Created by: ")
 
             for (var i = 0; i < response.created_by.length; i++) {

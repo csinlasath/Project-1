@@ -22,7 +22,7 @@ const Navigation = () => {
 
 const WatchButton = () => {
     return (
-        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal'>My Watch List</button>
+        <button style={{ height: '51px' }} id='watch-button' className='btn' type='submit' data-toggle='modal'>My Watch List</button>
     );
 }
 
@@ -125,15 +125,16 @@ const MediaInfo = () => {
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
                     <div id='media-modal-body' className='modal-body'>
+                        <div id="media-modal-overview"></div>
                         <div id="media-modal-year"></div>
                         <div id="media-modal-rating"></div>
                         <div id="media-modal-actors"></div>
                         <div id="media-modal-director"></div>
                         <div id="media-modal-genre"></div>
-                        <div id="media-modal-imdb" style={{display: 'none'}}></div>
+                        <div id="media-modal-imdb" style={{ display: 'none' }}></div>
                     </div>
 
-                    <div className='modal-footer'>
+                    <div id='media-modal-footer' className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
                         <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
@@ -154,14 +155,15 @@ const MediaInfoTV = () => {
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
                     <div id='media-modal-body-tv' className='modal-body'>
+                        <div id="media-modal-overview-tv"></div>
                         <div id="media-modal-creators-tv"></div>
                         <div id="media-modal-latest-epi-tv"></div>
                         <div id="media-modal-network-tv"></div>
                         <div id="media-modal-genre-tv"></div>
-                        <div id="media-modal-imdb-tv" style={{display: 'none'}}></div>
+                        <div id="media-modal-imdb-tv" style={{ display: 'none' }}></div>
                     </div>
 
-                    <div className='modal-footer'>
+                    <div id='media-modal-tv-footer'className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
                         <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
@@ -213,8 +215,8 @@ const Searchbar = () => {
     return (
         <form className='form-inline'>
             <SearchTypeSwitch />
-            <input style={{height: '51px', width: '205.5px'}} id='search-bar' className='form-control mr-md-6' type='search' placeholder='Type in Text' aria-label='Search'></input>
-            <button style={{height: '51px'}} id='submit-button' className='btn' type='submit'>Search</button>
+            <input style={{ height: '51px', width: '205.5px' }} id='search-bar' className='form-control mr-md-6' type='search' placeholder='Type in Text' aria-label='Search'></input>
+            <button style={{ height: '51px' }} id='submit-button' className='btn' type='submit'>Search</button>
         </form>
     );
 }
@@ -238,61 +240,61 @@ const Navbar = (props) => {
 }
 class SearchTypeSwitch extends React.Component {
     constructor(props) {
-      super(props)
-      this.state = {
-        selectedView: 'Movie'
-      }
-    }
-    
-    render() {
-      const { selectedView } = this.state
-      const VIEWS = [
-        {
-            name: 'Movie', 
-            minor: ['Title'],
-            genreCode: ['1'],
-        }, {
-            name: 'Movie Genre', 
-            minor: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Sci-Fi', 'TV Movie', 'Thriller', 'War', 'Western'],
-            genreCode: ['28', '12', '16', '35', '80', '99', '18', '10751', '14', '36', '27', '10402', '9648', '10749', '878', '10770', '53', '10752', '37']
-        }, {
-            name: 'TV Show',
-            minor: ['Title'],
-            genreCode: ['1']
-        }, {
-            name: 'TV Genre',
-            minor: ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western'],
-            genreCode: ['10759', '16', '35', '80', '99', '18', '10751', '10762', '9648', '10763', '10764', '10765', '10766', '10767', '10768', '37']
-        }, {
-            name: 'Actor/Actresss',
-            minor: ['Name'],
-            genreCode: ['1']
+        super(props)
+        this.state = {
+            selectedView: 'Movie'
         }
-
-      ]
-  
-      const getMajorMethod = () => {
-        const view = VIEWS.filter(({name}) => name === selectedView)[0]
-        return (
-          <div className='dropdownSub'>
-            <select id='subSearch' style={{width: '164.5px'}}>
-              {view.minor.map(m => <option data-genre={view.genreCode[view.minor.indexOf(m)]}>{m}</option>)}
-            </select>
-            
-          </div>
-        )
-      }
-      return (
-        <div className='dropdownMain'>
-          <select id='mainSearch' style={{width: '164.5px'}} onChange={(e) => this.setState({selectedView: e.target.value})}>
-            {VIEWS.map(({name}) => <option value={name}>{name}</option>)}
-          </select>
-  
-          {getMajorMethod()}
-        </div>
-      )
     }
-  }
+
+    render() {
+        const { selectedView } = this.state
+        const VIEWS = [
+            {
+                name: 'Movie',
+                minor: ['Title'],
+                genreCode: ['1'],
+            }, {
+                name: 'Movie Genre',
+                minor: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Sci-Fi', 'TV Movie', 'Thriller', 'War', 'Western'],
+                genreCode: ['28', '12', '16', '35', '80', '99', '18', '10751', '14', '36', '27', '10402', '9648', '10749', '878', '10770', '53', '10752', '37']
+            }, {
+                name: 'TV Show',
+                minor: ['Title'],
+                genreCode: ['1']
+            }, {
+                name: 'TV Genre',
+                minor: ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western'],
+                genreCode: ['10759', '16', '35', '80', '99', '18', '10751', '10762', '9648', '10763', '10764', '10765', '10766', '10767', '10768', '37']
+            }, {
+                name: 'Actor/Actresss',
+                minor: ['Name'],
+                genreCode: ['1']
+            }
+
+        ]
+
+        const getMajorMethod = () => {
+            const view = VIEWS.filter(({ name }) => name === selectedView)[0]
+            return (
+                <div className='dropdownSub'>
+                    <select id='subSearch' style={{ width: '164.5px' }}>
+                        {view.minor.map(m => <option data-genre={view.genreCode[view.minor.indexOf(m)]}>{m}</option>)}
+                    </select>
+
+                </div>
+            )
+        }
+        return (
+            <div className='dropdownMain'>
+                <select id='mainSearch' style={{ width: '164.5px' }} onChange={(e) => this.setState({ selectedView: e.target.value })}>
+                    {VIEWS.map(({ name }) => <option value={name}>{name}</option>)}
+                </select>
+
+                {getMajorMethod()}
+            </div>
+        )
+    }
+}
 
 //This renders the objects to the page
 ReactDOM.render(
