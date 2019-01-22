@@ -13,6 +13,7 @@ const Navigation = () => {
             <SignUp />
             <Login />
             <MediaInfo />
+            <MediaInfoTV />
             <MyWatchList />
             <AccountInfo />
         </header>
@@ -21,7 +22,7 @@ const Navigation = () => {
 
 const WatchButton = () => {
     return (
-        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal' data-target='#watch-modal'>My Watch List</button>
+        <button style={{height: '51px'}} id='watch-button' className='btn' type='submit' data-toggle='modal'>My Watch List</button>
     );
 }
 
@@ -67,13 +68,9 @@ const MyWatchList = () => {
                     </div>
                     <div className='modal-body'>
                         <div id='my-watch-list' className='col-sm-3'>
-                            <div className='list-group'>
-                                <a href="#" className="list-group-item list-group-item-action">Seven
-                                    <button id="remove-item" type='button' className='btn btn-primary'>Remove</button>
-                                </a>
-                                <a href="#" className="list-group-item list-group-item-action">Forrest Gump</a>
-                                <a href="#" className="list-group-item list-group-item-action"> Whatever </a>
-                                <a href="#" className="list-group-item list-group-item-action"> Whatever#2</a>
+                            <div id='list-group-watch-div' className='list-group'>
+                                <div id='empty-watch-list'>You don't have anything on your list!  Try searching for some.</div>
+                                <ul id='watch-list-group' className='list-group'></ul>
                             </div>
                         </div>
                     </div>
@@ -128,16 +125,46 @@ const MediaInfo = () => {
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
                     <div id='media-modal-body' className='modal-body'>
+                        <div id="media-modal-year"></div>
                         <div id="media-modal-rating"></div>
                         <div id="media-modal-actors"></div>
                         <div id="media-modal-director"></div>
                         <div id="media-modal-genre"></div>
+                        <div id="media-modal-imdb" style={{display: 'none'}}></div>
                     </div>
 
                     <div className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                        <button type='button' className='btn btn-primary'>Add to Watch List</button>
+                        <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const MediaInfoTV = () => {
+    return (
+        <div id='media-info-modal-tv' className='modal fade' tabIndex='-1' role='dialog'>
+            <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
+                <div className='modal-content'>
+                    <div className='modal-header'>
+                        <h5 id='media-info-modal-title-tv' className='modal-title'></h5>
+                        <button type='button' className='close' data-dismiss='modal'></button>
+                    </div>
+                    <div id='media-modal-body-tv' className='modal-body'>
+                        <div id="media-modal-creators-tv"></div>
+                        <div id="media-modal-latest-epi-tv"></div>
+                        <div id="media-modal-network-tv"></div>
+                        <div id="media-modal-genre-tv"></div>
+                        <div id="media-modal-imdb-tv" style={{display: 'none'}}></div>
+                    </div>
+
+                    <div className='modal-footer'>
+                        <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
+                        <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
+                        <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
                     </div>
                 </div>
             </div>
@@ -151,14 +178,14 @@ const AccountInfo = () => {
             <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
                 <div className='modal-content'>
                     <div className='modal-header'>
-                        <h5 id='account-info-modal-title' className='modal-title'></h5>
+                        <h5 id='account-info-modal-title' className='modal-title'>My Account</h5>
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
                     <div id='account-modal-body' className='modal-body'></div>
                     <div className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                        <button type='button' className='btn btn-primary'>Add to Watch List</button>
+                        <button id='save-account-settings' type='button' className='btn btn-primary'>Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -174,7 +201,7 @@ const LoginDropdown = (props) => {
             <div className='dropdown-menu' aria-labelledby='loginDropdownMenuLink'>
                 <a id='login-button' className='dropdown-item' data-toggle='modal' data-target="#login-modal"> {props.listItemOne}</a>
                 <a id='sign-up-button' className='dropdown-item' data-toggle='modal' data-target='#sign-up-modal'>{props.listItemTwo}</a>
-                <a id='account-details' className='dropdown-item' data-toggle='modal' data-target='#account-info-modal'>{props.listItemThree}</a>
+                <a id='account-details' className='dropdown-item' data-toggle='modal'>{props.listItemThree}</a>
                 <a id='log-off-button' className='dropdown-item' href='#'>{props.listItemFour}</a>
             </div>
         </li>
@@ -276,6 +303,7 @@ ReactDOM.render(
 $("#account-details").hide();
 $("#log-off-button").hide();
 $("#watch-button").hide();
+$("#add-to-watch-list-button").hide();
 
 
 
