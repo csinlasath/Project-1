@@ -7,8 +7,8 @@ $(document).ready(function () {
         projectId: "project-1-music-trivia",
         storageBucket: "project-1-music-trivia.appspot.com",
         messagingSenderId: "743814852234"
-      };
-      firebase.initializeApp(config);
+    };
+    firebase.initializeApp(config);
 
     var userKey = "/users/";
     var database = firebase.database().ref().child(userKey);
@@ -55,64 +55,76 @@ $(document).ready(function () {
             $("#log-off-button").show();
             $("#watch-button").show();
             $("#loginDropdownMenuLink").text(projectAppUser.email);
-            userKey = userKey + firebase.auth().currentUser.uid.toString() + "/";
+            userKey = userKey + firebase.auth().currentUser.uid + "/";
             $("#login-button").hide();
             $("#sign-up-button").hide();
+            $("#login-modal").modal("hide");
+            $("#sign-up-modal").modal("hide");
+            $("#add-to-watch-list-button").show();
+            
         } else {
             console.log("Not logged in.");
         }
     });
 
-    $(document).on("click", "#user-info-login", function(event) {
+    $(document).on("click", "#user-info-login", function (event) {
         event.preventDefault();
 
         const emailText = $("#login-email-field").val().toString().toLowerCase().trim();
         const passwordText = $("#login-password-field").val().toString().toLowerCase().trim();
-        
-        const databasePromise = databaseAuth.signInWithEmailAndPassword(emailText, passwordText);
-        databasePromise.catch(event => console.log(event.message));
 
-        databaseAuth.onAuthStateChanged(projectAppUser => {
-            if (projectAppUser) {
-                $("#account-details").show();
-                $("#log-off-button").show();
-                $("#watch-button").show();
-                $("#loginDropdownMenuLink").text(projectAppUser.email);
-                userKey = userKey + firebase.auth().currentUser.uid + "/"; 
-                $("#login-button").hide();
-                $("#sign-up-button").hide();
-                $("#login-modal").modal("hide");
-            } else {
-                console.log("Not logged in.");
-            }
-        });
+        var emailIsValid = false;
+        var passwordIsValid = false;
+
+        if (emailText.indexOf("@") && emailText.indexOf(".")) {
+            emailIsValid = true;
+        }
+        else {
+            console.log("Email is not valid");
+        }
+        if (passwordText.length > 5) {
+            passwordIsValid = true;
+        }
+        else {
+            console.log("Password is not valid");
+        }
+        if ((emailIsValid === true) && (passwordIsValid === true)) {
+            const databasePromise = databaseAuth.signInWithEmailAndPassword(emailText, passwordText);
+            databasePromise.catch(event => console.log(event.message));
+        }
     });
 
-    $(document).on("click", "#info-user-signup", function(event) {
+    $(document).on("click", "#info-user-signup", function (event) {
         event.preventDefault();
 
         const emailText = $("#sign-up-email-field").val().toString().toLowerCase().trim();
         const passwordText = $("#sign-up-password-field").val().toString().toLowerCase().trim();
 
-        const databasePromise = databaseAuth.createUserWithEmailAndPassword(emailText, passwordText);
-        databasePromise.catch(event => console.log(event.message));
-        databaseAuth.onAuthStateChanged(projectAppUser => {
-            if (projectAppUser) {
-                $("#account-details").show();
-                $("#log-off-button").show();
-                $("#watch-button").show();
-                $("#loginDropdownMenuLink").text(projectAppUser.email);
-                userKey = userKey + firebase.auth().currentUser.uid + "/"; 
-                $("#login-button").hide();
-                $("#sign-up-button").hide();
-                $("#sign-up-modal").modal("hide");
-            } else {
-                console.log("Not logged in.");
-            }
-        });
+        var emailIsValid = false;
+        var passwordIsValid = false;
+
+        if (emailText.indexOf("@") && emailText.indexOf(".")) {
+            emailIsValid = true;
+        }
+        else {
+            console.log("Email is not valid");
+        }
+        if (passwordText.length > 5) {
+            passwordIsValid = true;
+        }
+        else {
+            console.log("Password is not valid");
+        }
+
+        if ((emailIsValid === true) && (passwordIsValid === true)) {
+            const databasePromise = databaseAuth.createUserWithEmailAndPassword(emailText, passwordText);
+            databasePromise.catch(event => console.log(event.message));
+        }
+
+
     });
 
-    $(document).on("click", "#log-off-button", function() {
+    $(document).on("click", "#log-off-button", function () {
         firebase.auth().signOut();
         $("#account-details").hide();
         $("#log-off-button").hide();
@@ -121,9 +133,10 @@ $(document).ready(function () {
         userKey = "/object/users/";
         $("#login-button").show();
         $("#sign-up-button").show();
+        $("#add-to-watch-list-button").hide();
     });
 
-    $(document).on("click", "#add-to-watch-list-button", function() {
+    $(document).on("click", "#add-to-watch-list-button", function () {
         database.push({
             movieTitle: $("#media-info-modal-title").text(),
             movieYear: $("#media-modal-year").text(),
@@ -138,7 +151,7 @@ $(document).ready(function () {
         $("#watch-modal").modal("show");
     });
 
-    $(document).on("click", ".remove-watch-list-button", function(snap) {
+    $(document).on("click", ".remove-watch-list-button", function (snap) {
         $(this).closest("li").remove();
         database.child($(this).closest("li").attr("id")).remove();
         if ($("#watch-list-group").children().length < 1) {
@@ -146,13 +159,13 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click", "#watch-button", function() {
+    $(document).on("click", "#watch-button", function () {
         if ($("#watch-list-group").children().length > 0) {
             $("#empty-watch-list").hide();
         }
         $("#watch-modal").modal("show");
     });
-    $(document).on("click", "#account-details", function() {
+    $(document).on("click", "#account-details", function () {
         $("#account-modal-body").text("This is placeholder text");
         $("#account-info-modal").modal("show");
     });
