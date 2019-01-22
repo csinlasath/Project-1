@@ -32,8 +32,12 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i = 19; i >= 0; i--) {
-            $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+        for (var i = 19; i >= 0; i--) {         
+            if (response.results[i].poster_path === null){
+                $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+            }else {
+                $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            }
             $('#theater' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
         }
         page1 = 2;
@@ -43,8 +47,12 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i = 19; i >= 0; i--) {
-            $('#topRated' + i).append($('<img class="moviePoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+        for (var i = 19; i >= 0; i--) {            
+            if (response.results[i].poster_path === null){
+                $('#topRated' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+            }else {
+                $('#topRated' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            }
             $('#topRated' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
         }
         page2 = 2;
@@ -116,7 +124,11 @@ $(document).ready(function () {
                 $('#more1').before($('<div/>', { id: 'theater'+page1+'-'+ i, 'class': 'posterContainer' }))
             };
             for (var i = 0; i < response.results.length; i++) {
-                $('#theater'+page1+'-' + i).append($('<img class="moviePoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                if (response.results[i].poster_path === null){
+                    $('#theater'+page1+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                }else {
+                    $('#theater'+page1+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                }
                 $('#theater'+page1+'-' + i).append($('<div><h5>' + response.results[i].title.slice(0 , 28) + '</h5></div>'));
             }
             page1++;
@@ -135,7 +147,11 @@ $(document).ready(function () {
                 $('#more2').before($('<div/>', { id: 'topRated'+page2+'-'+ i, 'class': 'posterContainer' }))
             };
             for (var i = 0; i < response.results.length; i++) {
-                $('#topRated'+page2+'-' + i).append($('<img class="moviePoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                if (response.results[i].poster_path === null){
+                    $('#topRated'+page2+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                }else {
+                    $('#topRated'+page2+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                }
                 $('#topRated'+page2+'-' + i).append($('<div><h5>' + response.results[i].title.slice(0 , 28) + '</h5></div>'));
             }
             page2++;
@@ -154,7 +170,11 @@ $(document).ready(function () {
                 $('#more3').before($('<div/>', { id: 'popTv'+page3+'-'+ i, 'class': 'posterContainer' }))
             };
             for (var i = 0; i < response.results.length; i++) {
-                $('#popTv'+page3+'-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                if (response.results[i].poster_path === null) {
+                    $('#popTv'+page3+'-' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                } else {
+                    $('#popTv'+page3+'-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                };
                 $('#popTv'+page3+'-' + i).append($('<div><h5>' + response.results[i].name.slice(0 , 28) + '</h5></div>'));
             }
             page3++;
@@ -173,7 +193,11 @@ $(document).ready(function () {
                 $('#more4').before($('<div/>', { id: 'tonightTv'+page4+'-'+ i, 'class': 'posterContainer' }))
             };
             for (var i = 0; i < response.results.length; i++) {
-                $('#tonightTv'+page4+'-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                if (response.results[i].poster_path === null) {
+                    $('#tonightTv'+page4+'-' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                } else {
+                    $('#tonightTv'+page4+'-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                };
                 $('#tonightTv'+page4+'-' + i).append($('<div><h5>' + response.results[i].name.slice(0 , 28) + '</h5></div>'));
             }
             page4++;
@@ -181,6 +205,26 @@ $(document).ready(function () {
                 $("#more4").empty();
             };
         })
+    });
+    $(document).on('mousedown', '#right-button0', function() {
+        event.preventDefault();
+        $('#results').animate({
+          scrollLeft: "+=80600px"
+        }, 28000)
+      });
+    $(document).on('mouseup', '#right-button0', function() {
+        event.preventDefault();
+        $('#results').stop();
+    });
+    $(document).on('mousedown', '#left-button0', function() {
+        event.preventDefault();
+        $('#results').animate({
+          scrollLeft: "-=80600px"
+        }, 28000);
+      });
+    $(document).on('mouseup', '#left-button0', function() {
+        event.preventDefault();
+        $('#results').stop();
     });
     $('#right-button').mousedown(function() {
         event.preventDefault();
