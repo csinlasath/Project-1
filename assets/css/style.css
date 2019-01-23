@@ -182,19 +182,34 @@ select:hover, option:hover {
     height: 110px;
 }
 
-@media only screen and (min-width: 592px) and (max-width: 831px) {
+@media only screen and (min-width: 597px) and (max-width: 974px) {
     #topPush {
-        height: 148px;
+        height: 147px;
     }
+
 }
-@media only screen and (min-width: 576px) and (max-width: 591px) {
+@media only screen and (min-width: 518px) and (max-width: 596px) {
     #topPush {
         height: 182px;
     }
 }
-@media only screen and (max-width: 575px) {
+@media only screen and (min-width: 423px) and (max-width: 518px) {
     #topPush {
-        height: 258px;
+        height: 232px;
+    }
+    #watch-button{
+        position: sticky;
+       
+    }
+}
+@media only screen and (min-width: 353px) and (max-width: 424px) {
+    #topPush {
+        height: 271px;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 353px) {
+    #topPush{
+        height: 322px; 
     }
 }
 ::-webkit-scrollbar {
