@@ -22,6 +22,7 @@ $(document).ready(function () {
     var queryURL7 = "https://api.themoviedb.org/3/tv/";
     var queryURL8 = "https://api.themoviedb.org/3/movie/";
     var queryURL9 = "https://api.themoviedb.org/3/tv/";
+    var queryURL10 = "https://api.themoviedb.org/3/person/";
     var videoSearch = "/videos?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US"
     var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
     var omdbAPIKey = "&apikey=3dc16ac5";
@@ -107,18 +108,32 @@ $(document).ready(function () {
                 $("#media-modal-director").html("Directed by: " + response.Director);
                 $("#media-modal-genre").html("Genre: " + response.Genre);
                 $("#media-modal-imdb").html(response.imdbID);
-                $.ajax ({
+                $.ajax({
                     url: queryURL8 + movieID + videoSearch,
                     method: "GET"
                 }).then(function (response) {
-                    $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/'+ response.results[0].key +'?autoplay=1&origin=http://github.com" frameborder="0"></iframe>');
+                    $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
                     $("#media-modal-trailer").css("text-align", "center");
+
                 });
             });
         });
     });
     $(document).on("click", ".close", function () {
         $("#media-modal-trailer").empty();
+        $("#media-modal-tv-trailer").empty();
+    });
+    $(document).on("click", ".actorPoster", function () {
+        $.ajax({
+            url: queryURL10 + $(this).attr("data-id") + tmdbKey,
+            method: "GET"
+        }).then(function (response) {
+            $("#media-info-modal-person").modal();
+            $("#media-info-modal-title-person").html(response.name);
+            $("#media-modal-pic-person").html("<img id='personPic' src='" + moviePosterSize2 + response.profile_path + "'>");
+            $("#media-modal-bio-person").html('<strong>Bio: </strong>' + response.biography);
+            $("#media-modal-place-born-person").html('<strong>Place of Birth: </strong>' + response.place_of_birth);
+        });
     });
     $(document).on("click", ".tvPoster", function () {
         var tvID = $(this).attr("data-id");
@@ -144,7 +159,7 @@ $(document).ready(function () {
                 }
             }
 
-            $("#media-modal-first-air-tv").html("Original Air Date: " + response.first_air_date.slice(5,10) + "-" + response.first_air_date.slice(0,4) + "</div>");
+            $("#media-modal-first-air-tv").html("Original Air Date: " + response.first_air_date.slice(5, 10) + "-" + response.first_air_date.slice(0, 4) + "</div>");
 
             $("#media-modal-network-tv").html("Network:  " + response.networks[0].name);
 
@@ -161,34 +176,34 @@ $(document).ready(function () {
             }
             $("#media-modal-episodes").css("float", "left");
             if (response.last_episode_to_air !== null) {
-                $("#media-modal-previousEpisode").html('<br><h5><strong>Previously on '+ response.name + '</strong></h5>');
+                $("#media-modal-previousEpisode").html('<br><h5><strong>Previously on ' + response.name + '</strong></h5>');
                 if (response.last_episode_to_air.still_path === null) {
                     $("#media-modal-previousEpisode").append('<img src="assets/images/null2.jpg">');
-                }else {
+                } else {
                     $("#media-modal-previousEpisode").append('<img src="' + moviePosterSize2 + response.last_episode_to_air.still_path + '">');
                 }
-                $("#media-modal-previousEpisode").append('<div>Season ' + response.last_episode_to_air.season_number + ' Episode ' + response.last_episode_to_air.episode_number +'</div>');
-                $("#media-modal-previousEpisode").append('<div>"' + response.last_episode_to_air.name + '"' +'</div>');
-                $("#media-modal-previousEpisode").append('<div>Air Date: ' + response.last_episode_to_air.air_date.slice(5.10) + '-' +response.last_episode_to_air.air_date.slice(0,4)+'</div>');
+                $("#media-modal-previousEpisode").append('<div>Season ' + response.last_episode_to_air.season_number + ' Episode ' + response.last_episode_to_air.episode_number + '</div>');
+                $("#media-modal-previousEpisode").append('<div>"' + response.last_episode_to_air.name + '"' + '</div>');
+                $("#media-modal-previousEpisode").append('<div>Air Date: ' + response.last_episode_to_air.air_date.slice(5.10) + '-' + response.last_episode_to_air.air_date.slice(0, 4) + '</div>');
                 $("#media-modal-previousEpisode").append('<hr><div>' + response.last_episode_to_air.overview + '</div>');
             }
             if (response.next_episode_to_air !== null) {
-                $("#media-modal-nextEpisode").html('<br><h5><strong>Next on '+ response.name + '</strong></h5>');
-                if (response.next_episode_to_air.still_path === null){
+                $("#media-modal-nextEpisode").html('<br><h5><strong>Next on ' + response.name + '</strong></h5>');
+                if (response.next_episode_to_air.still_path === null) {
                     $("#media-modal-nextEpisode").append('<img src="assets/images/null2.jpg">');
-                }else {
+                } else {
                     $("#media-modal-nextEpisode").append('<img src="' + moviePosterSize2 + response.next_episode_to_air.still_path + '">');
                 }
-                $("#media-modal-nextEpisode").append('<div>Season ' + response.next_episode_to_air.season_number + ' Episode ' + response.next_episode_to_air.episode_number +'</div>');
-                $("#media-modal-nextEpisode").append('<div>"' + response.next_episode_to_air.name + '"' +'</div>');
-                $("#media-modal-nextEpisode").append('<div>Air Date: ' + response.next_episode_to_air.air_date.slice(5.10) + '-' +response.next_episode_to_air.air_date.slice(0,4)+'</div>');
+                $("#media-modal-nextEpisode").append('<div>Season ' + response.next_episode_to_air.season_number + ' Episode ' + response.next_episode_to_air.episode_number + '</div>');
+                $("#media-modal-nextEpisode").append('<div>"' + response.next_episode_to_air.name + '"' + '</div>');
+                $("#media-modal-nextEpisode").append('<div>Air Date: ' + response.next_episode_to_air.air_date.slice(5.10) + '-' + response.next_episode_to_air.air_date.slice(0, 4) + '</div>');
                 $("#media-modal-nextEpisode").append('<hr><div>' + response.next_episode_to_air.overview);
             }
-            $.ajax ({
+            $.ajax({
                 url: queryURL9 + tvID + videoSearch,
                 method: "GET"
             }).then(function (response) {
-                $("#media-modal-tv-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/'+ response.results[0].key +'?autoplay=1&origin=http://github.com" frameborder="0"></iframe>');
+                $("#media-modal-tv-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
                 $("#media-modal-tv-trailer").css("text-align", "center");
             });
 
