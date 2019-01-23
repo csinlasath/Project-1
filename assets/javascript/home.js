@@ -13,12 +13,16 @@ $(document).ready(function () {
     };
     var queryURL1 = "https://api.themoviedb.org/3/movie/now_playing?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=";
     var moviePosterSize = "https://image.tmdb.org/t/p/w200";
+    var moviePosterSize2 = "https://image.tmdb.org/t/p/w300";
     var queryURL2 = "https://api.themoviedb.org/3/movie/top_rated?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=";
     var queryURL3 = "https://api.themoviedb.org/3/tv/popular?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=";
     var queryURL4 = "https://api.themoviedb.org/3/tv/airing_today?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US&page=";
     var queryURL5 = "https://api.themoviedb.org/3/movie/";
     var queryURL6 = "https://www.omdbapi.com/?i=";
-    var queryURL7 = "https://api.themoviedb.org/3/tv/"
+    var queryURL7 = "https://api.themoviedb.org/3/tv/";
+    var queryURL8 = "https://api.themoviedb.org/3/movie/";
+    var queryURL9 = "https://api.themoviedb.org/3/tv/";
+    var videoSearch = "/videos?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US"
     var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
     var omdbAPIKey = "&apikey=3dc16ac5";
     var region = "&region=US"
@@ -33,10 +37,10 @@ $(document).ready(function () {
     }).then(function (response) {
         console.log(response);
 
-        for (var i = 19; i >= 0; i--) {         
-            if (response.results[i].poster_path === null){
+        for (var i = 19; i >= 0; i--) {
+            if (response.results[i].poster_path === null) {
                 $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
-            }else {
+            } else {
                 $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
 
@@ -49,10 +53,10 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i = 19; i >= 0; i--) {            
-            if (response.results[i].poster_path === null){
+        for (var i = 19; i >= 0; i--) {
+            if (response.results[i].poster_path === null) {
                 $('#topRated' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
-            }else {
+            } else {
                 $('#topRated' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
             $('#topRated' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
@@ -83,6 +87,7 @@ $(document).ready(function () {
 
     });
     $(document).on("click", ".moviePoster", function () {
+        var movieID = $(this).attr("data-id");
         $.ajax({
             url: queryURL5 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
@@ -102,16 +107,27 @@ $(document).ready(function () {
                 $("#media-modal-director").html("Directed by: " + response.Director);
                 $("#media-modal-genre").html("Genre: " + response.Genre);
                 $("#media-modal-imdb").html(response.imdbID);
-
+                $.ajax ({
+                    url: queryURL8 + movieID + videoSearch,
+                    method: "GET"
+                }).then(function (response) {
+                    $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/'+ response.results[0].key +'?autoplay=1&origin=http://github.com" frameborder="0"></iframe>');
+                    $("#media-modal-trailer").css("text-align", "center");
+                });
             });
         });
     });
+    $(document).on("click", ".close", function () {
+        $("#media-modal-trailer").empty();
+    });
     $(document).on("click", ".tvPoster", function () {
+        var tvID = $(this).attr("data-id");
         $.ajax({
             url: queryURL7 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
         }).then(function (response) {
             console.log(response);
+            var width = 0;
             $("#media-info-modal-tv").modal();
             $("#media-info-modal-title-tv").html(response.name);
             $("#media-modal-overview-tv").html("<p><q>" + response.overview + "</q></p><br>");
@@ -128,23 +144,55 @@ $(document).ready(function () {
                 }
             }
 
-            $("#media-modal-latest-epi-tv").html("Latest Episode: " + response.last_episode_to_air.name + " (Season: " + response.number_of_seasons + " Episode: " + response.last_episode_to_air.episode_number + ")");
+            $("#media-modal-first-air-tv").html("Original Air Date: " + response.first_air_date.slice(5,10) + "-" + response.first_air_date.slice(0,4) + "</div>");
 
             $("#media-modal-network-tv").html("Network:  " + response.networks[0].name);
 
             $("#media-modal-genre-tv").html("Genres: ")
-            
-                for (var i = 0; i < response.genres.length; i++) {
-                    if (response.genres.length > 0) {
-                        if (i !== 0) {
-                            $("#media-modal-genre-tv").append(", ");
-                            console.log(response.genres[i].name);
-                        }
-                        $("#media-modal-genre-tv").append(response.genres[i].name);
-                        }
+
+            for (var i = 0; i < response.genres.length; i++) {
+                if (response.genres.length > 0) {
+                    if (i !== 0) {
+                        $("#media-modal-genre-tv").append(", ");
+                        console.log(response.genres[i].name);
+                    }
+                    $("#media-modal-genre-tv").append(response.genres[i].name);
                 }
             }
-        );
+            $("#media-modal-episodes").css("float", "left");
+            if (response.last_episode_to_air !== null) {
+                $("#media-modal-previousEpisode").html('<br><h5><strong>Previously on '+ response.name + '</strong></h5>');
+                if (response.last_episode_to_air.still_path === null) {
+                    $("#media-modal-previousEpisode").append('<img src="assets/images/null2.jpg">');
+                }else {
+                    $("#media-modal-previousEpisode").append('<img src="' + moviePosterSize2 + response.last_episode_to_air.still_path + '">');
+                }
+                $("#media-modal-previousEpisode").append('<div>Season ' + response.last_episode_to_air.season_number + ' Episode ' + response.last_episode_to_air.episode_number +'</div>');
+                $("#media-modal-previousEpisode").append('<div>"' + response.last_episode_to_air.name + '"' +'</div>');
+                $("#media-modal-previousEpisode").append('<div>Air Date: ' + response.last_episode_to_air.air_date.slice(5.10) + '-' +response.last_episode_to_air.air_date.slice(0,4)+'</div>');
+                $("#media-modal-previousEpisode").append('<hr><div>' + response.last_episode_to_air.overview + '</div>');
+            }
+            if (response.next_episode_to_air !== null) {
+                $("#media-modal-nextEpisode").html('<br><h5><strong>Next on '+ response.name + '</strong></h5>');
+                if (response.next_episode_to_air.still_path === null){
+                    $("#media-modal-nextEpisode").append('<img src="assets/images/null2.jpg">');
+                }else {
+                    $("#media-modal-nextEpisode").append('<img src="' + moviePosterSize2 + response.next_episode_to_air.still_path + '">');
+                }
+                $("#media-modal-nextEpisode").append('<div>Season ' + response.next_episode_to_air.season_number + ' Episode ' + response.next_episode_to_air.episode_number +'</div>');
+                $("#media-modal-nextEpisode").append('<div>"' + response.next_episode_to_air.name + '"' +'</div>');
+                $("#media-modal-nextEpisode").append('<div>Air Date: ' + response.next_episode_to_air.air_date.slice(5.10) + '-' +response.next_episode_to_air.air_date.slice(0,4)+'</div>');
+                $("#media-modal-nextEpisode").append('<hr><div>' + response.next_episode_to_air.overview);
+            }
+            $.ajax ({
+                url: queryURL9 + tvID + videoSearch,
+                method: "GET"
+            }).then(function (response) {
+                $("#media-modal-tv-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/'+ response.results[0].key +'?autoplay=1&origin=http://github.com" frameborder="0"></iframe>');
+                $("#media-modal-tv-trailer").css("text-align", "center");
+            });
+
+        });
     });
     $(document).on("click", "#more1", function () {
         $.ajax({
@@ -157,12 +205,12 @@ $(document).ready(function () {
             };
             for (var i = 0; i < response.results.length; i++) {
 
-                if (response.results[i].poster_path === null){
-                    $('#theater'+page1+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
-                }else {
-                    $('#theater'+page1+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                if (response.results[i].poster_path === null) {
+                    $('#theater' + page1 + '-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                } else {
+                    $('#theater' + page1 + '-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
                 }
-                $('#theater'+page1+'-' + i).append($('<div><h5>' + response.results[i].title.slice(0 , 28) + '</h5></div>'));
+                $('#theater' + page1 + '-' + i).append($('<div><h5>' + response.results[i].title.slice(0, 28) + '</h5></div>'));
 
             }
             page1++;
@@ -182,12 +230,12 @@ $(document).ready(function () {
             };
             for (var i = 0; i < response.results.length; i++) {
 
-                if (response.results[i].poster_path === null){
-                    $('#topRated'+page2+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
-                }else {
-                    $('#topRated'+page2+'-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                if (response.results[i].poster_path === null) {
+                    $('#topRated' + page2 + '-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                } else {
+                    $('#topRated' + page2 + '-' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
                 }
-                $('#topRated'+page2+'-' + i).append($('<div><h5>' + response.results[i].title.slice(0 , 28) + '</h5></div>'));
+                $('#topRated' + page2 + '-' + i).append($('<div><h5>' + response.results[i].title.slice(0, 28) + '</h5></div>'));
 
             }
             page2++;
@@ -208,11 +256,11 @@ $(document).ready(function () {
             for (var i = 0; i < response.results.length; i++) {
 
                 if (response.results[i].poster_path === null) {
-                    $('#popTv'+page3+'-' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                    $('#popTv' + page3 + '-' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
                 } else {
-                    $('#popTv'+page3+'-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                    $('#popTv' + page3 + '-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
                 };
-                $('#popTv'+page3+'-' + i).append($('<div><h5>' + response.results[i].name.slice(0 , 28) + '</h5></div>'));
+                $('#popTv' + page3 + '-' + i).append($('<div><h5>' + response.results[i].name.slice(0, 28) + '</h5></div>'));
 
             }
             page3++;
@@ -233,11 +281,11 @@ $(document).ready(function () {
             for (var i = 0; i < response.results.length; i++) {
 
                 if (response.results[i].poster_path === null) {
-                    $('#tonightTv'+page4+'-' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                    $('#tonightTv' + page4 + '-' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
                 } else {
-                    $('#tonightTv'+page4+'-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                    $('#tonightTv' + page4 + '-' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
                 };
-                $('#tonightTv'+page4+'-' + i).append($('<div><h5>' + response.results[i].name.slice(0 , 28) + '</h5></div>'));
+                $('#tonightTv' + page4 + '-' + i).append($('<div><h5>' + response.results[i].name.slice(0, 28) + '</h5></div>'));
 
             }
             page4++;
@@ -247,27 +295,27 @@ $(document).ready(function () {
         })
     });
 
-    $(document).on('mousedown', '#right-button0', function() {
+    $(document).on('mousedown', '#right-button0', function () {
         event.preventDefault();
         $('#results').animate({
-          scrollLeft: "+=80600px"
+            scrollLeft: "+=80600px"
         }, 28000)
-      });
-    $(document).on('mouseup', '#right-button0', function() {
+    });
+    $(document).on('mouseup', '#right-button0', function () {
         event.preventDefault();
         $('#results').stop();
     });
-    $(document).on('mousedown', '#left-button0', function() {
+    $(document).on('mousedown', '#left-button0', function () {
         event.preventDefault();
         $('#results').animate({
-          scrollLeft: "-=80600px"
+            scrollLeft: "-=80600px"
         }, 28000);
-      });
-    $(document).on('mouseup', '#left-button0', function() {
+    });
+    $(document).on('mouseup', '#left-button0', function () {
         event.preventDefault();
         $('#results').stop();
     });
-    $('#right-button').mousedown(function() {
+    $('#right-button').mousedown(function () {
         event.preventDefault();
         $('#theater').animate({
             scrollLeft: "+=25600px"

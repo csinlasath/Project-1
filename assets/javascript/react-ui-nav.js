@@ -122,9 +122,10 @@ const MediaInfo = () => {
                 <div className='modal-content'>
                     <div className='modal-header'>
                         <h5 id='media-info-modal-title' className='modal-title'></h5>
-                        <button type='button' className='close' data-dismiss='modal'></button>
+                        <button type='button' className='close' data-dismiss='modal' style={{color: '#1e90ff'}}>&#x2718;</button>
                     </div>
                     <div id='media-modal-body' className='modal-body'>
+                        <div id="media-modal-trailer"></div>
                         <div id="media-modal-overview"></div>
                         <div id="media-modal-year"></div>
                         <div id="media-modal-rating"></div>
@@ -136,7 +137,6 @@ const MediaInfo = () => {
 
                     <div id='media-modal-footer' className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
-                        <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
                         <button id='add-to-watch-list-button' type='button' className='btn btn-primary add-watch-list'>Add to Watch List</button>
                     </div>
                 </div>
@@ -152,20 +152,24 @@ const MediaInfoTV = () => {
                 <div className='modal-content'>
                     <div className='modal-header'>
                         <h5 id='media-info-modal-title-tv' className='modal-title'></h5>
-                        <button type='button' className='close' data-dismiss='modal'></button>
+                        <button type='button' className='close trailerClose' data-dismiss='modal' style={{color: '#1e90ff'}}>&#x2718;</button>
                     </div>
                     <div id='media-modal-body-tv' className='modal-body'>
+                        <div id="media-modal-tv-trailer"></div>
                         <div id="media-modal-overview-tv"></div>
                         <div id="media-modal-creators-tv"></div>
-                        <div id="media-modal-latest-epi-tv"></div>
+                        <div id="media-modal-first-air-tv"></div>
                         <div id="media-modal-network-tv"></div>
                         <div id="media-modal-genre-tv"></div>
                         <div id="media-modal-imdb-tv" style={{ display: 'none' }}></div>
+                        <div id="media-modal-episodes" className='row'>
+                            <div id="media-modal-previousEpisode" className='col-md-6'></div>
+                            <div id="media-modal-nextEpisode" className='col-md-6'></div>
+                        </div>
                     </div>
 
                     <div id='media-modal-tv-footer'className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
-                        <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
                         <button id='add-to-watch-list-button-tv' type='button' className='btn btn-primary add-watch-list'>Add to Watch List</button>
                     </div>
                 </div>
