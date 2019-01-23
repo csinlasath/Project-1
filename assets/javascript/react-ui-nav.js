@@ -9,6 +9,7 @@ const Navigation = () => {
             <Login />
             <MediaInfo />
             <MediaInfoTV />
+            <MediaInfoPerson />
             <MyWatchList />
             <AccountInfo />
         </header>
@@ -121,10 +122,10 @@ const MediaInfo = () => {
                 <div className='modal-content'>
                     <div className='modal-header'>
                         <h5 id='media-info-modal-title' className='modal-title'></h5>
-                        <button type='button' className='close' data-dismiss='modal' style={{color: '#1e90ff'}}>&#x2718;</button>
+                        <button type='button' className='close' data-dismiss='modal' style={{ color: '#1e90ff' }}>&#x2718;</button>
                     </div>
                     <div id='media-modal-body' className='modal-body'>
-                        <div id="media-modal-trailer"></div>
+                        <div id='media-modal-trailer'></div>
                         <div id="media-modal-overview"></div>
                         <div id="media-modal-year"></div>
                         <div id="media-modal-rating"></div>
@@ -151,10 +152,10 @@ const MediaInfoTV = () => {
                 <div className='modal-content'>
                     <div className='modal-header'>
                         <h5 id='media-info-modal-title-tv' className='modal-title'></h5>
-                        <button type='button' className='close trailerClose' data-dismiss='modal' style={{color: '#1e90ff'}}>&#x2718;</button>
+                        <button type='button' className='close trailerClose' data-dismiss='modal' style={{ color: '#1e90ff' }}>&#x2718;</button>
                     </div>
                     <div id='media-modal-body-tv' className='modal-body'>
-                        <div id="media-modal-tv-trailer"></div>
+                        <div id='media-modal-tv-trailer'></div>
                         <div id="media-modal-overview-tv"></div>
                         <div id="media-modal-creators-tv"></div>
                         <div id="media-modal-first-air-tv"></div>
@@ -167,9 +168,29 @@ const MediaInfoTV = () => {
                         </div>
                     </div>
 
-                    <div id='media-modal-tv-footer'className='modal-footer'>
+                    <div id='media-modal-tv-footer' className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button id='add-to-watch-list-button-tv' type='button' className='btn btn-primary add-watch-list'>Add to Watch List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const MediaInfoPerson = () => {
+    return (
+        <div id='media-info-modal-person' className='modal fade' tabIndex='-1' role='dialog'>
+            <div className='modal-dialog modal-dialog-centered modal-lg' role='document'>
+                <div className='modal-content'>
+                    <div className='modal-header'>
+                        <h5 id='media-info-modal-title-person' className='modal-title'></h5>
+                        <button type='button' className='close trailerClose' data-dismiss='modal' style={{ color: '#1e90ff' }}>&#x2718;</button>
+                    </div>
+                    <div id='media-modal-body-person' className='modal-body'>
+                        <div id="media-modal-pic-person"></div>
+                        <div id="media-modal-bio-person"></div>
+                        <div id="media-modal-place-born-person"></div>
                     </div>
                 </div>
             </div>
@@ -250,7 +271,7 @@ class SearchTypeSwitch extends React.Component {
     }
 
     render() {
-      
+
         const { selectedView } = this.state
         const VIEWS = [
             {
