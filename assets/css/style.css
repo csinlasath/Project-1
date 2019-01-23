@@ -99,6 +99,20 @@ h2 {
     color: white;
     margin-left: 60px;
 }
+#media-modal-trailer, #media-modal-tv-trailer {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
+#media-modal-trailer iframe, #media-modal-trailer object, #media-modal-trailer embed, #media-modal-tv-trailer iframe, #media-modal-tv-trailer object, #media-modal-tv-trailer embed {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
 #moreButton:hover {
     cursor: pointer;
 }
