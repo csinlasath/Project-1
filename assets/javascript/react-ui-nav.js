@@ -1,8 +1,3 @@
-var firstSearch = "";
-var secondSearch = "";
-var threeSearch = "";
-var fourSearch = "";
-
 //This creates the header
 const Navigation = () => {
     return (
@@ -41,8 +36,10 @@ const SignUp = () => {
                             <div className='form-group'>
                                 <label htmlFor='sign-up-email-field'>Email Address</label>
                                 <input id='sign-up-email-field' type='email' className='form-control' placeholder='johndoe@johndoe.com'></input>
+                                <small id='signup-email-error' className='form-text'>Your Email is not in the right format</small>
                                 <label htmlFor='sign-up-password-field'>Password</label>
                                 <input id='sign-up-password-field' type='password' className='form-control' placeholder='Minimum of 6 Characters'></input>
+                                <small id='signup-password-error' className='form-text'>Your Password is incorrect or missing</small>
                             </div>
                         </form>
                     </div>
@@ -98,8 +95,10 @@ const Login = () => {
                             <div className='form-group'>
                                 <label htmlFor='login-email-field'>Email Address</label>
                                 <input id='login-email-field' type='email' className='form-control' placeholder='johndoe@johndoe.com'></input>
+                                <small id='login-email-error' className='form-text'>Your Email is not in the right format</small>
                                 <label htmlFor='login-password-field'>Password</label>
                                 <input id='login-password-field' type='password' className='form-control' placeholder='Minimum of 6 Characters'></input>
+                                <small id='login-password-error' className='form-text'>Your Password is incorrect or missing</small>
                             </div>
                         </form>
                     </div>
@@ -307,6 +306,14 @@ $("#log-off-button").hide();
 $("#watch-button").hide();
 $("#add-to-watch-list-button").hide();
 $("#add-to-watch-list-button-tv").hide();
+$("#signup-email-error").css("color", "red");
+$("#signup-password-error").css("color", "red");
+$("#login-email-error").css("color", "red");
+$("#login-password-error").css("color", "red");
+$("#signup-email-error").hide();
+$("#signup-password-error").hide();
+$("#login-email-error").hide();
+$("#login-password-error").hide();
 
 
 
