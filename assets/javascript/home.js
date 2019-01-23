@@ -89,6 +89,7 @@ $(document).ready(function () {
     });
     $(document).on("click", ".moviePoster", function () {
         var movieID = $(this).attr("data-id");
+        $("#media-modal-body").prepend("<div id='media-modal-trailer'></div>");
         $.ajax({
             url: queryURL5 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
@@ -112,16 +113,21 @@ $(document).ready(function () {
                     url: queryURL8 + movieID + videoSearch,
                     method: "GET"
                 }).then(function (response) {
-                    $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
-                    $("#media-modal-trailer").css("text-align", "center");
-
+                    if (!$.trim(response.results)) {
+                        $("#media-modal-trailer").remove();
+                    } else {
+                        $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
+                        $("#media-modal-trailer").css("text-align", "center");
+                    }
                 });
             });
         });
     });
-    $(document).on("click", ".close", function () {
-        $("#media-modal-trailer").empty();
-        $("#media-modal-tv-trailer").empty();
+    $('#media-info-modal').on('hidden.bs.modal', function () {
+        $("#media-modal-trailer").remove();
+    });
+    $('#media-info-modal-tv').on('hidden.bs.modal', function () {
+        $("#media-modal-tv-trailer").remove();
     });
     $(document).on("click", ".actorPoster", function () {
         $.ajax({
@@ -137,6 +143,7 @@ $(document).ready(function () {
     });
     $(document).on("click", ".tvPoster", function () {
         var tvID = $(this).attr("data-id");
+        $("#media-modal-body-tv").prepend("<div id='media-modal-tv-trailer'></div>");
         $.ajax({
             url: queryURL7 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
@@ -202,8 +209,12 @@ $(document).ready(function () {
                 url: queryURL9 + tvID + videoSearch,
                 method: "GET"
             }).then(function (response) {
-                $("#media-modal-tv-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
-                $("#media-modal-tv-trailer").css("text-align", "center");
+                if (!$.trim(response.results)) {
+                    $("#media-modal-tv-trailer").remove();
+                } else {
+                    $("#media-modal-tv-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
+                    $("#media-modal-tv-trailer").css("text-align", "center");
+                }
             });
 
         });

@@ -125,7 +125,6 @@ const MediaInfo = () => {
                         <button type='button' className='close' data-dismiss='modal' style={{ color: '#1e90ff' }}>&#x2718;</button>
                     </div>
                     <div id='media-modal-body' className='modal-body'>
-                        <div id='media-modal-trailer'></div>
                         <div id="media-modal-overview"></div>
                         <div id="media-modal-year"></div>
                         <div id="media-modal-rating"></div>
@@ -155,7 +154,6 @@ const MediaInfoTV = () => {
                         <button type='button' className='close trailerClose' data-dismiss='modal' style={{ color: '#1e90ff' }}>&#x2718;</button>
                     </div>
                     <div id='media-modal-body-tv' className='modal-body'>
-                        <div id='media-modal-tv-trailer'></div>
                         <div id="media-modal-overview-tv"></div>
                         <div id="media-modal-creators-tv"></div>
                         <div id="media-modal-first-air-tv"></div>
