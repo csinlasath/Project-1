@@ -174,13 +174,12 @@ $(document).ready(function () {
                     $("#media-modal-genre-tv").append(response.genres[i].name);
                 }
             }
-            $("#media-modal-episodes").css("float", "left");
             if (response.last_episode_to_air !== null) {
                 $("#media-modal-previousEpisode").html('<br><h5><strong>Previously on ' + response.name + '</strong></h5>');
                 if (response.last_episode_to_air.still_path === null) {
-                    $("#media-modal-previousEpisode").append('<img src="assets/images/null2.jpg">');
+                    $("#media-modal-previousEpisode").append('<img style="width: 100%" src="assets/images/null2.jpg">');
                 } else {
-                    $("#media-modal-previousEpisode").append('<img src="' + moviePosterSize2 + response.last_episode_to_air.still_path + '">');
+                    $("#media-modal-previousEpisode").append('<img style="width: 100%" src="' + moviePosterSize2 + response.last_episode_to_air.still_path + '">');
                 }
                 $("#media-modal-previousEpisode").append('<div>Season ' + response.last_episode_to_air.season_number + ' Episode ' + response.last_episode_to_air.episode_number + '</div>');
                 $("#media-modal-previousEpisode").append('<div>"' + response.last_episode_to_air.name + '"' + '</div>');
@@ -190,9 +189,9 @@ $(document).ready(function () {
             if (response.next_episode_to_air !== null) {
                 $("#media-modal-nextEpisode").html('<br><h5><strong>Next on ' + response.name + '</strong></h5>');
                 if (response.next_episode_to_air.still_path === null) {
-                    $("#media-modal-nextEpisode").append('<img src="assets/images/null2.jpg">');
+                    $("#media-modal-nextEpisode").append('<img style="width: 100%" src="assets/images/null2.jpg">');
                 } else {
-                    $("#media-modal-nextEpisode").append('<img src="' + moviePosterSize2 + response.next_episode_to_air.still_path + '">');
+                    $("#media-modal-nextEpisode").append('<img style="width: 100%" src="' + moviePosterSize2 + response.next_episode_to_air.still_path + '">');
                 }
                 $("#media-modal-nextEpisode").append('<div>Season ' + response.next_episode_to_air.season_number + ' Episode ' + response.next_episode_to_air.episode_number + '</div>');
                 $("#media-modal-nextEpisode").append('<div>"' + response.next_episode_to_air.name + '"' + '</div>');
