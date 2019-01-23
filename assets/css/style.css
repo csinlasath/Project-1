@@ -75,9 +75,18 @@ h2 {
     }
 }
 
+#mainSearch, #subSearch {
+    font-family: 'Aleo', serif;
+    padding: 3px;
+    border-radius: 8px;
+    background: lightgray;
+    margin-right: 15px;
+}
+
 #media-modal-body {
     font-family: 'Aleo', serif;
 }
+
 .levels {
     max-width: 960px;
     color: white;
@@ -93,6 +102,7 @@ h2 {
 #moreButton:hover {
     cursor: pointer;
 }
+
 .movie-info {
     margin-top: 40px;
 }
@@ -166,6 +176,9 @@ h2 {
 }
 #search-bar {
     margin-right: 15px;
+    border-radius: 8px;
+    font-family: 'Aleo', serif;
+    background: lightgray;
 }
 #search-type-selector {
     margin-right: 15px;
@@ -177,7 +190,13 @@ select:hover, option:hover {
     margin-right: 15px;
     border-radius: 8px !important;
     font-family: 'Aleo', serif;
+    background: lightgray !important;
 }
+ #submit-button:hover, #watch-button:hover {
+    cursor: pointer;
+    box-shadow: 0 12px 16px 0 rgba(122, 122, 122, 0.33), 0 17px 50px 0 rgba(122, 122, 122, 0.25);
+ }
+
 #topPush {
     height: 110px;
 }
