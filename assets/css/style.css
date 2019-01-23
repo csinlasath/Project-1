@@ -78,7 +78,7 @@ h2 {
     z-index: 5;
     top: 232.25px;
 }
-@media only screen and (max-height:800px) {
+@media only screen and (max-width:1000px) {
     .left {
         display: none;
     }
@@ -127,10 +127,19 @@ h2 {
 	width:100%;
 	height:100%;
 }
+.modal-body {
+    max-height: calc(100vh - 150px);
+    overflow: auto;
+}
+.modal-dialog {
+    overflow: initial!important;
+}
+/* .modal-open {
+    overflow: scroll;
+} */
 #moreButton:hover {
     cursor: pointer;
 }
-
 .movie-info {
     margin-top: 40px;
 }
@@ -141,7 +150,6 @@ h2 {
     min-width: 300px;
     border-radius: 8px;
 }
-
 .moviePoster:hover,
 .tvPoster:hover,
 .actorPoster:hover{
@@ -193,7 +201,7 @@ h2 {
     margin-right: 0;
     bottom: 245.25px;
 }
-@media only screen and (max-height:800px) {
+@media only screen and (max-width:1000px) {
     .right {
         display: none;
     }
