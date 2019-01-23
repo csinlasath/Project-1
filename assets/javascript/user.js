@@ -12,47 +12,39 @@ $(document).ready(function () {
 
     var userKey = "/users/";
     var database = firebase.database().ref().child(userKey);
+    var userSignInID = "";
 
     database.on("child_added", snap => {
         console.log(snap.val());
-
-        if (snap.val().mediaType === "Movie") {
-            const newListItem = $("<li></li>");
-            newListItem.addClass("list-group-item");
-            newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
-            newListItem.attr("id", snap.key);
-            newListItem.attr("data-imdb", snap.val().imdbID);
-            var deleteWatchListButton = $("<button>");
-            deleteWatchListButton.add.id = snap.key + "-button";
-            deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
-            deleteWatchListButton.text("Remove");
-            deleteWatchListButton.css("float", "right");
-            newListItem.append(deleteWatchListButton);
-            $("#watch-list-group").append(newListItem);
+        if (snap.val().firebaseUserID === userSignInID) {
+            if (snap.val().mediaType === "Movie") {
+                const newListItem = $("<li></li>");
+                newListItem.addClass("list-group-item");
+                newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
+                newListItem.attr("id", snap.key);
+                newListItem.attr("data-imdb", snap.val().imdbID);
+                var deleteWatchListButton = $("<button>");
+                deleteWatchListButton.add.id = snap.key + "-button";
+                deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
+                deleteWatchListButton.text("Remove");
+                deleteWatchListButton.css("float", "right");
+                newListItem.append(deleteWatchListButton);
+                $("#watch-list-group").append(newListItem);
+            }
+            if (snap.val().mediaType === "Show") {
+                const newListItem = $("<li></li>");
+                newListItem.addClass("list-group-item");
+                newListItem.text(snap.val().showTitle + " - (" + snap.val().showNetwork + ")");
+                newListItem.attr("id", snap.key);
+                var deleteWatchListButton = $("<button>");
+                deleteWatchListButton.add.id = snap.key + "-button";
+                deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
+                deleteWatchListButton.text("Remove");
+                deleteWatchListButton.css("float", "right");
+                newListItem.append(deleteWatchListButton);
+                $("#watch-list-group").append(newListItem);
+            }
         }
-        if (snap.val().mediaType === "Show") {
-            const newListItem = $("<li></li>");
-            newListItem.addClass("list-group-item");
-            newListItem.text(snap.val().showTitle + " - (" + snap.val().showNetwork + ")");
-            newListItem.attr("id", snap.key);
-            var deleteWatchListButton = $("<button>");
-            deleteWatchListButton.add.id = snap.key + "-button";
-            deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
-            deleteWatchListButton.text("Remove");
-            deleteWatchListButton.css("float", "right");
-            newListItem.append(deleteWatchListButton);
-            $("#watch-list-group").append(newListItem);
-        }
-    });
-
-    database.on("child_changed", snap => {
-        console.log(snap.val());
-        const listItemChanged = $(snap.key);
-    });
-
-    database.on("child_removed", snap => {
-        console.log(snap.val());
-        const listItemRemove = $(snap.key);
     });
 
     const databaseAuth = firebase.auth();
@@ -69,9 +61,43 @@ $(document).ready(function () {
             $("#login-modal").modal("hide");
             $("#sign-up-modal").modal("hide");
             $("#add-to-watch-list-button").show();
-            
-        } else {
-            console.log("Not logged in.");
+            $("#add-to-watch-list-button-tv").show();
+            userSignInID = firebase.auth().currentUser.uid;
+            console.log(userSignInID);
+            console.log(projectAppUser);
+            $("#watch-list-group").empty();
+            database.once("value", snap => {
+                console.log(snap.val());
+                if (snap.val().firebaseUserID === userSignInID) {
+                    if (snap.val().mediaType === "Movie") {
+                        const newListItem = $("<li></li>");
+                        newListItem.addClass("list-group-item");
+                        newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
+                        newListItem.attr("id", snap.key);
+                        newListItem.attr("data-imdb", snap.val().imdbID);
+                        var deleteWatchListButton = $("<button>");
+                        deleteWatchListButton.add.id = snap.key + "-button";
+                        deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
+                        deleteWatchListButton.text("Remove");
+                        deleteWatchListButton.css("float", "right");
+                        newListItem.append(deleteWatchListButton);
+                        $("#watch-list-group").append(newListItem);
+                    }
+                    if (snap.val().mediaType === "Show") {
+                        const newListItem = $("<li></li>");
+                        newListItem.addClass("list-group-item");
+                        newListItem.text(snap.val().showTitle + " - (" + snap.val().showNetwork + ")");
+                        newListItem.attr("id", snap.key);
+                        var deleteWatchListButton = $("<button>");
+                        deleteWatchListButton.add.id = snap.key + "-button";
+                        deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
+                        deleteWatchListButton.text("Remove");
+                        deleteWatchListButton.css("float", "right");
+                        newListItem.append(deleteWatchListButton);
+                        $("#watch-list-group").append(newListItem);
+                    }
+                }
+            });
         }
     });
 
@@ -128,24 +154,25 @@ $(document).ready(function () {
             const databasePromise = databaseAuth.createUserWithEmailAndPassword(emailText, passwordText);
             databasePromise.catch(event => console.log(event.message));
         }
-
-
     });
 
     $(document).on("click", "#log-off-button", function () {
-        firebase.auth().signOut();
-        $("#account-details").hide();
-        $("#log-off-button").hide();
-        $("#watch-button").hide();
-        $("#loginDropdownMenuLink").text("Menu");
-        userKey = "/object/users/";
-        $("#login-button").show();
-        $("#sign-up-button").show();
-        $("#add-to-watch-list-button").hide();
+        firebase.auth().signOut().then(function () {
+            console.log("Signed Out");
+            $("#account-details").hide();
+            $("#log-off-button").hide();
+            $("#watch-button").hide();
+            $("#loginDropdownMenuLink").text("Menu");
+            $("#login-button").show();
+            $("#sign-up-button").show();
+            $("#add-to-watch-list-button").hide();
+            $("#add-to-watch-list-button-tv").hide();
+        }).catch(function (error) {
+            console.log(error);
+        });
     });
 
-    $(document).on("click", "#add-to-watch-list-button", function () {
-
+    $(document).on("click", ".add-watch-list", function () {
         if (($(this).parent().attr("id")) === "media-modal-footer") {
             database.push({
                 movieTitle: $("#media-info-modal-title").text(),
@@ -187,6 +214,7 @@ $(document).ready(function () {
         }
         $("#watch-modal").modal("show");
     });
+
     $(document).on("click", "#account-details", function () {
         $("#account-modal-body").text("This is placeholder text");
         $("#account-info-modal").modal("show");

@@ -137,7 +137,7 @@ const MediaInfo = () => {
                     <div id='media-modal-footer' className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                        <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
+                        <button id='add-to-watch-list-button' type='button' className='btn btn-primary add-watch-list'>Add to Watch List</button>
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@ const MediaInfoTV = () => {
                     <div id='media-modal-tv-footer'className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                        <button id='add-to-watch-list-button' type='button' className='btn btn-primary'>Add to Watch List</button>
+                        <button id='add-to-watch-list-button-tv' type='button' className='btn btn-primary add-watch-list'>Add to Watch List</button>
                     </div>
                 </div>
             </div>
@@ -306,6 +306,7 @@ $("#account-details").hide();
 $("#log-off-button").hide();
 $("#watch-button").hide();
 $("#add-to-watch-list-button").hide();
+$("#add-to-watch-list-button-tv").hide();
 
 
 
