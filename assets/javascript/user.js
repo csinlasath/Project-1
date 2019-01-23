@@ -12,42 +12,8 @@ $(document).ready(function () {
 
     var userKey = "/users/";
     var database = firebase.database().ref().child(userKey);
-    var userSignInID = "";
-
-    database.on("child_added", snap => {
-        console.log(snap.val());
-        if (snap.val().firebaseUserID === userSignInID) {
-            if (snap.val().mediaType === "Movie") {
-                const newListItem = $("<li></li>");
-                newListItem.addClass("list-group-item");
-                newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
-                newListItem.attr("id", snap.key);
-                newListItem.attr("data-imdb", snap.val().imdbID);
-                var deleteWatchListButton = $("<button>");
-                deleteWatchListButton.add.id = snap.key + "-button";
-                deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
-                deleteWatchListButton.text("Remove");
-                deleteWatchListButton.css("float", "right");
-                newListItem.append(deleteWatchListButton);
-                $("#watch-list-group").append(newListItem);
-            }
-            if (snap.val().mediaType === "Show") {
-                const newListItem = $("<li></li>");
-                newListItem.addClass("list-group-item");
-                newListItem.text(snap.val().showTitle + " - (" + snap.val().showNetwork + ")");
-                newListItem.attr("id", snap.key);
-                var deleteWatchListButton = $("<button>");
-                deleteWatchListButton.add.id = snap.key + "-button";
-                deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
-                deleteWatchListButton.text("Remove");
-                deleteWatchListButton.css("float", "right");
-                newListItem.append(deleteWatchListButton);
-                $("#watch-list-group").append(newListItem);
-            }
-        }
-    });
-
     const databaseAuth = firebase.auth();
+    var userSignInID = "";
 
     databaseAuth.onAuthStateChanged(projectAppUser => {
         if (projectAppUser) {
@@ -62,12 +28,10 @@ $(document).ready(function () {
             $("#sign-up-modal").modal("hide");
             $("#add-to-watch-list-button").show();
             $("#add-to-watch-list-button-tv").show();
-            userSignInID = firebase.auth().currentUser.uid;
-            console.log(userSignInID);
-            console.log(projectAppUser);
+            userSignInID = projectAppUser.uid;
             $("#watch-list-group").empty();
-            database.once("value", snap => {
-                console.log(snap.val());
+
+            database.on("child_added", snap => {
                 if (snap.val().firebaseUserID === userSignInID) {
                     if (snap.val().mediaType === "Movie") {
                         const newListItem = $("<li></li>");
@@ -109,22 +73,32 @@ $(document).ready(function () {
 
         var emailIsValid = false;
         var passwordIsValid = false;
-
+        
         if (emailText.indexOf("@") && emailText.indexOf(".")) {
             emailIsValid = true;
+            $("#signup-email-error").hide();
+            $("#login-email-error").hide();
         }
         else {
-            console.log("Email is not valid");
+            $("#signup-email-error").show();
+            $("#login-email-error").show();
         }
         if (passwordText.length > 5) {
             passwordIsValid = true;
+            $("#signup-password-error").hide();
+            $("#login-password-error").hide();
         }
         else {
-            console.log("Password is not valid");
+            $("#signup-password-error").show();
+            $("#login-password-error").show();
         }
         if ((emailIsValid === true) && (passwordIsValid === true)) {
             const databasePromise = databaseAuth.signInWithEmailAndPassword(emailText, passwordText);
             databasePromise.catch(event => console.log(event.message));
+            $("#signup-email-error").hide();
+            $("#signup-password-error").hide();
+            $("#login-email-error").hide();
+            $("#login-password-error").hide();
         }
     });
 
@@ -139,26 +113,36 @@ $(document).ready(function () {
 
         if (emailText.indexOf("@") && emailText.indexOf(".")) {
             emailIsValid = true;
+            $("#signup-email-error").hide();
+            $("#login-email-error").hide();
         }
         else {
-            console.log("Email is not valid");
+            $("#signup-email-error").show();
+            $("#login-email-error").show();
         }
         if (passwordText.length > 5) {
             passwordIsValid = true;
+            $("#signup-password-error").hide();
+            $("#login-password-error").hide();
         }
         else {
-            console.log("Password is not valid");
+            $("#signup-password-error").show();
+            $("#login-password-error").show();
         }
 
         if ((emailIsValid === true) && (passwordIsValid === true)) {
             const databasePromise = databaseAuth.createUserWithEmailAndPassword(emailText, passwordText);
             databasePromise.catch(event => console.log(event.message));
+
+            $("#signup-email-error").hide();
+            $("#signup-password-error").hide();
+            $("#login-email-error").hide();
+            $("#login-password-error").hide();
         }
     });
 
     $(document).on("click", "#log-off-button", function () {
         firebase.auth().signOut().then(function () {
-            console.log("Signed Out");
             $("#account-details").hide();
             $("#log-off-button").hide();
             $("#watch-button").hide();
