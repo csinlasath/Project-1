@@ -51,6 +51,7 @@ $(document).ready(function () {
                         newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
                         newListItem.attr("id", snap.key);
                         newListItem.attr("data-imdb", snap.val().imdbID);
+                        newListItem.css("background-color", "#999898");
                         var deleteWatchListButton = $("<button>");
                         deleteWatchListButton.add.id = snap.key + "-button";
                         deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");
@@ -64,6 +65,7 @@ $(document).ready(function () {
                         newListItem.addClass("list-group-item");
                         newListItem.text(snap.val().showTitle + " - (" + snap.val().showNetwork + ")");
                         newListItem.attr("id", snap.key);
+                        newListItem.css("background-color", "#999898");
                         var deleteWatchListButton = $("<button>");
                         deleteWatchListButton.add.id = snap.key + "-button";
                         deleteWatchListButton.addClass("btn btn-danger remove-watch-list-button");

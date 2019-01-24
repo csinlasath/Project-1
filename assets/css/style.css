@@ -38,7 +38,7 @@ font-family: 'Aleo', serif;
     text-align: left;
 }
 .click {
-    color: blue!important;
+    color: skyblue!important;
 }
 .click:hover {
     cursor: pointer;
