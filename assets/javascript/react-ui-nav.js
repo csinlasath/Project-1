@@ -123,9 +123,12 @@ const MediaInfo = () => {
                         <button type='button' className='close' data-dismiss='modal' style={{ color: '#1e90ff' }}>&#x2718;</button>
                     </div>
                     <div id='media-modal-body' className='modal-body'>
+                        <div style={{lineHeight: '70px'}} className="row" id="media-modal-ratings">
+                            <div className="col-md-3" id="media-modal-ratings-tom"></div>
+                            <div className="col-md-3" id="media-modal-ratings-meta"></div>
+                        </div>
                         <div id="media-modal-overview"></div>
                         <div id="media-modal-year"></div>
-                        <div id="media-modal-rating"></div>
                         <div id="media-modal-actors"></div>
                         <div id="media-modal-director"></div>
                         <div id="media-modal-genre"></div>
