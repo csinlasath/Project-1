@@ -94,6 +94,10 @@ h2 {
 #media-modal-body {
     font-family: 'Aleo', serif;
 }
+
+.modal-footer {
+    background: url("../images/connectwork.png");
+}
 .levels {
     max-width: 960px;
     color: white;
