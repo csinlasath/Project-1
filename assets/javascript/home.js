@@ -23,10 +23,10 @@ $(document).ready(function () {
     var queryURL8 = "https://api.themoviedb.org/3/movie/";
     var queryURL9 = "https://api.themoviedb.org/3/tv/";
     var queryURL10 = "https://api.themoviedb.org/3/person/";
-    var videoSearch = "/videos?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US"
+    var videoSearch = "/videos?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
     var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
     var omdbAPIKey = "&apikey=3dc16ac5";
-    var region = "&region=US"
+    var region = "&region=US";
     var page1 = 1;
     var page2 = 1;
     var page3 = 1;
@@ -109,6 +109,7 @@ $(document).ready(function () {
                 $("#media-modal-director").html("Directed by: " + response.Director);
                 $("#media-modal-genre").html("Genre: " + response.Genre);
                 $("#media-modal-imdb").html(response.imdbID);
+                $("#media-modal-imdb").attr("data-media-type", "Movie");
                 $.ajax({
                     url: queryURL8 + movieID + videoSearch,
                     method: "GET"
@@ -167,10 +168,10 @@ $(document).ready(function () {
             }
 
             $("#media-modal-first-air-tv").html("Original Air Date: " + response.first_air_date.slice(5, 10) + "-" + response.first_air_date.slice(0, 4) + "</div>");
-
             $("#media-modal-network-tv").html("Network:  " + response.networks[0].name);
-
-            $("#media-modal-genre-tv").html("Genres: ")
+            $("#media-modal-genre-tv").html("Genres: ");
+            $("#media-modal-imdb-tv").html(response.id);
+            $("#media-modal-imdb-tv").attr("data-media-type", "TV");
 
             for (var i = 0; i < response.genres.length; i++) {
                 if (response.genres.length > 0) {

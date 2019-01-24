@@ -62,10 +62,6 @@ h2 {
     color: white;
     z-index: 5;
 }
-/* #home {
-    margin-top: 0;
-    vertical-align: top;
-} */
 #home-button {
     font-size: 16px;
     font-weight: 5px;
@@ -77,6 +73,9 @@ h2 {
     left: -74px;
     z-index: 5;
     top: 232.25px;
+}
+.list-group-item:hover {
+    cursor: pointer;
 }
 @media only screen and (max-width:1000px) {
     .left {
