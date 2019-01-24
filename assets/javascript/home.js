@@ -420,6 +420,14 @@ $(document).ready(function () {
         event.preventDefault();
         $('#tonightTv').stop();
     });
+    $(document).on("change", "#mainSearch", function() {
+        if ( ($("#mainSearch").val() === "Movie Genre") || ($("#mainSearch").val() === "TV Genre")) {
+            $("#search-bar").hide();
+        }
+        else {
+            $("#search-bar").show();
+        }
+    });
     // $(".levels").mCustomScrollbar({
     //     set_width: false,
     //     set_height: false,
