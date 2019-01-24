@@ -326,7 +326,7 @@ $(document).ready(function () {
             scrollLeft: "+=80600px"
         }, 28000)
     });
-    $(document).on('mouseup', '#right-button0', function () {
+    $(document).on('mouseup',  function () {
         event.preventDefault();
         $('#results').stop();
     });
@@ -336,7 +336,7 @@ $(document).ready(function () {
             scrollLeft: "-=80600px"
         }, 28000);
     });
-    $(document).on('mouseup', '#left-button0', function () {
+    $(document).on('mouseup', function () {
         event.preventDefault();
         $('#results').stop();
     });
@@ -346,7 +346,7 @@ $(document).ready(function () {
             scrollLeft: "+=25600px"
         }, 12000);
     });
-    $('#right-button').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#theater').stop();
     });
@@ -356,7 +356,7 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $('#left-button').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#theater').stop();
     });
@@ -366,7 +366,7 @@ $(document).ready(function () {
             scrollLeft: "+=25600px"
         }, 12000);
     });
-    $('#right-button2').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#topRated').stop();
     });
@@ -376,7 +376,7 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $('#left-button2').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#topRated').stop();
     });
@@ -386,7 +386,7 @@ $(document).ready(function () {
             scrollLeft: "+=25600px"
         }, 12000);
     });
-    $('#right-button3').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#popTv').stop();
     });
@@ -396,7 +396,7 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $('#left-button3').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#popTv').stop();
     });
@@ -406,7 +406,7 @@ $(document).ready(function () {
             scrollLeft: "+=25600px"
         }, 12000);
     });
-    $('#right-button4').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#tonightTv').stop();
     });
@@ -416,7 +416,7 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $('#left-button4').mouseup(function () {
+    $(document).mouseup(function () {
         event.preventDefault();
         $('#tonightTv').stop();
     });

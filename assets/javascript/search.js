@@ -10,12 +10,11 @@ $(document).ready(function () {
     var timeGenre = "&timezone=America%2FNew_York&with_genres=";
     $(document).on("click", "#submit-button", function (event) {
         event.preventDefault();
-        window.location.href="#topPush";
+        window.location.href = "#topPush";
         $("#searchResults").empty();
         $("#searchResults").append('<div id="results" class="scrolling-wrapper"></div>');
         $("#results").html('<div id="searchLeft" class="left"></div>');
         $("#results").append('<div id="searchRight" class="right"></div>');
-        $("#searchResults").prepend('<h1>Search results</h1>');
         searchTopicMain = $("#mainSearch").val();
         console.log(searchTopicMain);
         searchTopicsub = $("#subSearch").val();
@@ -36,128 +35,145 @@ $(document).ready(function () {
         $('input').val("");
 
         if (searchTopicMain === "Movie") {
-            $.ajax({
-                url: queryURL1 + searchTopicBar + adult,
-                method: "GET"
-            }).then(function (response) {
-                if (response.results.length > 3) {
-                    $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
-                    $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
-                };
-                for (var i = 0; i < response.results.length; i++) {
-                    $('#searchRight').before($('<div/>', { id: 'results' + i, 'class': 'posterContainer' }));
-                };
-                for (var i = 0; i < response.results.length; i++) {
-                    if (response.results[i].poster_path === null) {
-                        $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
-                    } else {
-                        $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
-                    }
-                    $('#results' + i).append($('<div><h5>' + response.results[i].title.slice(0, 28) + '</h5></div>'));
-                };
-            });
-        } else if (searchTopicMain === "TV Show") {
-            $.ajax({
-                url: queryURL2 + searchTopicBar,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response.results.length);
-                console.log(response);
-                if (response.results.length > 3) {
-                    $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
-                    $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
-                };
-                for (var i = 0; i < response.results.length; i++) {
-                    $('#searchRight').before($('<div/>', { id: 'results' + i, 'class': 'posterContainer' }));
-                };
-                for (var i = 0; i < response.results.length; i++) {
-                    if (response.results[i].poster_path === null) {
-                        $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="assets/images/null.jpg">'));
-                    } else {
-                        $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
-                    };
-                    $('#results' + i).append($('<div><h5>' + response.results[i].name.slice(0, 28) + '</h5></div>'));
-                };
-            });
-        } else if (searchTopicMain === "Actor/Actress") {
-            $.ajax({
-                url: queryURL3 + searchTopicBar,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response);
+            if (searchTopicBar !== "") {
+                $("#searchResults").prepend('<h1>Search results</h1>');
                 $.ajax({
-                    url: queryURL4 + response.results[0].id + tmdbKey + lang,
+                    url: queryURL1 + searchTopicBar + adult,
+                    method: "GET"
+                }).then(function (response) {
+                    if (response.results.length > 3) {
+                        $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
+                        $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
+                    };
+                    for (var i = 0; i < response.results.length; i++) {
+                        $('#searchRight').before($('<div/>', { id: 'results' + i, 'class': 'posterContainer' }));
+                    };
+                    for (var i = 0; i < response.results.length; i++) {
+                        if (response.results[i].poster_path === null) {
+                            $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+                        } else {
+                            $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                        }
+                        $('#results' + i).append($('<div><h5>' + response.results[i].title.slice(0, 28) + '</h5></div>'));
+                    };
+                });
+
+            } else {
+                $("searchResults").prepend('<h2 style="color: red">Please Enter a Search Parameter</h2>');
+            }
+
+        } else if (searchTopicMain === "TV Show") {
+            if (searchTopicBar !== "") {
+                $("#searchResults").prepend('<h1>Search results</h1>');
+                $.ajax({
+                    url: queryURL2 + searchTopicBar,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response.results.length);
+                    console.log(response);
+                    if (response.results.length > 3) {
+                        $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
+                        $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
+                    };
+                    for (var i = 0; i < response.results.length; i++) {
+                        $('#searchRight').before($('<div/>', { id: 'results' + i, 'class': 'posterContainer' }));
+                    };
+                    for (var i = 0; i < response.results.length; i++) {
+                        if (response.results[i].poster_path === null) {
+                            $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="assets/images/null.jpg">'));
+                        } else {
+                            $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+                        };
+                        $('#results' + i).append($('<div><h5>' + response.results[i].name.slice(0, 28) + '</h5></div>'));
+                    };
+                });
+            } else {
+                $("searchResults").prepend('<h2 style="color: red">Please Enter a Search Parameter</h2>');
+            }
+        } else if (searchTopicMain === "Actor/Actress") {
+            if (searchTopicBar !== "") {
+                $("#searchResults").prepend('<h1>Search results</h1>');
+                $.ajax({
+                    url: queryURL3 + searchTopicBar,
                     method: "GET"
                 }).then(function (response) {
                     console.log(response);
-                    $('#searchRight').before($('<div/>', { id: 'resultsa', 'class': 'posterContainer' }));
-                    $('#resultsa').append($('<img class="actorPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.id + '" src="' + moviePosterSize + response.profile_path + '">'));
-                    $('#resultsa').append($('<div><h5>' + response.name.slice(0, 28) + '</h5></div>'));
                     $.ajax({
-                        url: queryURL4 + response.id + combined + tmdbKey + lang,
+                        url: queryURL4 + response.results[0].id + tmdbKey + lang,
                         method: "GET"
                     }).then(function (response) {
                         console.log(response);
-                        var castArray = [];
-                        for (i = 0; i < response.cast.length; i++) {
-                            castArray.push(response.cast[i]);
-                        };
-                        console.log(castArray);
-                        castArray.sort(function (b, a) {
-                            return parseFloat(a.popularity) - parseFloat(b.popularity);
-                        });
-                        for (i = 0; i < castArray.length; i++) {
-                            if (castArray[i].genre_ids.includes(10763)) {
-                                delete castArray[i];
+                        $('#searchRight').before($('<div/>', { id: 'resultsa', 'class': 'posterContainer' }));
+                        $('#resultsa').append($('<img class="actorPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.id + '" src="' + moviePosterSize + response.profile_path + '">'));
+                        $('#resultsa').append($('<div><h5>' + response.name.slice(0, 28) + '</h5></div>'));
+                        $.ajax({
+                            url: queryURL4 + response.id + combined + tmdbKey + lang,
+                            method: "GET"
+                        }).then(function (response) {
+                            console.log(response);
+                            var castArray = [];
+                            for (i = 0; i < response.cast.length; i++) {
+                                castArray.push(response.cast[i]);
                             };
-                        };
-                        var filtered = castArray.filter(function (el) {
-                            return el != null;
-                        });
-                        for (i = 0; i < filtered.length; i++) {
-                            if (filtered[i].genre_ids.includes(10767)) {
-                                delete filtered[i];
-                            };
-                        };
-                        filtered2 = filtered.filter(function (el) {
-                            return el != null;
-                        });
-                        for (i = 0; i < filtered2.length; i++) {
-                            if (filtered2[i].character === "") {
-                                delete filtered2[i];
-                            };
-                        };
-                        castArray = filtered2.filter(function (el) {
-                            return el != null;
-                        });
-                        console.log(castArray);
-                        if (castArray.length > 2) {
-                            $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
-                            $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
-                        };
-                        for (var i = 0; i < castArray.length; i++) {
-                            $('#searchRight').before($('<div/>', { id: 'results' + i, 'class': 'posterContainer' }));
-                        };
-                        for (var i = 0; i < castArray.length; i++) {
-                            if (castArray[i].media_type === "tv") {
-                                if (castArray[i].poster_path === null) {
-                                    $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="assets/images/null.jpg">'));
-                                } else {
-                                    $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="' + moviePosterSize + castArray[i].poster_path + '">'));
+                            console.log(castArray);
+                            castArray.sort(function (b, a) {
+                                return parseFloat(a.popularity) - parseFloat(b.popularity);
+                            });
+                            for (i = 0; i < castArray.length; i++) {
+                                if (castArray[i].genre_ids.includes(10763)) {
+                                    delete castArray[i];
                                 };
-                                $('#results' + i).append($('<div><h5>' + castArray[i].character.slice(0, 28) + '</h5></div>'));
-                            } else if (castArray[i].media_type === "movie") {
-                                if (castArray[i].poster_path === null) {
-                                    $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="assets/images/null.jpg">'));
-                                } else {
-                                    $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="' + moviePosterSize + castArray[i].poster_path + '">'));
-                                }
-                                $('#results' + i).append($('<div><h5>' + castArray[i].character.slice(0, 28) + '</h5></div>'));
                             };
-                        };
+                            var filtered = castArray.filter(function (el) {
+                                return el != null;
+                            });
+                            for (i = 0; i < filtered.length; i++) {
+                                if (filtered[i].genre_ids.includes(10767)) {
+                                    delete filtered[i];
+                                };
+                            };
+                            filtered2 = filtered.filter(function (el) {
+                                return el != null;
+                            });
+                            for (i = 0; i < filtered2.length; i++) {
+                                if (filtered2[i].character === "") {
+                                    delete filtered2[i];
+                                };
+                            };
+                            castArray = filtered2.filter(function (el) {
+                                return el != null;
+                            });
+                            console.log(castArray);
+                            if (castArray.length > 2) {
+                                $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
+                                $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
+                            };
+                            for (var i = 0; i < castArray.length; i++) {
+                                $('#searchRight').before($('<div/>', { id: 'results' + i, 'class': 'posterContainer' }));
+                            };
+                            for (var i = 0; i < castArray.length; i++) {
+                                if (castArray[i].media_type === "tv") {
+                                    if (castArray[i].poster_path === null) {
+                                        $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="assets/images/null.jpg">'));
+                                    } else {
+                                        $('#results' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="' + moviePosterSize + castArray[i].poster_path + '">'));
+                                    };
+                                    $('#results' + i).append($('<div><h5>' + castArray[i].character.slice(0, 28) + '</h5></div>'));
+                                } else if (castArray[i].media_type === "movie") {
+                                    if (castArray[i].poster_path === null) {
+                                        $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="assets/images/null.jpg">'));
+                                    } else {
+                                        $('#results' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + castArray[i].id + '" src="' + moviePosterSize + castArray[i].poster_path + '">'));
+                                    }
+                                    $('#results' + i).append($('<div><h5>' + castArray[i].character.slice(0, 28) + '</h5></div>'));
+                                };
+                            };
+                        });
                     });
                 });
-            });
+            } else {
+                $("searchResults").prepend('<h2 style="color: red">Please Enter a Search Parameter</h2>');
+            }
         } else if (searchTopicMain === "Movie Genre") {
             page0 = 2;
             $.ajax({
@@ -247,7 +263,7 @@ $(document).ready(function () {
                     $("#more0").empty();
                 };
             });
-        }else if (searchTopicMain === "TV Genre") {
+        } else if (searchTopicMain === "TV Genre") {
             $.ajax({
                 url: queryURL8 + page0 + timeGenre + searchTopicsub + langOriginal,
                 method: "GET"
