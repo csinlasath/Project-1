@@ -126,7 +126,7 @@ $(document).ready(function () {
                             $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%");
                         }
                     };
-                    if (response.Metascore !== null) {
+                    if (response.Metascore !== "N/A") {
                         $("#media-modal-ratings-meta").html("&emsp;&emsp;<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
                     };
                     $.ajax({
