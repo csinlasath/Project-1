@@ -10,6 +10,7 @@ $(document).ready(function () {
     var timeGenre = "&timezone=America%2FNew_York&with_genres=";
     $(document).on("click", "#submit-button", function (event) {
         event.preventDefault();
+        window.location.href="#topPush";
         $("#searchResults").empty();
         $("#searchResults").append('<div id="results" class="scrolling-wrapper"></div>');
         $("#results").html('<div id="searchLeft" class="left"></div>');
