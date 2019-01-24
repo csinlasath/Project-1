@@ -96,6 +96,7 @@ $(document).ready(function () {
 
     });
     $(document).on("click", ".moviePoster", function () {
+        var tomScore = "";
         var movieID = $(this).attr("data-id");
         $("#media-modal-body").prepend("<div id='media-modal-trailer'></div>");
         $.ajax({
@@ -106,29 +107,48 @@ $(document).ready(function () {
                 url: queryURL6 + response.imdb_id + omdbAPIKey,
                 method: "GET"
             }).then(function (response) {
+                console.log(response.Ratings);
                 console.log(response);
                 $("#media-info-modal").modal();
                 $("#media-info-modal-title").html(response.Title);
                 $("#media-modal-overview").html("<p><q>" + response.Plot + "</q></p><br>");
                 $("#media-modal-overview").css("font-weight", "bolder");
                 $("#media-modal-year").html("Year Released: " + response.Year)
-                $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
+                // $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
                 $("#media-modal-actors").html("Actors: " + response.Actors);
                 $("#media-modal-director").html("Directed by: " + response.Director);
                 $("#media-modal-genre").html("Genre: " + response.Genre);
                 $("#media-modal-imdb").html(response.imdbID);
-                $("#media-modal-imdb").attr("data-media-type", "Movie");
-                $.ajax({
-                    url: queryURL8 + movieID + videoSearch,
-                    method: "GET"
-                }).then(function (response) {
-                    if (!$.trim(response.results)) {
-                        $("#media-modal-trailer").remove();
-                    } else {
-                        $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
-                        $("#media-modal-trailer").css("text-align", "center");
-                    }
-                });
+
+                for (i = 0; i < response.Ratings.length; i++) {
+                    if (response.Ratings[i].Source === "Rotten Tomatoes") {
+                        tomScore = response.Ratings[i].Value
+                        tomScore = tomScore.replace("%", "");
+                        tomScoreNum = parseInt(tomScore);
+                        console.log(tomScoreNum);
+                        if (tomScoreNum > 90) {
+                            $("#media-modal-ratings-tom").html("&ensp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%");
+                        } else if (tomScoreNum > 59 && tomScoreNum < 91) {
+                            $("#media-modal-ratings-tom").html("&ensp;<img style='height: 50px' src='assets/images/good.png'> &ensp;" + tomScoreNum + "%");
+                        } else if (tomScoreNum < 60) {
+                            $("#media-modal-ratings-tom").html("&ensp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%");
+                        }
+                    };
+                    if (response.Metascore !== null) {
+                        $("#media-modal-ratings-meta").html("<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
+                    };
+                    $.ajax({
+                        url: queryURL8 + movieID + videoSearch,
+                        method: "GET"
+                    }).then(function (response) {
+                        if (!$.trim(response.results)) {
+                            $("#media-modal-trailer").remove();
+                        } else {
+                            $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="1"></iframe>');
+                            $("#media-modal-trailer").css("text-align", "center");
+                        }
+                    });
+                };
             });
         });
     });
