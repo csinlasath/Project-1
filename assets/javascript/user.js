@@ -90,6 +90,11 @@ $(document).ready(function () {
         var emailIsValid = false;
         var passwordIsValid = false;
 
+        $("#signup-email-error").hide();
+        $("#login-email-error").hide();
+        $("#signup-password-error").hide();
+        $("#login-password-error").hide();
+
         if (emailText.indexOf("@") && emailText.indexOf(".")) {
             emailIsValid = true;
             $("#signup-email-error").hide();
@@ -98,6 +103,7 @@ $(document).ready(function () {
         else {
             $("#signup-email-error").show();
             $("#login-email-error").show();
+            $("#login-email-field").val("");
         }
         if (passwordText.length > 5) {
             passwordIsValid = true;
@@ -107,6 +113,7 @@ $(document).ready(function () {
         else {
             $("#signup-password-error").show();
             $("#login-password-error").show();
+            $("#login-password-field").val("");
         }
         if ((emailIsValid === true) && (passwordIsValid === true)) {
             const databasePromise = databaseAuth.signInWithEmailAndPassword(emailText, passwordText);
@@ -115,6 +122,8 @@ $(document).ready(function () {
             $("#signup-password-error").hide();
             $("#login-email-error").hide();
             $("#login-password-error").hide();
+            $("#login-email-field").val("");
+            $("#login-password-field").val("");
         }
     });
 
@@ -127,6 +136,11 @@ $(document).ready(function () {
         var emailIsValid = false;
         var passwordIsValid = false;
 
+        $("#signup-email-error").hide();
+        $("#login-email-error").hide();
+        $("#signup-password-error").hide();
+        $("#login-password-error").hide();
+
         if (emailText.indexOf("@") && emailText.indexOf(".")) {
             emailIsValid = true;
             $("#signup-email-error").hide();
@@ -135,6 +149,7 @@ $(document).ready(function () {
         else {
             $("#signup-email-error").show();
             $("#login-email-error").show();
+            $("#sign-up-email-field").val("");
         }
         if (passwordText.length > 5) {
             passwordIsValid = true;
@@ -144,6 +159,7 @@ $(document).ready(function () {
         else {
             $("#signup-password-error").show();
             $("#login-password-error").show();
+            $("#sign-up-password-field").val("");
         }
 
         if ((emailIsValid === true) && (passwordIsValid === true)) {
@@ -154,6 +170,8 @@ $(document).ready(function () {
             $("#signup-password-error").hide();
             $("#login-email-error").hide();
             $("#login-password-error").hide();
+            $("#sign-up-email-field").val("");
+            $("#sign-up-password-field").val("");
         }
     });
 
