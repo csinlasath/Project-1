@@ -134,13 +134,18 @@ h2 {
     color: white;
     
 }
-.modal-dialog {
-    overflow: initial!important;
+
+.modal-content {
     border: solid 2px whitesmoke;
 }
 
+.modal-dialog {
+    overflow: initial!important;
 
-.modal-header, #media-modal-footer{
+}
+
+
+.modal-header, #media-modal-footer, #media-modal-tv-footer {
     background: url("../images/connectwork.png");
     color: white; 
 }
