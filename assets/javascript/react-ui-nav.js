@@ -2,9 +2,7 @@
 const Navigation = () => {
     return (
         <header id='masthead'>
-            <Navbar
-                siteName="Project 1"
-            />
+            <Navbar />
             <SignUp />
             <Login />
             <MediaInfo />
@@ -250,7 +248,6 @@ const Searchbar = () => {
 const Navbar = (props) => {
     return (
         <nav className='navbar navbar-expand-lg navbar-light bg-primary'>
-            <a id='home-button' className='navbar-brand' href='#'>{props.siteName}</a>
             <Searchbar />
             <WatchButton />
             <div className="navbar-nav ml-auto">
