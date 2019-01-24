@@ -16,14 +16,18 @@ $(document).ready(function () {
     var userSignInID = "";
     var displayName = "";
     var emailAddress = "";
-    var phoneNumber = "";
 
     databaseAuth.onAuthStateChanged(projectAppUser => {
         if (projectAppUser) {
             $("#account-details").show();
             $("#log-off-button").show();
             $("#watch-button").show();
-            $("#loginDropdownMenuLink").text(projectAppUser.email);
+            if (firebase.auth().currentUser.displayName === null) {
+                $("#loginDropdownMenuLink").text(projectAppUser.email);
+            }
+            else {
+                $("#loginDropdownMenuLink").text(firebase.auth().currentUser.displayName);
+            }
             userKey = userKey + firebase.auth().currentUser.uid + "/";
             $("#login-button").hide();
             $("#sign-up-button").hide();
@@ -38,11 +42,6 @@ $(document).ready(function () {
 
             $("#watch-list-group").empty();
 
-            console.log(projectAppUser);
-            console.log(displayName);
-            console.log(emailAddress);
-            console.log(phoneNumber);
-
             database.on("child_added", snap => {
                 if (snap.val().firebaseUserID === userSignInID) {
                     if (snap.val().mediaType === "Movie") {
@@ -51,6 +50,7 @@ $(document).ready(function () {
                         newListItem.text(snap.val().movieTitle + " - (" + snap.val().movieYear.replace("Year Released: ", "") + ")");
                         newListItem.attr("id", snap.key);
                         newListItem.attr("data-imdb", snap.val().imdbID);
+                        newListItem.attr("data-type", snap.val().mediaType);
                         newListItem.css("background-color", "#999898");
                         var deleteWatchListButton = $("<button>");
                         deleteWatchListButton.add.id = snap.key + "-button";
@@ -65,6 +65,8 @@ $(document).ready(function () {
                         newListItem.addClass("list-group-item");
                         newListItem.text(snap.val().showTitle + " - (" + snap.val().showNetwork + ")");
                         newListItem.attr("id", snap.key);
+                        newListItem.attr("data-tvid", snap.val().tvID);
+                        newListItem.attr("data-type", snap.val().mediaType);
                         newListItem.css("background-color", "#999898");
                         var deleteWatchListButton = $("<button>");
                         deleteWatchListButton.add.id = snap.key + "-button";
@@ -186,6 +188,7 @@ $(document).ready(function () {
             database.push({
                 showTitle: $("#media-info-modal-title-tv").text(),
                 showNetwork: $("#media-modal-network-tv").text(),
+                tvID: $("#media-modal-imdb-tv").text(),
                 mediaType: "Show",
                 firebaseUserID: firebase.auth().currentUser.uid,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -215,18 +218,19 @@ $(document).ready(function () {
 
     $(document).on("click", "#account-details", function () {
 
-        if ((displayName !== null) && (phoneNumber !== null)) {
+        if (displayName !== null) {
+            $("#save-account-settings").hide();
             $("#account-info-display-name").text("Display Name: " + displayName);
             $("#account-info-email-show").text("Email Address: " + emailAddress);
-            $("#account-info-phone-number").text("Phone Number: " + phoneNumber);
+
         }
         else {
             var nameFormElement = $("<form>");
             var nameCaptureDiv = $("<div>");
             $(nameCaptureDiv).addClass("form-group");
             var nameLabel = $("<label>");
-            nameLabel.attr("for", "displayNameInput");
-            nameLabel.text("Please Set a Display Name");
+            nameLabel.attr("for", "firstNameInput");
+            nameLabel.text("Please Type Your First Name");
             var nameInputElement = $("<input>");
             nameInputElement.attr("type", "text");
             nameInputElement.attr("id", "display-name-input");
@@ -236,25 +240,165 @@ $(document).ready(function () {
             $(nameFormElement).append(nameCaptureDiv);
             $("#account-info-display-name").html(nameFormElement);
 
-            var phoneFormElement = $("<form>");
-            var phoneCaptureDiv = $("<div>");
-            $(phoneCaptureDiv).addClass("form-group");
-            var phoneLabel = $("<label>");
-            phoneLabel.attr("for", "displayNameInput");
-            phoneLabel.text("Please Set a Phone Number");
-            var phoneInputElement = $("<input>");
-            phoneInputElement.attr("type", "text");
-            phoneInputElement.attr("id", "display-name-input");
-            phoneInputElement.addClass("form-control");
-            $(phoneCaptureDiv).append(phoneLabel);
-            $(phoneLabel).append(phoneInputElement);
-            $(phoneFormElement).append(phoneCaptureDiv);
-            $("#account-info-phone-number").html(phoneFormElement);
+            var lastFormElement = $("<form>");
+            var lastCaptureDiv = $("<div>");
+            $(lastCaptureDiv).addClass("form-group");
+            var lastLabel = $("<label>");
+            lastLabel.attr("for", "lastNameInput");
+            lastLabel.text("Please Type Your Last Name");
+            var lastInputElement = $("<input>");
+            lastInputElement.attr("type", "text");
+            lastInputElement.attr("id", "last-name-input");
+            lastInputElement.addClass("form-control");
+            $(lastCaptureDiv).append(lastLabel);
+            $(lastLabel).append(lastInputElement);
+            $(lastFormElement).append(lastCaptureDiv);
+            $("#account-info-phone-number").html(lastFormElement);
         }
+        $("#save-account-settings").show();
         $("#account-info-modal").modal("show");
     });
 });
 
+$(document).on("click", "#save-account-settings", function () {
+    var capturedFirstName = $("#display-name-input").val().trim();
+    var capturedLastName = $("#last-name-input").val().trim();
+    var capturedFullName = capturedFirstName + " " + capturedLastName;
 
+    firebase.auth().currentUser.updateProfile({
+        displayName: capturedFullName
+    }).then(function () {
+        console.log("Success");
+    }).catch(function (error) {
+        console.log(error);
+    });
+    $("#account-info-modal").modal("hide");
+    if (firebase.auth().currentUser.displayName === null) {
+        $("#loginDropdownMenuLink").text(projectAppUser.email);
+    }
+    else {
+        $("#loginDropdownMenuLink").text(firebase.auth().currentUser.displayName);
+    }
+});
+
+$(document).on("click", ".list-group-item", function () {
+
+    if ($(this).attr("data-type") === "Movie") {
+        var queryURL6 = "https://www.omdbapi.com/?i=";
+        var omdbAPIKey = "&apikey=3dc16ac5";
+        var videoSearch = "/videos?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
+        var queryURL8 = "https://api.themoviedb.org/3/movie/";
+        var movieID = $(this).attr("data-imdb");
+
+        $("#watch-modal").modal("hide");
+        $("#media-modal-body").prepend("<div id='media-modal-trailer'></div>");
+        $.ajax({
+            url: queryURL6 + movieID + omdbAPIKey,
+            method: "GET"
+        }).then(function (response) {
+            $("#media-info-modal").modal();
+            $("#media-info-modal-title").html(response.Title);
+            $("#media-modal-overview").html("<p><q>" + response.Plot + "</q></p><br>");
+            $("#media-modal-overview").css("font-weight", "bolder");
+            $("#media-modal-year").html("Year Released: " + response.Year)
+            $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
+            $("#media-modal-actors").html("Actors: " + response.Actors);
+            $("#media-modal-director").html("Directed by: " + response.Director);
+            $("#media-modal-genre").html("Genre: " + response.Genre);
+            $("#media-modal-imdb").html(response.imdbID);
+            $("#media-modal-imdb").attr("data-media-type", "Movie");
+            $.ajax({
+                url: queryURL8 + movieID + videoSearch,
+                method: "GET"
+            }).then(function (response) {
+                if (!$.trim(response.results)) {
+                    $("#media-modal-trailer").remove();
+                } else {
+                    $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
+                    $("#media-modal-trailer").css("text-align", "center");
+                }
+            });
+        });
+    }
+    if ($(this).attr("data-type") === "Show") {
+        var moviePosterSize2 = "https://image.tmdb.org/t/p/w300";
+        var queryURL7 = "https://api.themoviedb.org/3/tv/";
+        var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
+        var videoSearch = "/videos?api_key=b3599d7d48ba417da97cd4b6a2911968&language=en-US";
+        var tvID = $(this).attr("data-tvid");
+
+        $("#watch-modal").modal("hide");
+        $("#media-modal-body-tv").prepend("<div id='media-modal-tv-trailer'></div>");
+        $.ajax({
+            url: queryURL7 + tvID + tmdbKey,
+            method: "GET"
+        }).then(function (response) {
+            var width = 0;
+            $("#media-info-modal-tv").modal();
+            $("#media-info-modal-title-tv").html(response.name);
+            $("#media-modal-overview-tv").html("<p><q>" + response.overview + "</q></p><br>");
+            $("#media-modal-overview-tv").css("font-weight", "bolder");
+            $("#media-modal-creators-tv").html("Created by: ")
+
+            for (var i = 0; i < response.created_by.length; i++) {
+                if (response.created_by.length > 0) {
+                    if (i !== 0) {
+                        $("#media-modal-creators-tv").append(", ");
+                    }
+                    $("#media-modal-creators-tv").append(response.created_by[i].name);
+                }
+            }
+
+            $("#media-modal-first-air-tv").html("Original Air Date: " + response.first_air_date.slice(5, 10) + "-" + response.first_air_date.slice(0, 4) + "</div>");
+            $("#media-modal-network-tv").html("Network:  " + response.networks[0].name);
+            $("#media-modal-genre-tv").html("Genres: ");
+            $("#media-modal-imdb-tv").html(response.id);
+
+            for (var i = 0; i < response.genres.length; i++) {
+                if (response.genres.length > 0) {
+                    if (i !== 0) {
+                        $("#media-modal-genre-tv").append(", ");
+                    }
+                    $("#media-modal-genre-tv").append(response.genres[i].name);
+                }
+            }
+            if (response.last_episode_to_air !== null) {
+                $("#media-modal-previousEpisode").html('<br><h5><strong>Previously on ' + response.name + '</strong></h5>');
+                if (response.last_episode_to_air.still_path === null) {
+                    $("#media-modal-previousEpisode").append('<img style="width: 100%" src="assets/images/null2.jpg">');
+                } else {
+                    $("#media-modal-previousEpisode").append('<img style="width: 100%" src="' + moviePosterSize2 + response.last_episode_to_air.still_path + '">');
+                }
+                $("#media-modal-previousEpisode").append('<div>Season ' + response.last_episode_to_air.season_number + ' Episode ' + response.last_episode_to_air.episode_number + '</div>');
+                $("#media-modal-previousEpisode").append('<div>"' + response.last_episode_to_air.name + '"' + '</div>');
+                $("#media-modal-previousEpisode").append('<div>Air Date: ' + response.last_episode_to_air.air_date.slice(5.10) + '-' + response.last_episode_to_air.air_date.slice(0, 4) + '</div>');
+                $("#media-modal-previousEpisode").append('<hr><div>' + response.last_episode_to_air.overview + '</div>');
+            }
+            if (response.next_episode_to_air !== null) {
+                $("#media-modal-nextEpisode").html('<br><h5><strong>Next on ' + response.name + '</strong></h5>');
+                if (response.next_episode_to_air.still_path === null) {
+                    $("#media-modal-nextEpisode").append('<img style="width: 100%" src="assets/images/null2.jpg">');
+                } else {
+                    $("#media-modal-nextEpisode").append('<img style="width: 100%" src="' + moviePosterSize2 + response.next_episode_to_air.still_path + '">');
+                }
+                $("#media-modal-nextEpisode").append('<div>Season ' + response.next_episode_to_air.season_number + ' Episode ' + response.next_episode_to_air.episode_number + '</div>');
+                $("#media-modal-nextEpisode").append('<div>"' + response.next_episode_to_air.name + '"' + '</div>');
+                $("#media-modal-nextEpisode").append('<div>Air Date: ' + response.next_episode_to_air.air_date.slice(5.10) + '-' + response.next_episode_to_air.air_date.slice(0, 4) + '</div>');
+                $("#media-modal-nextEpisode").append('<hr><div>' + response.next_episode_to_air.overview);
+            }
+            $.ajax({
+                url: queryURL7 + tvID + videoSearch,
+                method: "GET"
+            }).then(function (response) {
+                if (!$.trim(response.results)) {
+                    $("#media-modal-tv-trailer").remove();
+                } else {
+                    $("#media-modal-tv-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0"></iframe>');
+                    $("#media-modal-tv-trailer").css("text-align", "center");
+                }
+            });
+        });
+    }
+});
 
 
