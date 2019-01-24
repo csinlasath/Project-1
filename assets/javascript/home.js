@@ -353,10 +353,6 @@ $(document).ready(function () {
             scrollLeft: "-=80600px"
         }, 28000);
     });
-    $(document).on('mouseup', function () {
-        event.preventDefault();
-        $('#results').stop();
-    });
     $('#right-button').mousedown(function () {
         event.preventDefault();
         $('#theater').animate({
@@ -372,10 +368,6 @@ $(document).ready(function () {
         $('#theater').animate({
             scrollLeft: "-=25600px"
         }, 12000);
-    });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#theater').stop();
     });
     $('#right-button2').mousedown(function () {
         event.preventDefault();
@@ -393,10 +385,6 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#topRated').stop();
-    });
     $('#right-button3').mousedown(function () {
         event.preventDefault();
         $('#popTv').animate({
@@ -413,10 +401,6 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#popTv').stop();
-    });
     $('#right-button4').mousedown(function () {
         event.preventDefault();
         $('#tonightTv').animate({
@@ -432,10 +416,6 @@ $(document).ready(function () {
         $('#tonightTv').animate({
             scrollLeft: "-=25600px"
         }, 12000);
-    });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#tonightTv').stop();
     });
     $(document).on("change", "#mainSearch", function () {
         if (($("#mainSearch").val() === "Movie Genre") || ($("#mainSearch").val() === "TV Genre")) {
