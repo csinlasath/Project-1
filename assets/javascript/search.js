@@ -175,6 +175,7 @@ $(document).ready(function () {
                 $("searchResults").prepend('<h2 style="color: red">Please Enter a Search Parameter</h2>');
             }
         } else if (searchTopicMain === "Movie Genre") {
+            $("#searchResults").prepend('<h1>Search results</h1>');
             page0 = 2;
             $.ajax({
                 url: queryURL5 + searchTopicsub + langOriginal,
@@ -207,6 +208,7 @@ $(document).ready(function () {
                 };
             });
         } else if (searchTopicMain === "TV Genre") {
+            $("#searchResults").prepend('<h1>Search results</h1>');
             page0 = 2;
             $.ajax({
                 url: queryURL6 + searchTopicsub + langOriginal,
