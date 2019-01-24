@@ -119,15 +119,15 @@ $(document).ready(function () {
                         tomScore = tomScore.replace("%", "");
                         tomScoreNum = parseInt(tomScore);
                         if (tomScoreNum > 90) {
-                            $("#media-modal-ratings-tom").html("&ensp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%");
                         } else if (tomScoreNum > 59 && tomScoreNum < 91) {
-                            $("#media-modal-ratings-tom").html("&ensp;<img style='height: 50px' src='assets/images/good.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/good.png'> &ensp;" + tomScoreNum + "%");
                         } else if (tomScoreNum < 60) {
-                            $("#media-modal-ratings-tom").html("&ensp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%");
                         }
                     };
                     if (response.Metascore !== null) {
-                        $("#media-modal-ratings-meta").html("<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
+                        $("#media-modal-ratings-meta").html("&emsp;&emsp;<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
                     };
                     $.ajax({
                         url: queryURL8 + movieID + videoSearch,
