@@ -126,12 +126,23 @@ h2 {
 	width:100%;
 	height:100%;
 }
+
 .modal-body {
     max-height: calc(100vh - 150px);
     overflow: auto;
+    background: url("../images/prism.png");
+    color: white;
+    
 }
 .modal-dialog {
     overflow: initial!important;
+    border: solid 2px whitesmoke;
+}
+
+
+.modal-header, #media-modal-footer{
+    background: url("../images/connectwork.png");
+    color: white; 
 }
 /* .modal-open {
     overflow: scroll;
