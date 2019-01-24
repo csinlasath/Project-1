@@ -234,20 +234,20 @@ $(document).ready(function () {
             $(nameFormElement).append(nameCaptureDiv);
             $("#account-info-display-name").html(nameFormElement);
 
-            // var accountFormElement = $("<form>");
-            // var nameCaptureDiv = $("<div>");
-            // $(nameCaptureDiv).addClass("form-group");
-            // var nameLabel = $("<label>");
-            // nameLabel.attr("for", "displayNameInput");
-            // nameLabel.text("Please Set a Display Name");
-            // var nameInputElement = $("<input>");
-            // nameInputElement.attr("type", "text");
-            // nameInputElement.attr("id", "display-name-input");
-            // nameInputElement.addClass("form-control");
-            // $(nameCaptureDiv).append(nameLabel);
-            // $(nameLabel).append(nameInputElement);
-            // $(accountFormElement).append(nameCaptureDiv);
-            // $("#account-info-display-name").html(accountFormElement);
+            var phoneFormElement = $("<form>");
+            var phoneCaptureDiv = $("<div>");
+            $(phoneCaptureDiv).addClass("form-group");
+            var phoneLabel = $("<label>");
+            phoneLabel.attr("for", "displayNameInput");
+            phoneLabel.text("Please Set a Phone Number");
+            var phoneInputElement = $("<input>");
+            phoneInputElement.attr("type", "text");
+            phoneInputElement.attr("id", "display-name-input");
+            phoneInputElement.addClass("form-control");
+            $(phoneCaptureDiv).append(phoneLabel);
+            $(phoneLabel).append(phoneInputElement);
+            $(phoneFormElement).append(phoneCaptureDiv);
+            $("#account-info-phone-number").html(phoneFormElement);
         }
         $("#account-info-modal").modal("show");
     });
