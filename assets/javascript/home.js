@@ -36,7 +36,6 @@ $(document).ready(function () {
         url: queryURL1 + page1 + region,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
 
         for (var i = 19; i >= 0; i--) {
             if (response.results[i].poster_path === null) {
@@ -53,7 +52,6 @@ $(document).ready(function () {
         url: queryURL2,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
         for (var i = 19; i >= 0; i--) {
             if (response.results[i].poster_path === null) {
                 $('#topRated' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
@@ -68,7 +66,6 @@ $(document).ready(function () {
         url: queryURL3,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
         for (var i = 19; i >= 0; i--) {
             if (response.results[i].poster_path === null) {
                 $('#popTv' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
@@ -83,7 +80,6 @@ $(document).ready(function () {
         url: queryURL4,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
         for (var i = 19; i >= 0; i--) {
             if (response.results[i].poster_path === null) {
                 $('#tonightTv' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
@@ -107,14 +103,11 @@ $(document).ready(function () {
                 url: queryURL6 + response.imdb_id + omdbAPIKey,
                 method: "GET"
             }).then(function (response) {
-                console.log(response.Ratings);
-                console.log(response);
                 $("#media-info-modal").modal();
                 $("#media-info-modal-title").html(response.Title);
                 $("#media-modal-overview").html("<p><q>" + response.Plot + "</q></p><br>");
                 $("#media-modal-overview").css("font-weight", "bolder");
                 $("#media-modal-year").html("Year Released: " + response.Year)
-                // $("#media-modal-rating").html("MetaScore: " + response.Metascore + "<br>");
                 $("#media-modal-actors").html("Actors: " + response.Actors);
                 $("#media-modal-director").html("Directed by: " + response.Director);
                 $("#media-modal-genre").html("Genre: " + response.Genre);
@@ -125,7 +118,6 @@ $(document).ready(function () {
                         tomScore = response.Ratings[i].Value
                         tomScore = tomScore.replace("%", "");
                         tomScoreNum = parseInt(tomScore);
-                        console.log(tomScoreNum);
                         if (tomScoreNum > 90) {
                             $("#media-modal-ratings-tom").html("&ensp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%");
                         } else if (tomScoreNum > 59 && tomScoreNum < 91) {
@@ -177,7 +169,6 @@ $(document).ready(function () {
             url: queryURL7 + $(this).attr("data-id") + tmdbKey,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
             var width = 0;
             $("#media-info-modal-tv").modal();
             $("#media-info-modal-title-tv").html(response.name);
@@ -189,7 +180,6 @@ $(document).ready(function () {
                 if (response.created_by.length > 0) {
                     if (i !== 0) {
                         $("#media-modal-creators-tv").append(", ");
-                        console.log(response.created_by[i].name);
                     }
                     $("#media-modal-creators-tv").append(response.created_by[i].name);
                 }
@@ -205,7 +195,6 @@ $(document).ready(function () {
                 if (response.genres.length > 0) {
                     if (i !== 0) {
                         $("#media-modal-genre-tv").append(", ");
-                        console.log(response.genres[i].name);
                     }
                     $("#media-modal-genre-tv").append(response.genres[i].name);
                 }
@@ -253,7 +242,6 @@ $(document).ready(function () {
             url: queryURL1 + page1 + region,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
             for (var i = 0; i < response.results.length; i++) {
                 $('#more1').before($('<div/>', { id: 'theater' + page1 + '-' + i, 'class': 'posterContainer' }))
             };
@@ -278,7 +266,6 @@ $(document).ready(function () {
             url: queryURL2 + page2 + region,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
             for (var i = 0; i < response.results.length; i++) {
                 $('#more2').before($('<div/>', { id: 'topRated' + page2 + '-' + i, 'class': 'posterContainer' }))
             };
@@ -303,7 +290,6 @@ $(document).ready(function () {
             url: queryURL3 + page3,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
             for (var i = 0; i < response.results.length; i++) {
                 $('#more3').before($('<div/>', { id: 'popTv' + page3 + '-' + i, 'class': 'posterContainer' }))
             };
@@ -328,7 +314,6 @@ $(document).ready(function () {
             url: queryURL4 + page4,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
             for (var i = 0; i < response.results.length; i++) {
                 $('#more4').before($('<div/>', { id: 'tonightTv' + page4 + '-' + i, 'class': 'posterContainer' }))
             };

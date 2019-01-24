@@ -16,11 +16,8 @@ $(document).ready(function () {
         $("#results").html('<div id="searchLeft" class="left"></div>');
         $("#results").append('<div id="searchRight" class="right"></div>');
         searchTopicMain = $("#mainSearch").val();
-        console.log(searchTopicMain);
         searchTopicsub = $("#subSearch").val();
-        console.log(searchTopicsub);
         var searchTopicBar = $("#search-bar").val().trim();
-        console.log(searchTopicBar);
         var tmdbKey = "?api_key=b3599d7d48ba417da97cd4b6a2911968";
         var lang = "&language=en-US";
         var adult = "&include_adult=false";
@@ -69,8 +66,6 @@ $(document).ready(function () {
                     url: queryURL2 + searchTopicBar,
                     method: "GET"
                 }).then(function (response) {
-                    console.log(response.results.length);
-                    console.log(response);
                     if (response.results.length > 3) {
                         $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
                         $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
@@ -97,12 +92,10 @@ $(document).ready(function () {
                     url: queryURL3 + searchTopicBar,
                     method: "GET"
                 }).then(function (response) {
-                    console.log(response);
                     $.ajax({
                         url: queryURL4 + response.results[0].id + tmdbKey + lang,
                         method: "GET"
                     }).then(function (response) {
-                        console.log(response);
                         $('#searchRight').before($('<div/>', { id: 'resultsa', 'class': 'posterContainer' }));
                         $('#resultsa').append($('<img class="actorPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.id + '" src="' + moviePosterSize + response.profile_path + '">'));
                         $('#resultsa').append($('<div><h5>' + response.name.slice(0, 28) + '</h5></div>'));
@@ -110,12 +103,10 @@ $(document).ready(function () {
                             url: queryURL4 + response.id + combined + tmdbKey + lang,
                             method: "GET"
                         }).then(function (response) {
-                            console.log(response);
                             var castArray = [];
                             for (i = 0; i < response.cast.length; i++) {
                                 castArray.push(response.cast[i]);
                             };
-                            console.log(castArray);
                             castArray.sort(function (b, a) {
                                 return parseFloat(a.popularity) - parseFloat(b.popularity);
                             });
@@ -143,7 +134,6 @@ $(document).ready(function () {
                             castArray = filtered2.filter(function (el) {
                                 return el != null;
                             });
-                            console.log(castArray);
                             if (castArray.length > 2) {
                                 $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
                                 $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
@@ -181,7 +171,6 @@ $(document).ready(function () {
                 url: queryURL5 + searchTopicsub + langOriginal,
                 method: "GET"
             }).then(function (response) {
-                console.log(response);
                 if (response.results.length > 3) {
                     $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
                     $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
@@ -214,7 +203,6 @@ $(document).ready(function () {
                 url: queryURL6 + searchTopicsub + langOriginal,
                 method: "GET"
             }).then(function (response) {
-                console.log(response);
                 if (response.results.length > 3) {
                     $('#searchLeft').append($('<button class="arrow" id="left-button0"><img src="assets/images/arrowLeft.png"></button>'));
                     $('#searchRight').append($('<button class="arrow" id="right-button0"><img src="assets/images/arrowRight.png"></button>'));
@@ -248,7 +236,6 @@ $(document).ready(function () {
                 url: queryURL7 + page0 + withGenre + searchTopicsub + langOriginal,
                 method: "GET"
             }).then(function (response) {
-                console.log(response);
                 for (var i = 0; i < response.results.length; i++) {
                     $('#more0').before($('<div/>', { id: 'results' + page0 + '-' + i, 'class': 'posterContainer' }))
                 };
@@ -270,7 +257,6 @@ $(document).ready(function () {
                 url: queryURL8 + page0 + timeGenre + searchTopicsub + langOriginal,
                 method: "GET"
             }).then(function (response) {
-                console.log(response);
                 for (var i = 0; i < response.results.length; i++) {
                     $('#more0').before($('<div/>', { id: 'results' + page0 + '-' + i, 'class': 'posterContainer' }))
                 };
