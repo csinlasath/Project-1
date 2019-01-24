@@ -11,7 +11,6 @@
 body {
     background-color: black;
 }
-
 h1 {
     border-bottom: solid;
     border-color: black;
@@ -20,22 +19,14 @@ h1 {
 h1,
 h5 {
 font-family: 'Aleo', serif;
-
 }
 .card {
     max-width: 300px;
     min-height: 707px;
-    /* float: left; */
     margin-top: 40px;
 }
 .card-text {
     min-height: 110px;
-}
-.carouselContainer {
-    width: 300px;
-    margin: 0 auto;
-    margin-top: 40px;
-    text-align: left;
 }
 .click {
     color: skyblue!important;
@@ -74,13 +65,13 @@ h2 {
     z-index: 5;
     top: 232.25px;
 }
-.list-group-item:hover {
-    cursor: pointer;
-}
 @media only screen and (max-width:1000px) {
     .left {
         display: none;
     }
+}
+.list-group-item:hover {
+    cursor: pointer;
 }
 #mainSearch, #subSearch {
     font-family: 'Aleo', serif;
@@ -89,7 +80,6 @@ h2 {
     background: lightgray;
     margin-right: 15px;
 }
-
 #media-modal-body {
     font-family: 'Aleo', serif;
 }
@@ -129,32 +119,22 @@ h2 {
 	width:100%;
 	height:100%;
 }
-
 .modal-body {
     max-height: calc(100vh - 150px);
     overflow: auto;
     background: url("../images/prism.png");
-    color: white;
-    
+    color: white; 
 }
-
 .modal-content {
     border: solid 2px whitesmoke;
 }
-
 .modal-dialog {
     overflow: initial!important;
-
 }
-
-
 .modal-header, #media-modal-footer, #media-modal-tv-footer {
     background: url("../images/connectwork.png");
     color: white; 
 }
-/* .modal-open {
-    overflow: scroll;
-} */
 #moreButton:hover {
     cursor: pointer;
 }
@@ -206,12 +186,7 @@ h2 {
     float: right;
     background: red;
 }
-#results-carousel-inner {
-    display: inline;
-    text-align: center;
-}
 .right {
-    /* float: right; */
     position: absolute;
     right: -62px;
     z-index: 5;
@@ -254,17 +229,14 @@ select:hover, option:hover {
  #submit-button:hover, #watch-button:hover {
     cursor: pointer;
     box-shadow: 0 12px 16px 0 rgba(122, 122, 122, 0.33), 0 17px 50px 0 rgba(122, 122, 122, 0.25);
- }
-
+}
 #topPush {
     height: 110px;
 }
-
 @media only screen and (min-width: 934px) and (max-width: 988px) {
     #topPush {
         height: 96px;
     }
-
 }
 @media only screen and (min-width: 681px) and (max-width: 934px) {
     #topPush {
@@ -276,8 +248,7 @@ select:hover, option:hover {
         height: 147px;
     }
     #watch-button{
-        position: sticky;
-       
+        position: sticky;  
     }
 }
 @media only screen and (min-width: 445px) and (max-width: 534px) {
@@ -296,10 +267,9 @@ select:hover, option:hover {
     }
 }
 ::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
+    width: 0px;  
+    background: transparent; 
 }
-/* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #1e90ff;
 }
