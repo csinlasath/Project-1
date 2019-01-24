@@ -44,7 +44,7 @@ $(document).ready(function () {
                 $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
 
-            $('#theater' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
+            $('#theater' + i).append($('<div><h5>' + response.results[i].title.slice(0,28) + '</h5></div>'));
         }
         page1 = 2;
     });
@@ -58,7 +58,7 @@ $(document).ready(function () {
             } else {
                 $('#topRated' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
-            $('#topRated' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
+            $('#topRated' + i).append($('<div><h5>' + response.results[i].title.slice(0,28) + '</h5></div>'));
         }
         page2 = 2;
     });
@@ -72,7 +72,7 @@ $(document).ready(function () {
             } else {
                 $('#popTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
-            $('#popTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
+            $('#popTv' + i).append($('<div><h5>' + response.results[i].name.slice(0,28) + '</h5></div>'));
         }
         page3 = 2;
     });
@@ -86,7 +86,7 @@ $(document).ready(function () {
             } else {
                 $('#tonightTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
-            $('#tonightTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
+            $('#tonightTv' + i).append($('<div><h5>' + response.results[i].name.slice(0,28) + '</h5></div>'));
         }
         page4 = 2;
 
