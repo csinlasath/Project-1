@@ -94,6 +94,8 @@ $(document).ready(function () {
     $(document).on("click", ".moviePoster", function () {
         var tomScore = "";
         var movieID = $(this).attr("data-id");
+        $("#media-modal-ratings-tom").empty();
+        $("#media-modal-ratings-meta").empty();
         $("#media-modal-body").prepend("<div id='media-modal-trailer'></div>");
         $.ajax({
             url: queryURL5 + $(this).attr("data-id") + tmdbKey,
@@ -119,28 +121,29 @@ $(document).ready(function () {
                         tomScore = tomScore.replace("%", "");
                         tomScoreNum = parseInt(tomScore);
                         if (tomScoreNum > 90) {
-                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%&emsp;");
                         } else if (tomScoreNum > 59 && tomScoreNum < 91) {
-                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/good.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/good.png'> &ensp;" + tomScoreNum + "%&emsp;");
                         } else if (tomScoreNum < 60) {
-                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%&emsp;");
                         }
                     };
-                    if (response.Metascore !== "N/A") {
-                        $("#media-modal-ratings-meta").html("&emsp;&emsp;<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
-                    };
-                    $.ajax({
-                        url: queryURL8 + movieID + videoSearch,
-                        method: "GET"
-                    }).then(function (response) {
-                        if (!$.trim(response.results)) {
-                            $("#media-modal-trailer").remove();
-                        } else {
-                            $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="1"></iframe>');
-                            $("#media-modal-trailer").css("text-align", "center");
-                        }
-                    });
                 };
+                if (response.Metascore !== "N/A") {
+                    $("#media-modal-ratings-meta").html("&emsp;<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
+                };
+                $.ajax({
+                    url: queryURL8 + movieID + videoSearch,
+                    method: "GET"
+                }).then(function (response) {
+                    if (!$.trim(response.results)) {
+                        $("#media-modal-trailer").remove();
+                    } else {
+                        $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="1"></iframe>');
+                        $("#media-modal-trailer").css("text-align", "center");
+                    }
+                });
+
             });
         });
     });
