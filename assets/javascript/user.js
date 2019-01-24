@@ -14,6 +14,9 @@ $(document).ready(function () {
     var database = firebase.database().ref().child(userKey);
     const databaseAuth = firebase.auth();
     var userSignInID = "";
+    var displayName = "";
+    var emailAddress = "";
+    var phoneNumber = "";
 
     databaseAuth.onAuthStateChanged(projectAppUser => {
         if (projectAppUser) {
@@ -29,8 +32,17 @@ $(document).ready(function () {
             $("#add-to-watch-list-button").show();
             $("#add-to-watch-list-button-tv").show();
             userSignInID = projectAppUser.uid;
+            displayName = projectAppUser.displayName;
+            emailAddress = projectAppUser.email;
+            phoneNumber =projectAppUser.phoneNumber;
+
             $("#watch-list-group").empty();
 
+            console.log(projectAppUser);
+            console.log(displayName);
+            console.log(emailAddress);
+            console.log(phoneNumber);
+            
             database.on("child_added", snap => {
                 if (snap.val().firebaseUserID === userSignInID) {
                     if (snap.val().mediaType === "Movie") {
@@ -200,7 +212,10 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#account-details", function () {
-        $("#account-modal-body").text("This is placeholder text");
+        $("#account-info-display-name").text("Display Name: " + displayName);
+        $("#account-info-email-show").text("Email Address: " + emailAddress);
+        $("#account-info-phone-number").text("Phone Number: " + phoneNumber);
+
         $("#account-info-modal").modal("show");
     });
 });
