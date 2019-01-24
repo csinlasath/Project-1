@@ -70,7 +70,11 @@ $(document).ready(function () {
     }).then(function (response) {
         console.log(response);
         for (var i = 19; i >= 0; i--) {
-            $('#popTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            if (response.results[i].poster_path === null) {
+                $('#popTv' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+            } else {
+                $('#popTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            }
             $('#popTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
         }
         page3 = 2;
@@ -81,7 +85,11 @@ $(document).ready(function () {
     }).then(function (response) {
         console.log(response);
         for (var i = 19; i >= 0; i--) {
-            $('#tonightTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            if (response.results[i].poster_path === null) {
+                $('#tonightTv' + i).append($('<img class="tvPoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="assets/images/null.jpg">'));
+            } else {
+                $('#tonightTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
+            }
             $('#tonightTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
         }
         page4 = 2;
@@ -326,7 +334,7 @@ $(document).ready(function () {
             scrollLeft: "+=80600px"
         }, 28000)
     });
-    $(document).on('mouseup',  function () {
+    $(document).on('mouseup', function () {
         event.preventDefault();
         $('#results').stop();
     });
@@ -420,8 +428,8 @@ $(document).ready(function () {
         event.preventDefault();
         $('#tonightTv').stop();
     });
-    $(document).on("change", "#mainSearch", function() {
-        if ( ($("#mainSearch").val() === "Movie Genre") || ($("#mainSearch").val() === "TV Genre")) {
+    $(document).on("change", "#mainSearch", function () {
+        if (($("#mainSearch").val() === "Movie Genre") || ($("#mainSearch").val() === "TV Genre")) {
             $("#search-bar").hide();
         }
         else {
@@ -469,7 +477,7 @@ $(document).ready(function () {
         $('#popTv').animate({
             scrollLeft: "+=316.5px"
         }, 100);
-    });$(document).on('click', '#left-button3', function () {
+    }); $(document).on('click', '#left-button3', function () {
         event.preventDefault();
         $('#popTv').animate({
             scrollLeft: "-=316.5px"
