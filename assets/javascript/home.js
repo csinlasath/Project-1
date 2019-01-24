@@ -428,34 +428,63 @@ $(document).ready(function () {
             $("#search-bar").show();
         }
     });
-    // $(".levels").mCustomScrollbar({
-    //     set_width: false,
-    //     set_height: false,
-    //     horizontalScroll: false,
-    //     scrollInertia: 850,
-    //     SCROLLINERTIA: "easeOutCirc",
-    //     mouseWheel: "auto",
-    //     autoDraggerLength: true,
-    //     scrollButtons: {
-    //         enable: false,
-    //         scrollType: "continuous",
-    //         SCROLLSPEED: 80,
-    //         SCROLLAMOUNT: 180
-    //     },
-    //     advanced: {
-    //         updateOnBrowserResize: true,
-    //         updateOnContentResize: false,
-    //         autoExpandHorizontalScroll: true,
-    //         autoScrollOnFocus: true
-    //     },
-    //     callbacks: {
-    //         onScrollStart: function () { },
-    //         onScroll: function () { },
-    //         onTotalScroll: function () { },
-    //         onTotalScrollBack: function () { },
-    //         onTotalScrollOffset: 0,
-    //         whileScrolling: false,
-    //         whileScrollingInterval: 30
-    //     }
-    // });
+    $(document).on('click', '#right-button0', function () {
+        event.preventDefault();
+        $('#results').animate({
+            scrollLeft: "+=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#left-button0', function () {
+        event.preventDefault();
+        $('#results').animate({
+            scrollLeft: "-=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#right-button', function () {
+        event.preventDefault();
+        $('#theater').animate({
+            scrollLeft: "+=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#left-button', function () {
+        event.preventDefault();
+        $('#theater').animate({
+            scrollLeft: "-=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#right-button2', function () {
+        event.preventDefault();
+        $('#topRated').animate({
+            scrollLeft: "+=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#left-button2', function () {
+        event.preventDefault();
+        $('#topRated').animate({
+            scrollLeft: "-=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#right-button3', function () {
+        event.preventDefault();
+        $('#popTv').animate({
+            scrollLeft: "+=316.5px"
+        }, 100);
+    });$(document).on('click', '#left-button3', function () {
+        event.preventDefault();
+        $('#popTv').animate({
+            scrollLeft: "-=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#right-button4', function () {
+        event.preventDefault();
+        $('#tonightTv').animate({
+            scrollLeft: "+=316.5px"
+        }, 100);
+    });
+    $(document).on('click', '#left-button4', function () {
+        event.preventDefault();
+        $('#tonightTv').animate({
+            scrollLeft: "-=316.5px"
+        }, 100);
+    });
 });
