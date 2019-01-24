@@ -44,7 +44,7 @@ $(document).ready(function () {
                 $('#theater' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
 
-            $('#theater' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
+            $('#theater' + i).append($('<div><h5>' + response.results[i].title.slice(0,28) + '</h5></div>'));
         }
         page1 = 2;
     });
@@ -58,7 +58,7 @@ $(document).ready(function () {
             } else {
                 $('#topRated' + i).append($('<img class="moviePoster" data-toggle="modal" data-target="#myModal" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
-            $('#topRated' + i).append($('<div><h5>' + response.results[i].title + '</h5></div>'));
+            $('#topRated' + i).append($('<div><h5>' + response.results[i].title.slice(0,28) + '</h5></div>'));
         }
         page2 = 2;
     });
@@ -72,7 +72,7 @@ $(document).ready(function () {
             } else {
                 $('#popTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
-            $('#popTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
+            $('#popTv' + i).append($('<div><h5>' + response.results[i].name.slice(0,28) + '</h5></div>'));
         }
         page3 = 2;
     });
@@ -86,7 +86,7 @@ $(document).ready(function () {
             } else {
                 $('#tonightTv' + i).append($('<img class="tvPoster" data-id="' + response.results[i].id + '" src="' + moviePosterSize + response.results[i].poster_path + '">'));
             }
-            $('#tonightTv' + i).append($('<div><h5>' + response.results[i].name + '</h5></div>'));
+            $('#tonightTv' + i).append($('<div><h5>' + response.results[i].name.slice(0,28) + '</h5></div>'));
         }
         page4 = 2;
 
@@ -94,6 +94,8 @@ $(document).ready(function () {
     $(document).on("click", ".moviePoster", function () {
         var tomScore = "";
         var movieID = $(this).attr("data-id");
+        $("#media-modal-ratings-tom").empty();
+        $("#media-modal-ratings-meta").empty();
         $("#media-modal-body").prepend("<div id='media-modal-trailer'></div>");
         $.ajax({
             url: queryURL5 + $(this).attr("data-id") + tmdbKey,
@@ -119,28 +121,29 @@ $(document).ready(function () {
                         tomScore = tomScore.replace("%", "");
                         tomScoreNum = parseInt(tomScore);
                         if (tomScoreNum > 90) {
-                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/fresh2.png'> &ensp;" + tomScoreNum + "%&emsp;");
                         } else if (tomScoreNum > 59 && tomScoreNum < 91) {
-                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/good.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/good.png'> &ensp;" + tomScoreNum + "%&emsp;");
                         } else if (tomScoreNum < 60) {
-                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%");
+                            $("#media-modal-ratings-tom").html("&emsp;<img style='height: 50px' src='assets/images/rotten.png'> &ensp;" + tomScoreNum + "%&emsp;");
                         }
                     };
-                    if (response.Metascore !== "N/A") {
-                        $("#media-modal-ratings-meta").html("&emsp;&emsp;<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
-                    };
-                    $.ajax({
-                        url: queryURL8 + movieID + videoSearch,
-                        method: "GET"
-                    }).then(function (response) {
-                        if (!$.trim(response.results)) {
-                            $("#media-modal-trailer").remove();
-                        } else {
-                            $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="1"></iframe>');
-                            $("#media-modal-trailer").css("text-align", "center");
-                        }
-                    });
                 };
+                if (response.Metascore !== "N/A") {
+                    $("#media-modal-ratings-meta").html("&emsp;<img style='height: 50px' src='assets/images/meta.png'> &ensp;" + response.Metascore + "/100");
+                };
+                $.ajax({
+                    url: queryURL8 + movieID + videoSearch,
+                    method: "GET"
+                }).then(function (response) {
+                    if (!$.trim(response.results)) {
+                        $("#media-modal-trailer").remove();
+                    } else {
+                        $("#media-modal-trailer").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="1"></iframe>');
+                        $("#media-modal-trailer").css("text-align", "center");
+                    }
+                });
+
             });
         });
     });
@@ -350,10 +353,6 @@ $(document).ready(function () {
             scrollLeft: "-=80600px"
         }, 28000);
     });
-    $(document).on('mouseup', function () {
-        event.preventDefault();
-        $('#results').stop();
-    });
     $('#right-button').mousedown(function () {
         event.preventDefault();
         $('#theater').animate({
@@ -369,10 +368,6 @@ $(document).ready(function () {
         $('#theater').animate({
             scrollLeft: "-=25600px"
         }, 12000);
-    });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#theater').stop();
     });
     $('#right-button2').mousedown(function () {
         event.preventDefault();
@@ -390,10 +385,6 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#topRated').stop();
-    });
     $('#right-button3').mousedown(function () {
         event.preventDefault();
         $('#popTv').animate({
@@ -410,10 +401,6 @@ $(document).ready(function () {
             scrollLeft: "-=25600px"
         }, 12000);
     });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#popTv').stop();
-    });
     $('#right-button4').mousedown(function () {
         event.preventDefault();
         $('#tonightTv').animate({
@@ -429,10 +416,6 @@ $(document).ready(function () {
         $('#tonightTv').animate({
             scrollLeft: "-=25600px"
         }, 12000);
-    });
-    $(document).mouseup(function () {
-        event.preventDefault();
-        $('#tonightTv').stop();
     });
     $(document).on("change", "#mainSearch", function () {
         if (($("#mainSearch").val() === "Movie Genre") || ($("#mainSearch").val() === "TV Genre")) {
