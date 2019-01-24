@@ -205,7 +205,11 @@ const AccountInfo = () => {
                         <h5 id='account-info-modal-title' className='modal-title'>My Account</h5>
                         <button type='button' className='close' data-dismiss='modal'></button>
                     </div>
-                    <div id='account-modal-body' className='modal-body'></div>
+                    <div id='account-modal-body' className='modal-body'>
+                        <div id='account-info-display-name'></div>
+                        <div id='account-info-email-show'></div>
+                        <div id='account-info-phone-number'></div>
+                    </div>
                     <div className='modal-footer'>
                         <p><a data-toggle='modal' className='click' data-target='#' data-dismiss='modal'></a></p>
                         <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
