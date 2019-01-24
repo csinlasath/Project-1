@@ -34,7 +34,7 @@ $(document).ready(function () {
             userSignInID = projectAppUser.uid;
             displayName = projectAppUser.displayName;
             emailAddress = projectAppUser.email;
-            phoneNumber =projectAppUser.phoneNumber;
+            phoneNumber = projectAppUser.phoneNumber;
 
             $("#watch-list-group").empty();
 
@@ -42,7 +42,7 @@ $(document).ready(function () {
             console.log(displayName);
             console.log(emailAddress);
             console.log(phoneNumber);
-            
+
             database.on("child_added", snap => {
                 if (snap.val().firebaseUserID === userSignInID) {
                     if (snap.val().mediaType === "Movie") {
@@ -85,7 +85,7 @@ $(document).ready(function () {
 
         var emailIsValid = false;
         var passwordIsValid = false;
-        
+
         if (emailText.indexOf("@") && emailText.indexOf(".")) {
             emailIsValid = true;
             $("#signup-email-error").hide();
@@ -212,10 +212,43 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#account-details", function () {
-        $("#account-info-display-name").text("Display Name: " + displayName);
-        $("#account-info-email-show").text("Email Address: " + emailAddress);
-        $("#account-info-phone-number").text("Phone Number: " + phoneNumber);
 
+        if ((displayName !== null) && (phoneNumber !== null)) {
+            $("#account-info-display-name").text("Display Name: " + displayName);
+            $("#account-info-email-show").text("Email Address: " + emailAddress);
+            $("#account-info-phone-number").text("Phone Number: " + phoneNumber);
+        }
+        else {
+            var nameFormElement = $("<form>");
+            var nameCaptureDiv = $("<div>");
+            $(nameCaptureDiv).addClass("form-group");
+            var nameLabel = $("<label>");
+            nameLabel.attr("for", "displayNameInput");
+            nameLabel.text("Please Set a Display Name");
+            var nameInputElement = $("<input>");
+            nameInputElement.attr("type", "text");
+            nameInputElement.attr("id", "display-name-input");
+            nameInputElement.addClass("form-control");
+            $(nameCaptureDiv).append(nameLabel);
+            $(nameLabel).append(nameInputElement);
+            $(nameFormElement).append(nameCaptureDiv);
+            $("#account-info-display-name").html(nameFormElement);
+
+            var phoneFormElement = $("<form>");
+            var phoneCaptureDiv = $("<div>");
+            $(phoneCaptureDiv).addClass("form-group");
+            var phoneLabel = $("<label>");
+            phoneLabel.attr("for", "displayNameInput");
+            phoneLabel.text("Please Set a Phone Number");
+            var phoneInputElement = $("<input>");
+            phoneInputElement.attr("type", "text");
+            phoneInputElement.attr("id", "display-name-input");
+            phoneInputElement.addClass("form-control");
+            $(phoneCaptureDiv).append(phoneLabel);
+            $(phoneLabel).append(phoneInputElement);
+            $(phoneFormElement).append(phoneCaptureDiv);
+            $("#account-info-phone-number").html(phoneFormElement);
+        }
         $("#account-info-modal").modal("show");
     });
 });
