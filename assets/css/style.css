@@ -62,10 +62,6 @@ h2 {
     color: white;
     z-index: 5;
 }
-/* #home {
-    margin-top: 0;
-    vertical-align: top;
-} */
 #home-button {
     font-size: 16px;
     font-weight: 5px;
@@ -77,6 +73,9 @@ h2 {
     left: -74px;
     z-index: 5;
     top: 232.25px;
+}
+.list-group-item:hover {
+    cursor: pointer;
 }
 @media only screen and (max-width:1000px) {
     .left {
@@ -261,20 +260,20 @@ select:hover, option:hover {
     height: 110px;
 }
 
-@media only screen and (min-width: 759px) and (max-width: 987px) {
+@media only screen and (min-width: 934px) and (max-width: 988px) {
     #topPush {
-        height: 136px;
+        height: 96px;
     }
 
 }
-@media only screen and (min-width: 613px) and (max-width: 759px) {
+@media only screen and (min-width: 681px) and (max-width: 934px) {
     #topPush {
-        height: 147px;
+        height: 136px;
     }
 }
-@media only screen and (min-width: 534px) and (max-width: 612px) {
+@media only screen and (min-width: 534px) and (max-width: 681px) {
     #topPush {
-        height: 181px;
+        height: 147px;
     }
     #watch-button{
         position: sticky;
@@ -283,17 +282,17 @@ select:hover, option:hover {
 }
 @media only screen and (min-width: 445px) and (max-width: 534px) {
     #topPush {
-        height: 232px;
+        height: 198px;
     }
 }
 @media only screen and (min-width: 355px) and (max-width: 445px) {
     #topPush{
-        height: 272px; 
+        height: 238px; 
     }
 }
 @media only screen and (min-width: 320px) and (max-width: 355px) {
     #topPush{
-        height: 323px;
+        height: 289px;
     }
 }
 ::-webkit-scrollbar {

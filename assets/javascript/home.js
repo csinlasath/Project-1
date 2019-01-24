@@ -196,10 +196,10 @@ $(document).ready(function () {
             }
 
             $("#media-modal-first-air-tv").html("Original Air Date: " + response.first_air_date.slice(5, 10) + "-" + response.first_air_date.slice(0, 4) + "</div>");
-
             $("#media-modal-network-tv").html("Network:  " + response.networks[0].name);
-
-            $("#media-modal-genre-tv").html("Genres: ")
+            $("#media-modal-genre-tv").html("Genres: ");
+            $("#media-modal-imdb-tv").html(response.id);
+            $("#media-modal-imdb-tv").attr("data-media-type", "TV");
 
             for (var i = 0; i < response.genres.length; i++) {
                 if (response.genres.length > 0) {
