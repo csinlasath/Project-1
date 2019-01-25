@@ -94,6 +94,7 @@ $(document).ready(function () {
     $(document).on("click", ".moviePoster", function () {
         var tomScore = "";
         var movieID = $(this).attr("data-id");
+        $("#media-modal-trailer").remove();
         $("#media-modal-ratings-tom").empty();
         $("#media-modal-ratings-meta").empty();
         $("#media-modal-body").prepend("<div id='media-modal-trailer'></div>");
@@ -166,6 +167,7 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", ".tvPoster", function () {
+        $("#media-modal-tv-trailer").remove();
         var tvID = $(this).attr("data-id");
         $("#media-modal-body-tv").prepend("<div id='media-modal-tv-trailer'></div>");
         $.ajax({
